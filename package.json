@@ -11,9 +11,11 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "serve": "node_modules/.bin/vue-cli-service serve"
   },
   "dependencies": {
+    "@vue/cli-service": "^4.2.3",
     "iview": "^3.5.4",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
