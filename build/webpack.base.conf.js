@@ -74,6 +74,47 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: /\.scss?$/,
+        use: [
+          {
+            loader: "style-loader", 
+            options: {
+              sourceMap: true
+            }
+          }, 
+          {
+            loader: "css-loader", 
+            options: {
+              sourceMap: true
+            }
+          }, 
+          {
+            loader: "sass-loader",
+            options: {
+              data: "@import '@/src/commons/_variables.scss'; ",
+              includePaths: [path.resolve(__dirname, '../src/commons/')]
+            }
+          }
+        ]
+      },
+      {
+        test: /\.sass$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              indentedSyntax: true,
+              // sass-loader version >= 8
+              sassOptions: {
+                indentedSyntax: true
+              }
+            }
+          }
+        ]
       }
     ]
   },
