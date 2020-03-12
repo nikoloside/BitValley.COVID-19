@@ -1,13 +1,13 @@
 <template>
-  <div id="covid19-header">
+  <div id="covid19-header" class="flex-container-spacebetween">
     <div class="covid19-logo">
     </div>
-    <div class="nav">
+    <div class="nav flex-container-spacebetween">
       <li><router-link to="/">感染情報</router-link></li>
       <li><router-link to="/">ニュース</router-link></li>
       <li><router-link to="/">症状比較</router-link></li>
       <li><router-link to="/">予防対策</router-link></li>
-      <div class="social">
+      <div class="social flex-container-spacebetween">
         <li><router-link to="/" class="facebook"></router-link></li>
         <li><router-link to="/" class="twitter"></router-link></li>
         <li><router-link to="/" class="sharelink"></router-link></li>
@@ -50,9 +50,6 @@ export default {
 @import "@/commons/_variables.scss";
 
 #covid19-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background-color: $color-background;
   z-index:$z-index-header;
   // width
@@ -70,19 +67,14 @@ export default {
   overflow: visible;
   .covid19-logo {
     background-image:url('../../assets/image/logo.svg');
-    width: 342.02px;
+    background-size: 100%;
+    max-width: 342.02px;
+    width: 32%;
     height: 50px;
   }
 
   .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
     .social {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       margin-left: 15px;
       margin-right: 15px;
 

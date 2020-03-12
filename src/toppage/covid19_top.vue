@@ -2,7 +2,7 @@
   <div id="wrap">
     <Header></Header>
     <PickUp></PickUp>
-    <InfectIncrease></InfectIncrease>
+    <InfectNumber></InfectNumber>
     <h1>都道府県别感染人数</h1>
     <InfectRegion></InfectRegion>
     <h1>ニュース</h1>
@@ -18,7 +18,7 @@
 <script>
 import Header from '@/toppage/sections/covid19_header';
 import PickUp from '@/toppage/sections/covid19_pickup';
-import InfectIncrease from '@/toppage/sections/covid19_infect_increase';
+import InfectNumber from '@/toppage/sections/covid19_infect_number';
 import InfectRegion from '@/toppage/sections/covid19_infect_region';
 import News from '@/toppage/sections/covid19_news';
 import Comparison from '@/toppage/sections/covid19_comparison';
@@ -30,7 +30,7 @@ export default {
   components: {
     Header,
     PickUp,
-    InfectIncrease,
+    InfectNumber,
     InfectRegion,
     News,
     Comparison,
@@ -83,6 +83,17 @@ h1 {
   justify-content: flex-start;
   align-items: center;
 }
+
+.flex-container-spacebetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
 a {
   text-decoration: none;
   color:$color-black;
