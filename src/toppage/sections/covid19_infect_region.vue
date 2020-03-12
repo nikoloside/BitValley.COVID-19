@@ -1,12 +1,17 @@
 <template>
   <div id="covid19-infect-region">
-    <h2>{{ msg }}</h2>
+    <InfectRegionGraphDesktop />
+    <InfectRegionGraphMobile />
   </div>
 </template>
 
 <script>
+import InfectRegionGraphDesktop from '@/components/InfectRegionGraphDesktop';
+import InfectRegionGraphMobile from '@/components/InfectRegionGraphMobile';
+
 export default {
   name: 'InfectRegion',
+  components: { InfectRegionGraphDesktop, InfectRegionGraphMobile },
   data() {
     return {
       msg: '这里是日本各地的感染情报的页面',
@@ -20,6 +25,6 @@ export default {
 @import "@/commons/_variables.scss";
 
 #covid19-infect-region {
-  display: flex;
+  display: block;
 }
 </style>
