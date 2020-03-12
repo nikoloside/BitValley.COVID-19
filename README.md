@@ -2,6 +2,13 @@
 
 > COVID-19の情報やコロナウイルスについての予防情報を発信
 
+# 内部结构
+
+- 【开发主文件】目前暂时住页面只有 covid19_top.vue 一个主页面，
+- 【开发模块】主页面里面具体的模块都在 /src/toppage/section/里面，
+- 【全局变量】全局统一的颜色变量和scss的通用函数写在了 /src/commons/_variables.scss
+- 【全局样式】全局统一的class样式写在了 /src/toppage/covid19_top.vue
+
 ## Build Setup
 
 ``` bash
