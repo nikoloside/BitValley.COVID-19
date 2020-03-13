@@ -1,12 +1,15 @@
 <template>
   <div id="covid19-news">
-    <h2>{{ msg }}</h2>
+    <NewsListBlock />
   </div>
 </template>
 
 <script>
+import NewsListBlock from '@/components/NewsListBlock';
+
 export default {
   name: 'News',
+  components: { NewsListBlock },
   data() {
     return {
       msg: '这里是News的页面',
@@ -20,6 +23,6 @@ export default {
 @import "@/commons/_variables.scss";
 
 #covid19-news {
-  display: flex;
+  display: block;
 }
 </style>
