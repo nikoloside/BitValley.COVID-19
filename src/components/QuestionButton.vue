@@ -40,7 +40,6 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-        text-decoration: none;
     }
     a:hover {
         background: $color-hover;
@@ -55,14 +54,7 @@ export default {
     left: calc(50% - 132px/2);
     top: calc(50% - 20px/2);
 
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 19px;
-    /* identical to box height */
-
+    @include poppins-font-001em(13px, 600);
     text-align: center;
-    letter-spacing: 0.01em;
 }
 </style>

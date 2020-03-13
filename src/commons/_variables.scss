@@ -40,13 +40,40 @@ $z-index-button: 30;
 $z-index-wrap: 20;
 $z-index-background: 10;
 
+
+
+//！ mixin Fontを自動生成
+
 @function lineHeight($size) {
     @return $result * 3 / 2;
 }
 
-@function fontPoppins($size) {
-    @return $result * 3 / 2;
+@mixin poppins-font($fontsize: 14px, $weight: normal) {
+    font-family: 'Poppins', sans-serif;
+    font-size: $fontsize;
+    line-height: $fontsize *3 / 2;
+    font-style: normal;
+    font-weight: $weight;
 }
+
+@mixin noto-font($fontsize: 14px, $weight: normal) {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: $fontsize;
+    line-height: $fontsize *3 / 2;
+    font-style: normal;
+    font-weight: $weight;
+}
+
+@mixin poppins-font-001em($fontsize: 14px, $weight: normal) {
+    @include poppins-font($fontsize, $weight);
+    letter-spacing: 0.01em;
+}
+
+@mixin noto-font-001em($fontsize: 14px, $weight: normal) {
+    @include noto-font($fontsize, $weight);
+    letter-spacing: 0.01em;
+}
+
 
 // 最外层设置 min-width：960 maxwidth：1280
 // section里面规定好每个内部元件的最低width，高度信息根据宽度的比例设置

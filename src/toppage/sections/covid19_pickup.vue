@@ -52,26 +52,11 @@ export default {
     z-index: $z-index-wrap;
   }
   .icon-pickup-title {
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 30px;
-    /* identical to box height */
-    letter-spacing: 0.01em;
+    @include poppins-font-001em(20px, bold);
     color: $color-pink
   }
 }
 .icon-pickup-text {
-  font-family: Noto Sans CJK JP;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 24px;
-  /* identical to box height */
-  letter-spacing: 0.01em;
-  a {
-    text-decoration: none;
-  }
+    @include noto-font-001em(16px, bold);
 }
 </style>
