@@ -70,7 +70,7 @@
                             :y1="`${100 - infectFromData / units[0] * 100}`"
                             :x2="`${50 / infectDatas.length * (3 + index * 2)}`"
                             :y2="`${100 - infectDatas[index + 1].count / units[0] * 100}`"
-                            style="stroke:#0452E6;" stroke-linecap="round" stroke-width="1" />
+                            style="stroke:#0452E6;" stroke-linecap="round" stroke-width="2" />
                         </svg>
                         <div class="today-circle"
                         v-bind:style="{
