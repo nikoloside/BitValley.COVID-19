@@ -38,7 +38,9 @@
         v-for="regionData in regionDatas"
         v-bind:key="regionData.region"
         v-bind:style="{ width: `${regionData.count / units[0] * 100}%` }"
-      />
+      >
+        <div class="region-count">{{ regionData.count }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -171,6 +173,30 @@ export default {
     height: 15px;
     background-color: $color-navy;
     border-radius: 0 4px 4px 0px;
+    cursor: pointer;
+
+    &:hover {
+      .region-count {
+        opacity: 1;
+      }
+    }
+  }
+
+  .region-count {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateY(calc(-100% - 2px));
+    background-color: #757F8B;
+    color: $color-white;
+    text-align: center;
+    font-size: 12px;
+    box-sizing: border-box;
+    padding: 4px 8px;
+    border-radius: 15px;
+    pointer-events: none;
+    transition: opacity .3s ease;
   }
 
   .unit-group {

@@ -24,7 +24,9 @@
           <div
             class="region-column"
             v-bind:style="{ height: `${regionData.count / units[0] * 100}%` }"
-          ></div>
+          >
+            <div class="region-count">{{ regionData.count }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -184,6 +186,31 @@ export default {
     bottom: 0;
     background-color: $color-navy;
     border-radius: 4px 4px 0px 0px;
+    cursor: pointer;
+
+    &:hover {
+      .region-count {
+        opacity: 1;
+      }
+    }
+  }
+
+  .region-count {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    transform: translateY(calc(-100% - 8px));
+    background-color: #757F8B;
+    color: $color-white;
+    text-align: center;
+    font-size: 12px;
+    box-sizing: border-box;
+    padding: 4px 8px;
+    border-radius: 15px;
+    pointer-events: none;
+    transition: opacity .3s ease;
+    word-break: break-all;
   }
 
   .region-label-group {

@@ -1,7 +1,11 @@
 <template>
   <div id="covid19-infect-region">
-    <InfectRegionGraphDesktop />
-    <InfectRegionGraphMobile />
+    <div class="desktop-graph-wrapper">
+      <InfectRegionGraphDesktop />
+    </div>
+    <div class="mobile-graph-wrapper">
+      <InfectRegionGraphMobile />
+    </div>
   </div>
 </template>
 
@@ -25,6 +29,18 @@ export default {
 @import "@/commons/_variables.scss";
 
 #covid19-infect-region {
-  display: block;
+  .mobile-graph-wrapper {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+    .mobile-graph-wrapper {
+      display: block;
+    }
+
+    .desktop-graph-wrapper {
+      display: none;
+    }
+  }
 }
 </style>
