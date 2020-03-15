@@ -9,12 +9,12 @@
           class="DashBoardNumberColor"
           v-bind:style="{ 'color': `${ diffColor }` }"
         >
-          {{ signedDiffPersons }}
+          {{ normalizeDiffPersons }}
         </div>
       </div>
       <div class="DashBoardDowner flex-container-spacebetween">
         <div class="DashBoardNumberBlack">
-          {{ signedTotalPersons }}
+          {{ normalizeTotalPersons }}
         </div>
         <div class="DashBoardIcon">
             <img :src="diffIcon">
@@ -40,11 +40,11 @@ export default {
     };
   },
   computed: {
-    signedTotalPersons() {
+    normalizeTotalPersons() {
       const { TotalPersons } = this;
       return TotalPersons.toLocaleString();
     },
-    signedDiffPersons() {
+    normalizeDiffPersons() {
       const { DiffPersons } = this;
       let sign = '';
       if (DiffPersons > 0) {
@@ -87,7 +87,9 @@ export default {
     background-color: $color-background;
     border-radius: 12px;
     min-width: 206px;
+    width: 100%;
     height: 97px;
+    margin: 0 12px;
 
     .wrap-dashboard {
         width: 100%;

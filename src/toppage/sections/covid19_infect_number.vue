@@ -1,8 +1,22 @@
 <template>
   <div id="covid19-infect-number">
-    <div class="infect-number-left">
+    <div class="infect-number-left flex-container-start">
       <DashBoardMedium></DashBoardMedium>
       <DashBoardMedium></DashBoardMedium>
+    </div>
+    <div class="infect-number-right flex-container-start">
+      <DashBoardLarge></DashBoardLarge>
+    </div>
+    <div class="infect-number-text flex-container-start flex-direction-column">
+      <div class="infect-number-text-bold">
+        世界全感染人数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{normalizeWorldNum}}
+      </div>
+      <div class="infect-number-text-bold">
+        ダイヤモンドプリンセス号感染人数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{normalizeDiamondNum}}
+      </div>
+      <div class="infect-number-text-gray">
+        最終更新：{{updatedate}}
+      </div>
     </div>
   </div>
 </template>
@@ -19,8 +33,20 @@ export default {
   },
   data() {
     return {
-      msg: '这里是日本各地的感染情报的页面',
+      worldInfectNum: 99999,
+      diamondInfectNum: 99999,
+      updatedate: '2020年3月1日',
     };
+  },
+  computed: {
+    normalizeWorldNum() {
+      const { worldInfectNum } = this;
+      return worldInfectNum.toLocaleString();
+    },
+    normalizeDiamondNum() {
+      const { diamondInfectNum } = this;
+      return diamondInfectNum.toLocaleString();
+    },
   },
 };
 </script>
@@ -31,5 +57,35 @@ export default {
 
 #covid19-infect-number {
   display: flex;
+  padding: 24px 12px;
+  height: 203px;
+
+  .infect-number-left {
+    align-items: start;
+    width: 50%;
+  }
+
+  .infect-number-right {
+    align-items: start;
+    width: 50%;
+  }
+
+
+  .infect-number-text {
+    text-align: left;
+    align-items: flex-start;
+    position: absolute;
+    padding-left: 24px;
+    padding-top: 121px;
+
+    .infect-number-text-bold {
+      @include noto-font-001em(14px, bold);
+      margin-bottom: 8px;
+    }
+    .infect-number-text-gray {
+      @include noto-font-001em(14px, normal);
+      color: $color-lightgray;
+    }
+  }
 }
 </style>

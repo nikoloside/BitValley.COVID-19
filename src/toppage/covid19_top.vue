@@ -50,6 +50,8 @@ export default {
 @import "@/commons/_variables.scss";
 #wrap {
   background-color : #fff;
+  // 先对应 960 和 1280 之间，等增加样式之后统一加@ media 的tag
+  // 基本所有的component样式都是能默认自适应的
   min-width: 960px;
   max-width: 1280px;
   overflow: hidden;

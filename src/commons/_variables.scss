@@ -40,13 +40,12 @@ $z-index-button: 30;
 $z-index-wrap: 20;
 $z-index-background: 10;
 
-
+//! break-point
+$breakpoint-highpc : 1280px;
+$breakpoint-pc : 960px;
+$breakpoint-sp : 480px;
 
 //！ mixin Fontを自動生成
-
-@function lineHeight($size) {
-    @return $result * 3 / 2;
-}
 
 @mixin poppins-font($fontsize: 14px, $weight: normal) {
     font-family: 'Poppins', sans-serif;
