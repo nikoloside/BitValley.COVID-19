@@ -72,10 +72,28 @@
                             :y2="`${100 - infectDatas[index + 1].count / units[0] * 100}`"
                             style="stroke:#0452E6;" stroke-linecap="round" stroke-width="1" />
                         </svg>
+                        <div class="today-circle"
+                        v-bind:style="{
+                         right:`${50 / infectDatas.length - 2}%`,
+                         top: `${100 - infectDatas[infectDatas.length-1].count
+                          / units[0] * 100 - 3}%` }">
+                        </div>
+
+                        <div
+                        class="infect-column"
+                         v-for="(infectData,index) in infectDatas"
+                         v-bind:key="infectData.date"
+                         v-bind:style="{ width: `${100 / infectDatas.length}%`,
+                         height: `${infectData.count / units[0] * 100}%`,
+                         left:`${100 / infectDatas.length * index}%`}"
+                        >
+                            <div class="infect-count">{{ infectData.count }}</div>
+                        </div>
                     </div>
 
                 </div>
 
+                <!-- からのdivが必要です -->
                 <div/>
 
                 <!-- 横軸 -->
@@ -295,10 +313,46 @@ export default {
             position: absolute;
             width: 100%;
             height: 100%;
-        }
 
-        .infect-data-line {
-            background: linear-gradient(180deg, #D2E2FF 0%, rgba(210, 226, 255, 0) 100%);
+            .today-circle {
+                position: absolute;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                border: solid 3px $color-navy;
+                background-color:#fff;
+            }
+            .infect-column {
+                position: absolute;
+                bottom: 0;
+                background-color: rgba(0,0,0,0);
+                border-radius: 0px 0px 0px 0px;
+                cursor: pointer;
+
+                &:hover {
+                .infect-count {
+                    opacity: 1;
+                }
+                }
+            }
+            .infect-count {
+                @include poppins-font(12px, 500);
+                opacity: 0;
+                position: absolute;
+                width: 46px;
+                height: 24px;
+                top: 0;
+                transform: translateY(calc(-100% - 8px));
+                background-color: #757F8B;
+                color: $color-white;
+                text-align: center;
+                box-sizing: border-box;
+                padding: 4px 8px;
+                border-radius: 15px;
+                pointer-events: none;
+                transition: opacity .3s ease;
+                word-break: break-all;
+            }
         }
 
         .infect-column {
