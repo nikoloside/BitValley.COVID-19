@@ -1,12 +1,17 @@
 <template>
-  <div id="covid19-footer">
-    <h2>{{ msg }}</h2>
-  </div>
+  <footer id="covid19-footer">
+    <AboutServiceBlock />
+    <AboutTeamTermsOfServiceBlock />
+  </footer>
 </template>
 
 <script>
+import AboutServiceBlock from '@/components/AboutServiceBlock';
+import AboutTeamTermsOfServiceBlock from '@/components/AboutTeamTermsOfServiceBlock';
+
 export default {
   name: 'Footer',
+  components: { AboutServiceBlock, AboutTeamTermsOfServiceBlock },
   data() {
     return {
       msg: '这里是Footer的页面',
@@ -20,6 +25,6 @@ export default {
 @import "@/commons/_variables.scss";
 
 #covid19-footer {
-  display: flex;
+  display: block;
 }
 </style>
