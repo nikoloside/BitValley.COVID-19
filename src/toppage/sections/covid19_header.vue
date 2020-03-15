@@ -55,6 +55,7 @@ export default {
   // width
   width: 100%;
   height: 112px;
+  // 此处通过@ media 来分开出处理 TODO
   min-width: 960px;
   max-width: 1280px;
   // fixed
@@ -62,8 +63,7 @@ export default {
   top: 0px;
   left: 0px;
   right:0px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 0 16px;
   overflow: visible;
   .covid19-logo {
     background-image:url('../../assets/image/logo.svg');
@@ -75,8 +75,7 @@ export default {
 
   .nav {
     .social {
-      margin-left: 15px;
-      margin-right: 15px;
+      margin: 0 15px;
 
       .twitter {
         width: 24px;
@@ -130,6 +129,7 @@ export default {
     text-align: center;
 
     a {
+      // 只有header这部分字体和size是分开，特殊处理
       font-family: SF Compact Display;
       font-style: normal;
       font-weight: bold;
@@ -137,8 +137,7 @@ export default {
       line-height: 42px;
       /* identical to box height */
       position: relative;
-      margin-left: 12px;
-      margin-right: 12px;
+      margin: 0 12px;
       transition: color .3s ease;
       -webkit-transition: color .3s ease;
       background-color: #fff;
@@ -149,6 +148,7 @@ export default {
     }
     a::after {
       border-bottom: solid 4px $color-blue;
+      border-radius: 2px;
       bottom: 0;
       display: block;
       content: "";

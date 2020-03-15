@@ -1,10 +1,9 @@
 <svg width="104" height="77" viewBox="0 0 104 77" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="58" height="36" transform="matrix(1 8.74228e-08 8.74228e-08 -1 23 53)" fill="white"/>
 <g filter="url(#filter0_d)">
 <path d="M26 22L39 34.5L52 22L78 47M78 47L78 35M78 47L65.5 47" stroke="#31D9A5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <defs>
-<filter id="filter0_d" x="0" y="-2.86102e-06" width="104" height="77" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter0_d" x="0" y="0" width="104" height="77" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
 <feOffset dy="4"/>

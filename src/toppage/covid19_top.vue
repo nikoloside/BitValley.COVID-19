@@ -50,11 +50,15 @@ export default {
 @import "@/commons/_variables.scss";
 #wrap {
   background-color : #fff;
+  // 先对应 960 和 1280 之间，等增加样式之后统一加@ media 的tag
+  // 基本所有的component样式都是能默认自适应的
   min-width: 960px;
   max-width: 1280px;
   overflow: hidden;
 }
 
+//! 以下是covid19_top内部所有的共通css class
+// Covid19_top的标准h1
 h1 {
   padding-left: 10px;
   margin-left: 24px;
@@ -63,37 +67,10 @@ h1 {
   border-left: 4px solid #0452E6;
   border-radius: 2px;
 
-  font-family: Noto Sans CJK JP;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 36px;
-  /* identical to box height */
-  letter-spacing: 0.01em;
+  @include noto-font-001em(24px, bold);
 }
 
-.wrap-shadow {
-  box-shadow: $box-shadow-wrap;
-  border-radius: 12px;
-  margin: 24px;
-}
-
-.flex-container-start {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.flex-container-spacebetween {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.flex-direction-column {
-  flex-direction: column;
-}
-
+// link的共通样式
 a {
   text-decoration: none;
   color:$color-black;
