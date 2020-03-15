@@ -52,6 +52,17 @@
                         viewBox="0 0 100 100"
                         preserveAspectRatio="none"
                         >
+                            <defs>
+                                <linearGradient id="grad1" gradientTransform="rotate(90)">
+                                    <stop offset="0%" stop-color="#D2E2FF"/>
+                                    <stop offset="100%" stop-color="#D2E2FF" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <polygon classe="infect-data-line"
+                            :points="`${polygonPoints} ${100 - 50 / infectDatas.length},
+                            100 ${50 / infectDatas.length},100`"
+                            fill="url(#grad1)" />
+
                             <line
                             v-for="(infectFromData, index) in infectFromDatas"
                             v-bind:key="index"
@@ -59,16 +70,7 @@
                             :y1="`${100 - infectFromData / units[0] * 100}`"
                             :x2="`${50 / infectDatas.length * (3 + index * 2)}`"
                             :y2="`${100 - infectDatas[index + 1].count / units[0] * 100}`"
-                            style="stroke:#0452E6;" stroke-linecap="round" stroke-width="2" />
-
-                            <defs>
-                                <linearGradient id="grad1">
-                                    <stop offset="0%" stop-color="#D2E2FF"/>
-                                    <stop offset="100%" stop-color="#D2E2FF" stop-opacity="0" />
-                                </linearGradient>
-                            </defs>
-                            <polygon classe="infect-data-line"
-                            points="60,20 100,40 100,80 60,100 20,80 20,40" fill="url(#grad1)" />
+                            style="stroke:#0452E6;" stroke-linecap="round" stroke-width="1" />
                         </svg>
                     </div>
 
@@ -183,6 +185,12 @@ export default {
     infectFromDatas() {
       const { infectDatas } = this;
       return [...Array(infectDatas.length - 1).keys()].map(i => infectDatas[i].count);
+    },
+    polygonPoints() {
+      const { infectDatas, units } = this;
+      return [...Array(infectDatas.length).keys()].map(
+        // eslint-disable-next-line no-mixed-operators
+        i => `${50 * (1 + i * 2) / infectDatas.length},${100 - infectDatas[i].count * 100 / units[0]}`).join(' ');
     },
   },
 };
