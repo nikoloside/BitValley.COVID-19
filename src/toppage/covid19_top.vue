@@ -83,4 +83,8 @@ a {
 a:hover{
     color: $color-blue;
 }
+
+body {
+  margin: 0;
+}
 </style>
