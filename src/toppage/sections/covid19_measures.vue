@@ -1,12 +1,15 @@
 <template>
   <div id="covid19-measures">
-    <h2>{{ msg }}</h2>
+    <PreventMeasureBlock />
   </div>
 </template>
 
 <script>
+import PreventMeasureBlock from '@/components/PreventMeasureBlock';
+
 export default {
   name: 'Measures',
+  components: { PreventMeasureBlock },
   data() {
     return {
       msg: '这里是防疫情报，预防情报的页面',
@@ -20,6 +23,6 @@ export default {
 @import "@/commons/_variables.scss";
 
 #covid19-measures {
-  display: flex;
+  display: block;
 }
 </style>
