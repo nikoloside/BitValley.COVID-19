@@ -87,5 +87,26 @@ export default {
       color: $color-lightgray;
     }
   }
+
+  @media (max-width: $breakpoint-pc) {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    .infect-number-left {
+      width: 100%;
+      margin:12px 0;
+    }
+    .infect-number-right {
+      width: 96%;
+      display: block;
+      margin: 0 ;
+    }
+    .infect-number-text {
+      position:static;
+      display: block;
+      margin:12px 0;
+      padding:12px;
+    }
+  }
 }
 </style>

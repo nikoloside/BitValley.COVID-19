@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app flex-container-spacebetween">
     <router-view/>
   </div>
 </template>

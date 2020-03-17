@@ -226,6 +226,7 @@ export default {
     width: 100%;
     height: 203px;
     margin: 0 12px;
+    padding: 0;
 
     @media (max-width: $breakpoint-sp) {
         height: 275px;

@@ -55,9 +55,6 @@ export default {
   // width
   width: 100%;
   height: 112px;
-  // 此处通过@ media 来分开出处理 TODO
-  min-width: 960px;
-  max-width: 1280px;
   // fixed
   position: fixed;
   top: 0px;
@@ -68,6 +65,7 @@ export default {
   .covid19-logo {
     background-image:url('../../assets/image/logo.svg');
     background-size: 100%;
+    background-repeat: no-repeat;
     max-width: 342.02px;
     width: 32%;
     height: 50px;
