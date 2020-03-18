@@ -31,11 +31,41 @@ export default {
 #covid19-pickup {
   display: flex;
   margin-top: 112px;
+  @media (max-width: $breakpoint-pc) {
+    margin-top: 130px;
+  }
+  @media (max-width: $breakpoint-sp) {
+    margin-top: 72px;
+  }
 }
 
 .wrap-pickup {
   width: 100%;
   height: 66px;
+  margin: 24px 24px;
+  @media (max-width: $breakpoint-pc) {
+    margin: 8px 16px;
+    margin-top: 24px;
+  }
+  @media (max-width: $breakpoint-sp) {
+    height: 144px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 8px 16px;
+    margin-top: 24px;
+
+    .icon-pickup {
+      padding-top: 16px;
+      padding-left: 16px;
+      margin: 0;
+    }
+
+    .icon-pickup-text {
+      padding-top: 8px;
+      padding-left:16px;
+      width: 263px;
+    }
+  }
 }
 
 .icon-pickup {

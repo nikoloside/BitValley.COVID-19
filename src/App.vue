@@ -34,7 +34,6 @@ export default {
 .wrap-shadow {
   box-shadow: $box-shadow-wrap;
   border-radius: 12px;
-  margin: 24px;
 }
 
 // flex的共通化

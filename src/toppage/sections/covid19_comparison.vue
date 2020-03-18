@@ -112,24 +112,32 @@ export default {
 #covid19-comparison {
   display: block;
   padding-bottom: 16px;
+  margin: 0 24px;
+  @media (max-width: $breakpoint-pc) {
+    margin: 0 16px;
+  }
 }
 
 .comparison-catchcopy {
   @include noto-font-001em(16px, bold);
-  padding: 8px 24px;
+  padding: 8px 0px;
   text-align: left;
+  @media (max-width: $breakpoint-pc) {
+    @include noto-font-001em(14px, normal);
+  }
 }
 
 .comparison-source-copyright{
   @include noto-font-001em(14px, normal);
   color: $color-lightgray;
   text-align: left;
-  padding: 0px 24px;
+  padding: 0px 0px;
 }
 .comparison-table {
   border-collapse:  collapse; /* セルの線を重ねる */
   width:  100%;               /* 幅指定 */
   table-layout: fixed;        /* セルの幅計算指定 */
+  margin: 16px 0;
 
   th,td {
     @include noto-font-001em(16px, 500);
@@ -148,6 +156,12 @@ export default {
     background-color: $color-primary;
     color: $color-white;
     width: 232px;
+    @media (max-width: $breakpoint-pc) {
+      width: 142px;
+    }
+    @media (max-width: $breakpoint-sp) {
+      width: auto;
+    }
   }
 
   .lt {
@@ -180,6 +194,4 @@ export default {
    color: $color-black;
   }
 }
-
-
 </style>

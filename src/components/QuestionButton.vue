@@ -27,7 +27,6 @@ export default {
 
     width: 136px;
     height: 42px;
-    margin-right: 32px;
 
     top: 35px;
     background: $gradation-blue;

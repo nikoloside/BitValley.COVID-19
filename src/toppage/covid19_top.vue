@@ -3,6 +3,7 @@
     <Header></Header>
     <div id="wrap-contents">
       <PickUp></PickUp>
+      <h1 class="wrap-sp-display">感染人数</h1>
       <InfectNumber></InfectNumber>
       <h1>都道府県别感染人数</h1>
       <InfectRegion></InfectRegion>
@@ -72,6 +73,19 @@ h1 {
   border-radius: 2px;
 
   @include noto-font-001em(24px, bold);
+  @media (max-width: $breakpoint-pc) {
+    margin-left: 16px;
+  }
+  @media (max-width: $breakpoint-sp) {
+    margin-left: 16px;
+  }
+}
+
+.wrap-sp-display{
+  display: none;
+  @media (max-width: $breakpoint-sp) {
+    display: block;
+  }
 }
 
 // link的共通样式
