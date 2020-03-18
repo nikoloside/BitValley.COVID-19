@@ -75,6 +75,8 @@ export default {
 
   .label {
     margin-top: 8px;
+    font-size: 16px;
+    font-weight: bold;
     color: $color-gray;
   }
 
