@@ -1,0 +1,217 @@
+<template>
+  <div id="HeaderPcBlock" class="flex-container-spacebetween">
+    <div class="covid19-logo">
+    </div>
+    <div class="nav flex-container-spacebetween">
+      <div class="nav-link flex-container-spacebetween">
+        <li><router-link to="/">感染情報</router-link></li>
+        <li><router-link to="/">ニュース</router-link></li>
+        <li><router-link to="/">症状比較</router-link></li>
+        <li><router-link to="/">予防対策</router-link></li>
+      </div>
+      <div class="social flex-container-spacebetween">
+        <div class="social-text">
+            シェア
+        </div>
+        <li><router-link to="/" class="facebook"></router-link></li>
+        <li><router-link to="/" class="twitter"></router-link></li>
+        <li><router-link to="/" class="sharelink"></router-link></li>
+      </div>
+      <div class="question">
+        <QuestionButton></QuestionButton>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import QuestionButton from '@/components/QuestionButton';
+
+export default {
+  name: 'HeaderPcBlock',
+  components: {
+    QuestionButton,
+  },
+  data() {
+    return {
+      scrollY: true,
+    };
+  },
+  methods: {
+    handleScroll() {
+      // Any code to be executed when the window is scrolled
+      this.scrollY = window.scrollY > window.innerHeight + 20;
+    },
+  },
+  created() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style  lang="scss" scoped>
+@import "@/commons/_variables.scss";
+
+#HeaderPcBlock {
+  background-color: $color-background;
+  z-index:$z-index-header;
+  // width
+  width: 100%;
+  height: 112px;
+  // fixed
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right:0px;
+  overflow: visible;
+  @media (max-width: $breakpoint-sp) {
+      display: none;
+  }
+  .covid19-logo {
+    background-image:url('../assets/image/logo.svg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    max-width: 342.02px;
+    width: 32%;
+    height: 50px;
+    margin-left: 16px;
+  }
+
+  .nav {
+    margin-right: 16px;
+    .social {
+      margin: 0 15px;
+      .social-text {
+        display: flex;
+        @include noto-font-001em(12px, bold);
+        color: $color-black;
+        display: none;
+        @media (max-width: $breakpoint-pc) {
+            display: flex;
+            margin-right: 1px;
+        }
+      }
+      .twitter {
+        width: 24px;
+        height: 24px;
+        -webkit-mask-image: url('../assets/image/facebook.svg');
+        mask-image: url('../assets/image/facebook.svg');
+      }
+      .facebook {
+        width: 24px;
+        height: 24px;
+        -webkit-mask-image: url('../assets/image/twitter.svg');
+        mask-image: url('../assets/image/twitter.svg');
+      }
+      .sharelink {
+        width: 24px;
+        height: 24px;
+        -webkit-mask-image: url('../assets/image/sharelink.svg');
+        mask-image: url('../assets/image/sharelink.svg');
+      }
+      .nav-link {
+        width: 100%;
+      }
+      li{
+        a {
+        margin-left: 5px;
+        margin-right: 5px;
+        transition: color .3s ease;
+        -webkit-transition: color .3s ease;
+        background-color: $color-black;
+        }
+        a:hover{
+        background-color: $color-blue;
+        }
+        a::after {
+        border-bottom: $color-white;
+        width: 0;
+        background-color: $color-blue;
+        }
+        a:hover::after {
+        width: 0;
+        }
+      }
+    }
+  }
+
+  @media (max-width: $breakpoint-pc) {
+    height: 130px;
+
+    .covid19-logo {
+        position: absolute;
+        min-width: 300px;
+        top: 24px;
+        left: 16px;
+        margin-left: 0;
+    }
+    .question {
+        position: absolute;
+        top: 24px;
+        right: 16px;
+    }
+    .nav-link {
+        position: absolute;
+        left: 16px;
+        bottom: 24px;
+    }
+    .social {
+        position: absolute;
+        width: 140px;
+        right: -3px;
+        bottom: 28px;
+    }
+  }
+
+  // 下划线动画特效
+  li{
+    min-width: 64;
+    height: 19px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    a {
+      // 只有header这部分字体和size是分开，特殊处理
+      font-family: SF Compact Display;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 42px;
+      /* identical to box height */
+      position: relative;
+      margin: 0 12px;
+      transition: color .3s ease;
+      -webkit-transition: color .3s ease;
+      background-color: #fff;
+      z-index: $z-index-over;
+
+      @media (max-width: $breakpoint-pc) {
+          font-size: 14px;
+          margin: 0 8px;
+      }
+    }
+    a:hover{
+        color: $color-blue;
+    }
+    a::after {
+      border-bottom: solid 4px $color-blue;
+      border-radius: 2px;
+      bottom: 0;
+      display: block;
+      content: "";
+      transition: all .3s ease;
+      -webkit-transition: all .3s ease;
+      width: 0;
+    }
+    a:hover::after {
+      width: 100%;
+    }
+  }
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app flex-container-spacebetween">
     <router-view/>
   </div>
 </template>
@@ -34,7 +34,6 @@ export default {
 .wrap-shadow {
   box-shadow: $box-shadow-wrap;
   border-radius: 12px;
-  margin: 24px;
 }
 
 // flex的共通化

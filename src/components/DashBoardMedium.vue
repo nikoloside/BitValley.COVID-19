@@ -89,7 +89,15 @@ export default {
     min-width: 206px;
     width: 100%;
     height: 97px;
-    margin: 0 12px;
+
+    margin-right: 24px;
+    @media (max-width: $breakpoint-pc) {
+      margin-right: 16px;
+      margin-bottom: 16px;
+      &:last-child{
+        margin-right: 0;
+      }
+    }
 
     .wrap-dashboard {
         width: 100%;

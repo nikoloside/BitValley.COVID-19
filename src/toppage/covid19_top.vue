@@ -1,16 +1,19 @@
 <template>
   <div id="wrap">
     <Header></Header>
-    <PickUp></PickUp>
-    <InfectNumber></InfectNumber>
-    <h1>都道府県别感染人数</h1>
-    <InfectRegion></InfectRegion>
-    <h1>ニュース</h1>
-    <News></News>
-    <h1>症状比較</h1>
-    <Comparison></Comparison>
-    <h1>予防対策</h1>
-    <Measures></Measures>
+    <div id="wrap-contents">
+      <PickUp></PickUp>
+      <h1 class="wrap-sp-display">感染人数</h1>
+      <InfectNumber></InfectNumber>
+      <h1>都道府県别感染人数</h1>
+      <InfectRegion></InfectRegion>
+      <h1>ニュース</h1>
+      <News></News>
+      <h1>症状比較</h1>
+      <Comparison></Comparison>
+      <h1>予防対策</h1>
+      <Measures></Measures>
+    </div>
     <Footer></Footer>
   </div>
 </template>
@@ -50,11 +53,13 @@ export default {
 @import "@/commons/_variables.scss";
 #wrap {
   background-color : #fff;
+}
+#wrap-contents {
   // 先对应 960 和 1280 之间，等增加样式之后统一加@ media 的tag
   // 基本所有的component样式都是能默认自适应的
-  min-width: 960px;
+  min-width: 320px;
   max-width: 1280px;
-  overflow: hidden;
+  margin: 0 auto;
 }
 
 //! 以下是covid19_top内部所有的共通css class
@@ -68,6 +73,19 @@ h1 {
   border-radius: 2px;
 
   @include noto-font-001em(24px, bold);
+  @media (max-width: $breakpoint-pc) {
+    margin-left: 16px;
+  }
+  @media (max-width: $breakpoint-sp) {
+    margin-left: 16px;
+  }
+}
+
+.wrap-sp-display{
+  display: none;
+  @media (max-width: $breakpoint-sp) {
+    display: block;
+  }
 }
 
 // link的共通样式

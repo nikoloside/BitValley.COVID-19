@@ -26,5 +26,6 @@ export default {
 
 #covid19-footer {
   display: block;
+  width: 100vw;
 }
 </style>

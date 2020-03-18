@@ -57,8 +57,9 @@ export default {
 
 #covid19-infect-number {
   display: flex;
-  padding: 24px 12px;
   height: 203px;
+  margin: 16px 24px;
+  margin-bottom: 32px;
 
   .infect-number-left {
     align-items: start;
@@ -86,6 +87,47 @@ export default {
       @include noto-font-001em(14px, normal);
       color: $color-lightgray;
     }
+  }
+
+  @media (max-width: $breakpoint-pc) {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: 16px 16px;
+    margin-bottom: 32px;
+    .infect-number-left {
+      width: 100%;
+    }
+    .infect-number-right {
+      width: 100%;
+      display: block;
+    }
+    .infect-number-text {
+      position:static;
+      display: block;
+      padding: 16px 16px;
+    }
+  }
+
+  @media (max-width: $breakpoint-sp) {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: 16px 16px;
+    .infect-number-left {
+      display: block;
+      width: 100%;
+    }
+    .infect-number-right {
+      width: 100%;
+      display: block;
+    }
+    .infect-number-text {
+      position:static;
+      display: block;
+      padding: 16px 16px;
+    }
+
   }
 }
 </style>

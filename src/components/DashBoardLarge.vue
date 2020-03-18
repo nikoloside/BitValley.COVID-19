@@ -2,11 +2,13 @@
     <div id="DashBoardLarge" class="wrap-shadow">
         <div class="wrap-dashboard flex-container-spacebetween">
             <div class="DashBoardLeft flex-container-spacebetween flex-direction-column">
+                <div class="DashBoardBlack">
                 <div class="DashBoardTitle">
                     {{ BoardTitle }}
                 </div>
                 <div class="DashBoardNumberBlack">
                     {{ normalizeTotalPersons }}
+                </div>
                 </div>
 
                 <div class="DashBoardDiff flex-container-start">
@@ -225,21 +227,39 @@ export default {
     min-width: 206px;
     width: 100%;
     height: 203px;
-    margin: 0 12px;
 
     @media (max-width: $breakpoint-sp) {
-        height: 275px;
+      height: 275px;
     }
 
     .wrap-dashboard {
         width: 100%;
         padding: 24px 24px;
+        @media (max-width: $breakpoint-sp) {
+          display: flex;
+          flex-direction: column;;
+          padding: 16px 24px;
+        }
     }
 
     .DashBoardLeft {
         height: 100%;
         align-items: flex-start;
         margin-right: 16px;
+        @media (max-width: $breakpoint-sp) {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          flex-direction: row;
+          margin: 0px;
+
+          .DashBoardTitle {
+            @include noto-font-001em(14px, bold);
+          }
+          .DashBoardNumberBlack {
+              @include poppins-font(24px, bold);
+          }
+        }
 
         .DashBoardTitle {
             @include noto-font-001em(24px, bold);
@@ -252,7 +272,6 @@ export default {
             @include poppins-font(40px, bold);
             color: $color-black;
             position: relative;
-            top: -16px;
         }
 
         .DashBoardDiff {
