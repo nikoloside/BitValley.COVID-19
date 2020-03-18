@@ -278,10 +278,6 @@ $break-point: 960px;
       .linkArrow path {
         stroke: $color-blue;
       }
-
-      .articleText {
-        color: $color-blue;
-      }
     }
   }
 
