@@ -75,21 +75,19 @@ $break-point: 480px;
   }
 
   .service-description {
+    @include noto-font-001em(16px, normal);
     margin: 20px 0 0;
-    font-size: 16px;
-    font-weight: bold;
     color: $color-darkgray;
 
     @media (max-width: $break-point) {
-      font-size: 14px;
+      @include noto-font-001em(14px, normal);
     }
   }
 
   .share-title {
+    @include noto-font-001em(16px, bold);
     margin: 32px 0 20px;
     text-align: center;
-    font-size: 16px;
-    font-weight: bold;;
   }
 }
 </style>

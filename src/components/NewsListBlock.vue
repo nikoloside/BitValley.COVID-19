@@ -182,18 +182,16 @@ $break-point: 960px;
   }
 
   .date {
-    font-size: 16px;
-    font-weight: bold;
+    @include noto-font-001em(16px, bold);
   }
 
   .time {
-    font-size: 14px;
+    @include noto-font-001em(16px, normal);
   }
 
   @media (max-width: $break-point) {
     .date, .time {
-      font-size: 14px;
-      font-weight: bold;
+      @include noto-font-001em(14px, bold);
     }
 
     .time {
@@ -288,11 +286,10 @@ $break-point: 960px;
   }
 
   .articleTitle {
+    @include noto-font-001em(16px, bold);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 16px;
-    font-weight: bold;
     margin: 0;
   }
 
@@ -306,7 +303,7 @@ $break-point: 960px;
   }
 
   .articleText {
-    font-size: 12px;
+    @include noto-font-001em(12px, normal);
     color: $color-gray;
     display: -webkit-box;
     -webkit-line-clamp: 2;
