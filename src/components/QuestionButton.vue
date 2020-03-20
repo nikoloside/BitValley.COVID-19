@@ -42,6 +42,11 @@ export default {
     }
     a:hover {
         background: $color-hover;
+        border-radius: 4px;
+    }
+    a:active {
+        background: #004AD7;
+        border-radius: 4px;
     }
 }
 
