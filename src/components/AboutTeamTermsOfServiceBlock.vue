@@ -121,8 +121,7 @@ export default {
   }
 
   .tab-link {
-    font-size: 16px;
-    font-weight: bold;
+    @include noto-font-001em(16px, bold);
     color: $color-gray;
 
     &:hover,
@@ -132,9 +131,9 @@ export default {
   }
 
   .tab-panel {
+    @include noto-font-001em(12px, normal);
     margin: 16px 0 0;
     text-align: center;
-    font-size: 12px;
     color: $color-darkgray;
     display: none;
 

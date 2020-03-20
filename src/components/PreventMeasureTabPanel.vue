@@ -103,14 +103,13 @@ export default {
     flex: auto;
 
     h3 {
+      @include noto-font-001em(24px, bold);
       position: relative;
       margin: 0;
-      font-size: 24px;
-      font-weight: bold;
       color: $color-navy;
 
       @media (max-width: 960px) {
-        font-size: 16px;
+        @include noto-font-001em(16px, bold);
       }
 
       &::after {
@@ -130,24 +129,24 @@ export default {
     }
 
     p {
+      @include noto-font-001em(16px, normal);
       margin: 32px 0 0;
-      font-size: 16px;
 
       strong {
         font-weight: bold;
       }
 
       @media (max-width: 960px) {
-        font-size: 14px;
+        @include noto-font-001em(14px, normal);
       }
     }
   }
 
   .measure-cite {
+    @include noto-font-001em(12px, normal);
     margin-top: 40px;
     text-align: left;
     color: $color-gray;
-    font-size: 12px;
     word-break: break-word;
 
     h4 {

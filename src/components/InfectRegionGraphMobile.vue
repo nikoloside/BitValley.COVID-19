@@ -148,8 +148,7 @@ export default {
   margin: 24px;
 
   .region-label {
-    font-weight: bold;
-    font-size: 10px;
+    @include noto-font-001em(10px, bold);
     color: $color-gray;
     text-align: left;
     margin: 8px 0;
@@ -183,6 +182,7 @@ export default {
   }
 
   .region-count {
+    @include noto-font-001em(12px, normal);
     opacity: 0;
     position: absolute;
     top: 0;
@@ -191,7 +191,6 @@ export default {
     background-color: #757F8B;
     color: $color-white;
     text-align: center;
-    font-size: 12px;
     box-sizing: border-box;
     padding: 4px 8px;
     border-radius: 15px;
@@ -205,10 +204,9 @@ export default {
   }
 
   .unit {
+    @include noto-font-001em(10px, bold);
     top: 0;
     position: absolute;
-    font-weight: bold;
-    font-size: 10px;
     color: $color-gray;
     text-align: right;
   }

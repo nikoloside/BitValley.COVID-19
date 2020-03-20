@@ -74,6 +74,7 @@ export default {
   }
 
   .label {
+    @include noto-font-001em(16px, bold);
     margin-top: 8px;
     color: $color-gray;
   }
