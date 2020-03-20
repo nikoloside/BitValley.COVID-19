@@ -76,7 +76,6 @@ export default {
     text-align: left;
     align-items: flex-start;
     position: absolute;
-    padding-left: 24px;
     padding-top: 121px;
 
     .infect-number-text-bold {
@@ -125,7 +124,7 @@ export default {
     .infect-number-text {
       position:static;
       display: block;
-      padding: 16px 16px;
+      padding: 16px 0;
     }
 
   }
