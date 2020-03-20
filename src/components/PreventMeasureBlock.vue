@@ -123,15 +123,16 @@
       <template v-slot:cite>
         <h4>出典</h4>
         <p>
-          1 首相官邸: <a href="https://www.kantei.go.jp/jp/headline/kansensho/coronavirus.html">「新型コロナウイルス感染症に備えて ～一人ひとりができる対策を知っておこう～」</a>
+          1-1.首相官邸ホームページ
           <br />
-          2 HUFFPOST: <a href="https://www.huffingtonpost.jp/entry/konzatsu-kaihi_jp_5e4b2c15c5b6eb8e95b15b3a">「新型コロナウイルスの感染予防にも…人でぎっしりの満員電車を避けるために使える方法」</a>
+          1-2.ハフポスト
           <br />
-          3 中国疾控中心
+          1-3.4. 中国疾病預防控制中心
           <br />
-          4 中国疾控中心
+          1-5.首相官邸・厚生労働省・中国疾病預防控制中心
           <br />
-          5 首相官邸・厚生労働省・中国疾控中心
+          2-1.2.3.4.5. China Construction Bank University・Laihua Video
+          <br />
         </p>
       </template>
     </PreventMeasureTabPanel>
@@ -213,7 +214,12 @@
 
       <template v-slot:cite>
         <h4>出典</h4>
-        <p>北京市疾病预防控制中心・北京市健康教育所・北京市石景山区疾病预防控制中心</p>
+        <p>
+          Beijing Centre for Diseases Prevention and Control・Beijing Institute of Health Education
+          <br />
+          ・Shijingshan Disease Control Prevention Center Institute of Tuberculosis Control
+          <br />
+        </p>
       </template>
     </PreventMeasureTabPanel>
 
@@ -232,12 +238,9 @@
           <strong>2. 普段から、十分な睡眠とバランスのよい食事を心がけ、免疫力を高めておきます。</strong>
           <br />
           <br />
-          <strong>3. 免疫力を下げない食事のポイント（日本調剤）</strong>
-          <br />
-          （１）たんぱく質を含む食品：肉類/魚介類/卵/豆腐など
-          <br />
-          （２）善玉菌を増やす食品：ヨーグルト/乳酸菌飲料/発酵食品/野菜/果物/豆類/ごぼう/玉ねぎなど
-          <br />
+          <strong>3. 免疫力を保つために、タンパク質を含む食品</strong>
+          （肉類/魚介類/卵/豆腐など）<strong>と善玉菌を増やす食品</strong>
+          （ヨーグルト/乳酸菌飲料/発酵食品/野菜/果物/豆類/ごぼう/玉ねぎなど）<strong>を食べるのがおすす</strong>
         </p>
 
       </template>
@@ -249,11 +252,9 @@
       <template v-slot:cite>
         <h4>出典</h4>
         <p>
-          1 首相官邸
+          1.2. 首相官邸ホームページ
           <br />
-          2 首相官邸
-          <br />
-          3 日本調剤 <a href="https://www.nicho.co.jp/column/20200303_c1/">「「新型コロナウイルス感染症」予防のための基本のき」</a>
+          3.日本調剤・厚生労働省.e-ヘルスネット.“たんぱく質”. “腸内細菌と健康”
           <br />
         </p>
       </template>
@@ -316,11 +317,11 @@
       <template v-slot:cite>
         <h4>出典</h4>
         <p>
-          1, 2, 8 首相官邸HP
+          1.2.8 首相官邸ホームページ
           <br />
-          3-6, 9, 10 厚生労働省
+          3.4.5.6.9.10. 厚生労働省ホームページ
           <br />
-          7,11 中国疾控中心
+          7.11.中国疾病預防控制中心
           <br />
         </p>
       </template>
@@ -355,11 +356,9 @@
       <template v-slot:cite>
         <h4>出典</h4>
         <p>
-          1 中国疾控中心
+          1.2.中国疾病預防控制中心
           <br />
-          2 中国疾控中心
-          <br />
-          3 東金市HP
+          3.東金市ホームページ
           <br />
         </p>
       </template>
