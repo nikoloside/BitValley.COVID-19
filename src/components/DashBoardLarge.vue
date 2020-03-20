@@ -49,8 +49,6 @@
                     <!-- データの描画空間 -->
                     <div class="infect-data-group">
                         <svg
-                        width="100%"
-                        height="100%"
                         :viewBox="`0 0 ${graphWidth} ${graphHeight}`"
                         preserveAspectRatio="none"
                         >
@@ -443,6 +441,10 @@ export default {
             position: absolute;
             width: 100%;
             height: 100%;
+            svg {
+                height: 140px;
+                width: 100%;
+            }
 
             .today-circle {
                 position: absolute;
