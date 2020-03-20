@@ -3,15 +3,15 @@
     <Header></Header>
     <div id="wrap-contents">
       <PickUp></PickUp>
-      <h1 class="wrap-sp-display">感染人数</h1>
+      <div class="section wrap-sp-display"><div class="section-left" />感染人数</div>
       <InfectNumber></InfectNumber>
-      <h1>都道府県别感染人数</h1>
+      <div class="section"><div class="section-left" />都道府県别感染人数</div>
       <InfectRegion></InfectRegion>
-      <h1>ニュース</h1>
+      <div class="section"><div class="section-left" />ニュース</div>
       <News></News>
-      <h1>症状比較</h1>
+      <div class="section"><div class="section-left" />症状比較</div>
       <Comparison></Comparison>
-      <h1>予防対策</h1>
+      <div class="section"><div class="section-left" />予防対策</div>
       <Measures></Measures>
     </div>
     <Footer></Footer>
@@ -64,13 +64,21 @@ export default {
 
 //! 以下是covid19_top内部所有的共通css class
 // Covid19_top的标准h1
-h1 {
-  padding-left: 10px;
+.section {
+  display: flex;
+  flex-direction: row;
   margin-left: 24px;
   color: $color-black;
   text-align: left;
-  border-left: 4px solid #0452E6;
-  border-radius: 2px;
+
+  .section-left {
+    width: 4px;
+    height: 36px;
+    border-radius: 2px;
+    background: $color-primary;
+    border-radius: 2px;
+    margin-right: 9px;
+  }
 
   @include noto-font-001em(24px, bold);
   @media (max-width: $breakpoint-pc) {
