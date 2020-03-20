@@ -49,9 +49,9 @@
                     <!-- データの描画空間 -->
                     <div class="infect-data-group">
                         <svg
-                        width='100%'
-                        height='100%'
-                        viewBox="0 0 100 100"
+                        width="100%"
+                        height="100%"
+                        :viewBox="`0 0 ${graphWidth} ${graphHeight}`"
                         preserveAspectRatio="none"
                         >
                             <defs>
@@ -61,18 +61,18 @@
                                 </linearGradient>
                             </defs>
                             <polygon classe="infect-data-line"
-                            :points="`${polygonPoints} ${100 - 50 / infectDatas.length},
-                            100 ${50 / infectDatas.length},100`"
+                            :points="`${polygonPoints} ${graphWidth*(1 - 0.5 / infectDatas.length)},
+                            ${graphHeight} ${graphWidth / 2 / infectDatas.length},${graphHeight}`"
                             fill="url(#grad1)" />
 
                             <line
                             v-for="(infectFromData, index) in infectFromDatas"
                             v-bind:key="index"
-                            :x1="`${50 / infectDatas.length * (1 + index * 2)}`"
-                            :y1="`${100 - infectFromData / units[0] * 100}`"
-                            :x2="`${50 / infectDatas.length * (3 + index * 2)}`"
-                            :y2="`${100 - infectDatas[index + 1].count / units[0] * 100}`"
-                            style="stroke:#0452E6;" stroke-linecap="round" stroke-width="2" />
+                            :x1="`${graphWidth / 2 / infectDatas.length * (1 + index * 2)}`"
+                            :y1="`${graphHeight - infectFromData / units[0] * graphHeight}`"
+                            :x2="`${graphWidth / 2 / infectDatas.length * (3 + index * 2)}`"
+                            :y2="`${graphHeight - infectDatas[index+1].count/units[0]*graphHeight}`"
+                            style="stroke:#0452E6;" stroke-linecap="round" stroke-width="3" />
                         </svg>
                         <div class="today-circle"
                         v-bind:style="{
@@ -152,6 +152,12 @@ export default {
     };
   },
   computed: {
+    graphWidth() {
+      return 283;
+    },
+    graphHeight() {
+      return 143;
+    },
     normalizeTotalPersons() {
       const { TotalPersons } = this;
       return TotalPersons.toLocaleString();
@@ -191,7 +197,7 @@ export default {
       const counts = infectDatas.map(({ count }) => count);
       const maxCount = Math.max(...counts);
 
-      return Math.ceil(maxCount / (unitCount - 1) / 10) * 10;
+      return Math.ceil(maxCount / (unitCount - 1) / 50) * 50;
     },
     lineBottoms() {
       const { unitCount } = this;
@@ -207,10 +213,10 @@ export default {
       return [...Array(infectDatas.length - 1).keys()].map(i => infectDatas[i].count);
     },
     polygonPoints() {
-      const { infectDatas, units } = this;
+      const { infectDatas, units, graphWidth, graphHeight } = this;
       return [...Array(infectDatas.length).keys()].map(
         // eslint-disable-next-line no-mixed-operators
-        i => `${50 * (1 + i * 2) / infectDatas.length},${100 - infectDatas[i].count * 100 / units[0]}`).join(' ');
+        i => `${graphWidth / 2 * (1 + i * 2) / infectDatas.length},${graphHeight - infectDatas[i].count * graphHeight / units[0]}`).join(' ');
     },
   },
 };

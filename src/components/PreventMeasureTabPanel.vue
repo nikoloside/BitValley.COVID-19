@@ -70,7 +70,8 @@ export default {
   .measure-image-wrapper {
     flex: none;
     position: relative;
-    width: 516px;
+    width: 40vw;
+    max-width: 516px;
     overflow: hidden;
     margin: auto;
 
@@ -86,10 +87,6 @@ export default {
       height: 100%;
       top: 0;
       left: 0;
-    }
-
-    @media (max-width: 1280px) {
-      width: 356px;
     }
 
     @media (max-width: 960px) {

@@ -1,7 +1,7 @@
 <template>
   <div id="covid19-comparison">
     <div class="comparison-catchcopy">
-      急に喉の痛みがあって、もしかして新型コロナウイルズ？子供が発熱しているかをどう判断すればいい？ここではその違いを紹介します。
+      １分で症状から区別しよう！
     </div>
     <div class="wrap-shadow">
       <table class="comparison-table">
@@ -89,7 +89,7 @@
       </table>
     </div>
     <div class="comparison-source-copyright">
-      出典：丁香医
+      出典：丁香医生
     </div>
   </div>
 </template>
