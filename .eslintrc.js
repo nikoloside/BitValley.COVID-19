@@ -40,10 +40,23 @@ module.exports = {
         'e' // for e.returnvalue
       ]
     }],
+
+  //   "no-restricted-syntax": [
+  //     "error",
+  //     {
+  //         "selector": "FunctionExpression",
+  //         "message": "Function expressions are not allowed."
+  //     },
+  //     {
+  //         "selector": "CallExpression[callee.name='setTimeout'][arguments.length!=2]",
+  //         "message": "setTimeout must always be invoked with two arguments."
+  //     }
+  // ]
     // allow optionalDependencies
     'import/no-extraneous-dependencies': ['error', {
       optionalDependencies: ['test/unit/index.js']
     }],
+    
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }

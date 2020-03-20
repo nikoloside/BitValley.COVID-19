@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import increaseIcon from '../assets/image/increase.svg';
 import decreaseIcon from '../assets/image/decrease.svg';
 import equalizeIcon from '../assets/image/equalize.svg';
@@ -38,6 +39,16 @@ export default {
       DiffPersons: -9999,
 
     };
+  },
+  props: ['request', 'title'],
+  mounted() {
+    this.BoardTitle = this.title;
+    const url = `http://localhost:8000/api/patient/${this.request}`;
+    axios.get(url)
+      .then((response) => {
+        this.TotalPersons = response.data.data.Current;
+        this.DiffPersons = response.data.data.Diff;
+      });
   },
   computed: {
     normalizeTotalPersons() {

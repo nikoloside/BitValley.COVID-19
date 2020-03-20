@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'InfectRegionGraphDesktop',
   data() {
@@ -114,6 +116,20 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    const dataList = [];
+    axios.get('http://localhost:8000/api/patient/location')
+      .then((response) => {
+        response.data.data.forEach((region) => {
+          const data = {
+            region: region.Location,
+            count: region.Sum,
+          };
+          dataList.push(data);
+        });
+      });
+    this.regionDatas = dataList;
   },
   computed: {
     step() {
