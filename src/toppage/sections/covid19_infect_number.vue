@@ -1,8 +1,8 @@
 <template>
   <div id="covid19-infect-number">
     <div class="infect-number-left flex-container-start">
-      <DashBoardMedium></DashBoardMedium>
-      <DashBoardMedium></DashBoardMedium>
+      <DashBoardMedium request="daily" title="日本昨日感染人数"></DashBoardMedium>
+      <DashBoardMedium request="dead" title="日本死亡人数"></DashBoardMedium>
     </div>
     <div class="infect-number-right flex-container-start">
       <DashBoardLarge></DashBoardLarge>

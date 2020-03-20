@@ -114,6 +114,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import increaseIcon from '../assets/image/increase.svg';
 import decreaseIcon from '../assets/image/decrease.svg';
 import equalizeIcon from '../assets/image/equalize.svg';
@@ -151,6 +152,26 @@ export default {
       ],
     };
   },
+  mounted() {
+    axios.get('http://localhost:8000/api/patient/current')
+      .then((response) => {
+        this.TotalPersons = response.data.data.Current;
+        this.DiffPersons = response.data.data.Diff;
+      });
+    const dataList = [];
+    axios.get('http://localhost:8000/api/patient/period')
+      .then((response) => {
+        response.data.data.forEach((patientByDate) => {
+          const data = {
+            date: patientByDate.Date,
+            count: patientByDate.Confirmed,
+          };
+          dataList.push(data);
+        });
+      });
+    this.infectDatas = dataList;
+  },
+
   computed: {
     normalizeTotalPersons() {
       const { TotalPersons } = this;

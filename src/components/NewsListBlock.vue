@@ -41,57 +41,40 @@
 </template>
 
 <script>
+import axios from 'axios';
 import dayjs from 'dayjs';
 
 export default {
   name: 'NewsList',
   data() {
     return {
-      newsDatas: [
-        {
-          id: '1',
-          publishAt: dayjs().subtract(1, 'minute').toISOString(),
-          title: '東京都で５０代女性と７０代男性が新たに感染',
-          text: '５０代の女性は千葉県内のクリニックに勤める看護師で、すでに３人の感染が判明している市川市のスポーツクラブを複数回利用していました。また、７０代の男性は感染判明後の先月２６日に亡くなった８０代の男性と都内の医療機関の同じ部屋に１３。５０代の女性は千葉県内のクリニックに勤める看護師で、すでに３人の感染が判明している市川市のスポーツクラブを複数回利用していました。また、７０代の男性は感染判明後の先月２６日に亡くなった８０代の男性と都内の医療機関の同じ部屋に１３。５０代の女性は千葉県内のクリニックに勤める看護師で、すでに３人の感染が判明している市川市のスポーツクラブを複数回利用していました。また、７０代の男性は感染判明後の先月２６日に亡くなった８０代の男性と都内の医療機関の同じ部屋に１３。',
-          href: 'https://www.google.com',
-        },
-        {
-          id: '2',
-          publishAt: dayjs().subtract(2, 'hour').toISOString(),
-          title: '東京都で５０代女性と７０代男性が新たに感染',
-          text: '５０代の女性は千葉県内のクリニックに勤める看護師で、すでに３人の感染が判明している市川市のスポーツクラブを複数回利用していました。また、７０代の男性は感染判明後の先月２６日に亡くなった８０代の男性と都内の医療機関の同じ部屋に１３。',
-          href: 'https://www.google.com',
-        },
-        {
-          id: '3',
-          publishAt: dayjs().subtract(3, 'day').toISOString(),
-          title: '東京都で５０代女性と７０代男性が新たに感染',
-          text: '５０代の女性は千葉県内のクリニックに勤める看護師で、すでに３人の感染が判明している市川市のスポーツクラブを複数回利用していました。また、７０代の男性は感染判明後の先月２６日に亡くなった８０代の男性と都内の医療機関の同じ部屋に１３。',
-          href: 'https://www.google.com',
-        },
-        {
-          id: '4',
-          publishAt: dayjs().subtract(4, 'day').toISOString(),
-          title: '東京都で５０代女性と７０代男性が新たに感染',
-          text: '５０代の女性は千葉県内のクリニックに勤める看護師で、すでに３人の感染が判明している市川市のスポーツクラブを複数回利用していました。また、７０代の男性は感染判明後の先月２６日に亡くなった８０代の男性と都内の医療機関の同じ部屋に１３。',
-          href: 'https://www.google.com',
-        },
-        {
-          id: '5',
-          publishAt: dayjs().subtract(7, 'day').toISOString(),
-          title: '東京都で５０代女性と７０代男性が新たに感染',
-          text: '５０代の女性は千葉県内のクリニックに勤める看護師で、すでに３人の感染が判明している市川市のスポーツクラブを複数回利用していました。また、７０代の男性は感染判明後の先月２６日に亡くなった８０代の男性と都内の医療機関の同じ部屋に１３。',
-          href: 'https://www.google.com',
-        },
-        {
-          id: '6',
-          publishAt: dayjs().subtract(8, 'day').toISOString(),
-          title: '東京都で５０代女性と７０代男性が新たに感染',
-          text: '５０代の女性は千葉県内のクリニックに勤める看護師で、すでに３人の感染が判明している市川市のスポーツクラブを複数回利用していました。また、７０代の男性は感染判明後の先月２６日に亡くなった８０代の男性と都内の医療機関の同じ部屋に１３。',
-          href: 'https://www.google.com',
-        },
-      ],
+      newsDatas: [],
     };
+  },
+  mounted() {
+    const dataList = [];
+    axios.get('http://localhost:8000/api/news?number=6')
+      .then((response) => {
+        response.data.data.forEach((news) => {
+          let publishTime = dayjs().subtract(news.PassedHour, 'minute').toISOString();
+          if (news.PassedMinutes > 60) {
+            if (news.PassedHour > 24) {
+              publishTime = dayjs().subtract(news.PassedDay, 'day').toISOString();
+            }
+            publishTime = dayjs().subtract(news.PassedHour, 'hour').toISOString();
+          }
+
+          const data = {
+            id: news.ID,
+            publishAt: publishTime,
+            title: news.Title,
+            text: news.Description,
+            href: news.Link,
+          };
+          dataList.push(data);
+        });
+      });
+    this.newsDatas = dataList;
   },
   methods: {
     getISOString(publishAt) {
