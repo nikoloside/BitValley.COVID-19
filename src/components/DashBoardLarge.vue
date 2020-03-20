@@ -49,8 +49,6 @@
                     <!-- データの描画空間 -->
                     <div class="infect-data-group">
                         <svg
-                        width="100%"
-                        height="100%"
                         :viewBox="`0 0 ${graphWidth} ${graphHeight}`"
                         preserveAspectRatio="none"
                         >
@@ -83,13 +81,13 @@
 
                         <div
                         class="infect-column"
-                         v-for="(infectData,index) in infectDatas"
-                         v-bind:key="infectData.date"
-                         v-bind:style="{ width: `${100 / infectDatas.length}%`,
-                         height: `${infectData.count / units[0] * 100}%`,
-                         left:`${100 / infectDatas.length * index}%`}"
+                         v-for="(label,index) in labelsCount"
+                         v-bind:key="label"
+                         v-bind:style="{ width: `${100 / labelsCount.length}%`,
+                         height: `${label / units[0] * 100}%`,
+                         left:`${100 / labelsCount.length * index}%`}"
                         >
-                            <div class="infect-count">{{ infectData.count }}</div>
+                            <div class="infect-count">{{ label }}</div>
                         </div>
                     </div>
 
@@ -101,11 +99,11 @@
                 <!-- 横軸 -->
                 <div class="infect-label-group">
                     <div class="infect-label"
-                        v-for="infectData in infectDatas"
-                        v-bind:key="infectData.date"
-                        v-bind:style="{ width: `${100 / infectDatas.length}%` }"
+                        v-for="label in labelsDate"
+                        v-bind:key="label"
+                        v-bind:style="{ width: `${100 / labelsDate.length}%` }"
                     >
-                        {{infectData.date}}
+                        {{label}}
                     </div>
                 </div>
             </div>
@@ -127,26 +125,115 @@ export default {
       DiffPersons: -9999,
 
       unitCount: 6,
+      labelCount: 6,
       infectDatas: [
         {
+          date: '02.23',
+          count: 0,
+        },
+        {
+          date: '02.24',
+          count: 2,
+        },
+        {
+          date: '02.25',
+          count: 6,
+        },
+        {
+          date: '02.26',
+          count: 11,
+        },
+        {
+          date: '02.27',
+          count: 17,
+        },
+        {
+          date: '02.28',
+          count: 25,
+        },
+        {
+          date: '02.29',
+          count: 35,
+        },
+        {
           date: '03.01',
-          count: 110,
+          count: 47,
         },
         {
           date: '03.02',
-          count: 96,
+          count: 69,
         },
         {
           date: '03.03',
-          count: 62,
+          count: 128,
         },
         {
           date: '03.04',
-          count: 59,
+          count: 256,
         },
         {
           date: '03.05',
-          count: 59,
+          count: 312,
+        },
+        {
+          date: '03.06',
+          count: 400,
+        },
+        {
+          date: '03.07',
+          count: 450,
+        },
+        {
+          date: '03.08',
+          count: 601,
+        },
+        {
+          date: '03.09',
+          count: 630,
+        },
+        {
+          date: '03.10',
+          count: 680,
+        },
+        {
+          date: '03.11',
+          count: 750,
+        },
+        {
+          date: '03.12',
+          count: 788,
+        },
+        {
+          date: '03.13',
+          count: 870,
+        },
+        {
+          date: '03.14',
+          count: 880,
+        },
+        {
+          date: '03.15',
+          count: 890,
+        },
+        {
+          date: '03.16',
+          count: 939,
+        },
+        {
+          date: '03.17',
+          count: 956,
+        },
+        {
+          date: '03.18',
+          count: 980,
+        },
+        {
+          date: '03.19',
+          count: 987,
+        },
+        {
+          date: '03.20',
+          count: 992,
         },
       ],
     };
@@ -207,6 +294,22 @@ export default {
     units() {
       const { unitCount, step } = this;
       return [...Array(unitCount).keys()].map(i => i * step).reverse();
+    },
+    labelsCount() {
+      const { infectDatas, labelCount } = this;
+      const divide = infectDatas.length / labelCount;
+      const offset = infectDatas.length % labelCount;
+      return [...Array(labelCount).keys()].map(i =>
+      // eslint-disable-next-line no-mixed-operators
+        infectDatas[Math.floor(divide * i + offset)].count);
+    },
+    labelsDate() {
+      const { infectDatas, labelCount } = this;
+      const divide = infectDatas.length / labelCount;
+      const offset = infectDatas.length % labelCount;
+      return [...Array(labelCount).keys()].map(i =>
+      // eslint-disable-next-line no-mixed-operators
+        infectDatas[Math.floor(divide * i + offset)].date);
     },
     infectFromDatas() {
       const { infectDatas } = this;
@@ -338,6 +441,10 @@ export default {
             position: absolute;
             width: 100%;
             height: 100%;
+            svg {
+                height: 140px;
+                width: 100%;
+            }
 
             .today-circle {
                 position: absolute;
