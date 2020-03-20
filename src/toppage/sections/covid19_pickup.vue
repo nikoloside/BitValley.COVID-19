@@ -6,7 +6,7 @@
         <div class="icon-pickup-title">PICKUP</div>
       </div>
       <div class="icon-pickup-text">
-        <a href="https://www.huffingtonpost.jp/entry/sengen_jp_5e6081f2c5b69d641c0a99c9">緊急事態宣言でどう変わる？ 新型コロナウイルス対策での発令を政府が検討
+        <a href="https://headlines.yahoo.co.jp/hl?a=20200320-00050173-yom-soci">国内感染者が１０００人超え、医療機関や高齢者施設で広がる
           </a>
         </div>
     </div>

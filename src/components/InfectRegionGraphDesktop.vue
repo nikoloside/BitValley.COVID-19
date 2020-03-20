@@ -119,7 +119,7 @@ export default {
   },
   mounted() {
     const dataList = [];
-    axios.get('http://localhost:8000/api/patient/location')
+    axios.get('http://160.16.196.229:8000/api/patient/location')
       .then((response) => {
         response.data.data.forEach((region) => {
           const data = {

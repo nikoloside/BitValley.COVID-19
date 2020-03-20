@@ -1,6 +1,6 @@
 <template>
     <div id="question_button">
-        <a href="/">
+        <a href="mailto:bitvalley.meliponinae@gmail.com">
             <div class="text_button">
                 {{ msg }}
             </div>
