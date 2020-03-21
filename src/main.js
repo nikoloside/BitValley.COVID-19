@@ -35,7 +35,7 @@ new Vue({
         { property: 'og:type', content: 'website' },
         { property: 'og:title', content: '新型コロナウイルス感染症対策サイト' },
         { property: 'og:url', content: 'http://covid-info.site' },
-        { property: 'og:image', content: 'https://res.cloudinary.com/df6wesepg/image/upload/v1584760478/OGP_wnhvpi.png' },
+        { property: 'og:image', content: 'https://res.cloudinary.com/df6wesepg/image/upload/v1584804046/OGP_qgagfy.png' },
         { property: 'og:description', content: '新型コロナウイルス感染症対策サイト #新型コロナウイルス対策 #covid19 #新型肺炎　#新型コロナウイルス対策まとめ ' },
         { property: 'twitter:card', content: 'summary_large_image' },
       // ...
