@@ -91,7 +91,7 @@
       </table>
     </div>
     <div class="comparison-source-copyright">
-      出典：丁香医生
+      出典：DXY.cn，
     </div>
   </div>
 </template>
