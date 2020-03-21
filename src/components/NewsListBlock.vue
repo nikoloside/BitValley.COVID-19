@@ -53,7 +53,7 @@ export default {
   },
   mounted() {
     const dataList = [];
-    axios.get('http://160.16.196.229:8080/api/news?number=6')
+    axios.get('http://covid-info.site:8080/api/news?number=6')
       .then((response) => {
         response.data.data.forEach((news) => {
           let publishTime = dayjs().subtract(news.PassedHour, 'minute').toISOString();
