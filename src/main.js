@@ -10,7 +10,7 @@ Vue.config.productionTip = false;
 Vue.use(VueHead);
 Vue.use(VueScrollTo, {
   duration: 500,
-  offset: -150,
+  offset: -120,
 });
 
 /* eslint-disable no-new */
