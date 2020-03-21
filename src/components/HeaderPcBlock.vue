@@ -139,14 +139,14 @@ export default {
       .twitter {
         width: 24px;
         height: 24px;
-        -webkit-mask-image: url('../assets/image/facebook.svg');
-        mask-image: url('../assets/image/facebook.svg');
+        -webkit-mask-image: url('../assets/image/twitter.svg');
+        mask-image: url('../assets/image/twitter.svg');
       }
       .facebook {
         width: 24px;
         height: 24px;
-        -webkit-mask-image: url('../assets/image/twitter.svg');
-        mask-image: url('../assets/image/twitter.svg');
+        -webkit-mask-image: url('../assets/image/facebook.svg');
+        mask-image: url('../assets/image/facebook.svg');
       }
       .link-copy-button {
         display: block;

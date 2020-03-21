@@ -30,8 +30,8 @@
 <script>
 import copy from 'copy-to-clipboard';
 
-const SHARE_URL = 'http://www.google.com';
-const SHARE_TEXT = 'シェアしますよーーー';
+const SHARE_URL = 'http://covid-info.site/';
+const SHARE_TEXT = ' 新型コロナウイルス感染症対策サイト';
 
 export default {
   name: 'SharePanel',

@@ -6,7 +6,7 @@
       <div
         class="unit"
         v-for="(unit, index) in units"
-        v-bind:key="unit"
+        v-bind:key="unit + index"
         v-bind:style="{
           right: `${100 / (units.length - 1) * index}%`,
           width: `${100 / (units.length - 1)}%`,
@@ -18,8 +18,8 @@
 
     <div class="region-label-group">
       <div class="region-label"
-        v-for="regionData in regionDatas"
-        v-bind:key="regionData.region"
+        v-for="(regionData, index) in regionDatas"
+        v-bind:key="regionData.region + index"
       >
         {{regionData.region}}
       </div>
@@ -28,15 +28,15 @@
     <div class="graph-wrapper">
       <div
         class="unit-line"
-        v-for="left in lineLefts"
-        v-bind:key="left"
+        v-for="(left, index) in lineLefts"
+        v-bind:key="left + index"
         v-bind:style="{ left }"
       />
 
       <div
         class="region-column"
-        v-for="regionData in regionDatas"
-        v-bind:key="regionData.region"
+        v-for="(regionData, index) in regionDatas"
+        v-bind:key="regionData.region + index"
         v-bind:style="{ width: `${regionData.count / units[0] * 100}%` }"
       >
         <div class="region-count">{{ regionData.count }}</div>
@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'InfectRegionGraphMobile',
   data() {
@@ -114,6 +116,20 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    const dataList = [];
+    axios.get('http://160.16.196.229:8080/api/patient/location')
+      .then((response) => {
+        response.data.data.forEach((region) => {
+          const data = {
+            region: region.Location,
+            count: region.Sum,
+          };
+          dataList.push(data);
+        });
+      });
+    this.regionDatas = dataList;
   },
   computed: {
     step() {

@@ -82,7 +82,7 @@
                         <div
                         class="infect-column"
                          v-for="(label,index) in labelsCount"
-                         v-bind:key="label"
+                         v-bind:key="index"
                          v-bind:style="{ width: `${100 / labelsCount.length}%`,
                          height: `${label / units[0] * 100}%`,
                          left:`${100 / labelsCount.length * index}%`}"
@@ -99,8 +99,8 @@
                 <!-- 横軸 -->
                 <div class="infect-label-group">
                     <div class="infect-label"
-                        v-for="label in labelsDate"
-                        v-bind:key="label"
+                        v-for="(label, index) in labelsDate"
+                        v-bind:key="index"
                         v-bind:style="{ width: `${100 / labelsDate.length}%` }"
                     >
                         {{label}}
@@ -122,119 +122,31 @@ export default {
   data() {
     return {
       BoardTitle: '日本感染人数',
-      TotalPersons: 9999,
-      DiffPersons: -9999,
+      TotalPersons: 1010,
+      DiffPersons: 0,
 
       unitCount: 6,
-      labelCount: 6,
+      labelCount: 5,
       infectDatas: [
         {
-          date: '02.23',
-          count: 0,
-        },
-        {
-          date: '02.24',
-          count: 2,
-        },
-        {
-          date: '02.25',
-          count: 6,
-        },
-        {
-          date: '02.26',
-          count: 11,
-        },
-        {
-          date: '02.27',
-          count: 17,
-        },
-        {
-          date: '02.28',
-          count: 25,
-        },
-        {
-          date: '02.29',
-          count: 35,
-        },
-        {
-          date: '03.01',
-          count: 47,
-        },
-        {
-          date: '03.02',
-          count: 69,
-        },
-        {
-          date: '03.03',
-          count: 128,
-        },
-        {
-          date: '03.04',
-          count: 256,
-        },
-        {
-          date: '03.05',
-          count: 312,
-        },
-        {
-          date: '03.06',
-          count: 400,
-        },
-        {
-          date: '03.07',
-          count: 450,
-        },
-        {
-          date: '03.08',
-          count: 601,
-        },
-        {
-          date: '03.09',
-          count: 630,
-        },
-        {
-          date: '03.10',
-          count: 680,
-        },
-        {
-          date: '03.11',
-          count: 750,
-        },
-        {
-          date: '03.12',
-          count: 788,
-        },
-        {
-          date: '03.13',
-          count: 870,
-        },
-        {
-          date: '03.14',
-          count: 880,
-        },
-        {
-          date: '03.15',
-          count: 890,
-        },
-        {
-          date: '03.16',
-          count: 939,
-        },
-        {
           date: '03.17',
-          count: 956,
+          count: 881,
         },
         {
           date: '03.18',
-          count: 980,
+          count: 915,
         },
         {
           date: '03.19',
-          count: 987,
+          count: 956,
         },
         {
           date: '03.20',
-          count: 992,
+          count: 1010,
+        },
+        {
+          date: '03.21',
+          count: 1010,
         },
       ],
     };
@@ -334,7 +246,9 @@ export default {
     },
     infectFromDatas() {
       const { infectDatas } = this;
-      return [...Array(infectDatas.length - 1).keys()].map(i => infectDatas[i].count);
+      return [...Array(
+        (infectDatas.length > 0) ? infectDatas.length - 1 : 0).keys(),
+      ].map(i => infectDatas[i].count);
     },
     polygonPoints() {
       const { infectDatas, units, graphWidth, graphHeight } = this;

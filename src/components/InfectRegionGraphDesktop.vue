@@ -1,7 +1,7 @@
 <template>
   <div id="InfectRegionGraphDesktop">
     <div class="unit-group">
-      <div class="unit" v-for="unit in units" v-bind:key="unit">
+      <div class="unit" v-for="(unit, index) in units" v-bind:key="unit + index">
         {{ unit }}人
       </div>
     </div>
@@ -9,16 +9,16 @@
     <div class="graph-wrapper">
       <div
         class="unit-line"
-        v-for="bottom in lineBottoms"
-        v-bind:key="bottom"
+        v-for="(bottom, index) in lineBottoms"
+        v-bind:key="bottom + index"
         v-bind:style="{ bottom }"
       />
 
       <div class="region-data-group">
         <div
           class="region-data"
-          v-for="regionData in regionDatas"
-          v-bind:key="regionData.region"
+          v-for="(regionData, index) in regionDatas"
+          v-bind:key="regionData.region + index"
           v-bind:style="{ width: `${100 / regionDatas.length}%` }"
         >
           <div
@@ -35,8 +35,8 @@
 
     <div class="region-label-group">
       <div class="region-label"
-        v-for="regionData in regionDatas"
-        v-bind:key="regionData.region"
+        v-for="(regionData, index) in regionDatas"
+        v-bind:key="regionData.region + index"
         v-bind:style="{ width: `${100 / regionDatas.length}%` }"
       >
         {{regionData.region}}

@@ -33,9 +33,9 @@ export default {
   },
   data() {
     return {
-      worldInfectNum: 99999,
-      diamondInfectNum: 99999,
-      updatedate: '2020年3月1日',
+      worldInfectNum: 258930,
+      diamondInfectNum: 691,
+      updatedate: '2020年3月21日',
     };
   },
   computed: {
