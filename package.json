@@ -23,7 +23,8 @@
     "vue": "^2.5.2",
     "vue-head": "^2.2.0",
     "vue-meta": "^2.3.3",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-scrollto": "^2.17.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

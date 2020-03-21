@@ -9,10 +9,10 @@
         <div class="spmodal-content" @click="$emit('close')">
           <div class="sp-header-menu">
             <div class="sp-nav">
-              <router-link to="/">感染情報</router-link>
-              <router-link to="/">ニュース</router-link>
-              <router-link to="/">症状比較</router-link>
-              <router-link to="/">予防対策</router-link>
+              <a href="#" v-scroll-to="'#section-infect'">感染情報</a>
+              <a href="#" v-scroll-to="'#section-news'">ニュース</a>
+              <a href="#" v-scroll-to="'#section-comparison'">症状比較</a>
+              <a href="#" v-scroll-to="'#section-measure'">予防対策</a>
             </div>
           </div>
           <div class="sp-footer">

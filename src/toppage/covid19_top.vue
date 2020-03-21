@@ -3,15 +3,18 @@
     <Header></Header>
     <div id="wrap-contents">
       <PickUp></PickUp>
-      <div class="section wrap-sp-display"><div class="section-left" />感染人数</div>
+      <div id="section-infect" class="section wrap-sp-display">
+        <div class="section-left" />感染人数</div>
       <InfectNumber></InfectNumber>
-      <div class="section"><div class="section-left" />都道府県别感染人数</div>
+      <div class="section section-region"><div class="section-left" />都道府県别感染人数</div>
       <InfectRegion></InfectRegion>
-      <div class="section"><div class="section-left" />ニュース</div>
+      <div id="section-news" class="section section-news"><div class="section-left" />ニュース</div>
       <News></News>
-      <div class="section"><div class="section-left" />症状比較</div>
+      <div id="section-comparison" class="section section-comparison">
+        <div class="section-left" />症状比較</div>
       <Comparison></Comparison>
-      <div class="section"><div class="section-left" />予防対策</div>
+      <div id="section-measure" class="section section-measure">
+        <div class="section-left" />予防対策</div>
       <Measures></Measures>
     </div>
     <Footer></Footer>

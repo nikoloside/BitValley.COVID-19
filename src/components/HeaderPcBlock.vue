@@ -4,10 +4,10 @@
     </div>
     <div class="nav flex-container-spacebetween">
       <div class="nav-link flex-container-spacebetween">
-        <li><router-link to="/">感染情報</router-link></li>
-        <li><router-link to="/">ニュース</router-link></li>
-        <li><router-link to="/">症状比較</router-link></li>
-        <li><router-link to="/">予防対策</router-link></li>
+        <li><a href="#" v-scroll-to="'#section-infect'">感染情報</a></li>
+        <li><a href="#" v-scroll-to="'#section-news'">ニュース</a></li>
+        <li><a href="#" v-scroll-to="'#section-comparison'">症状比較</a></li>
+        <li><a href="#" v-scroll-to="'#section-measure'">予防対策</a></li>
       </div>
       <div class="social flex-container-spacebetween">
         <div class="social-text">
@@ -50,7 +50,7 @@ import QuestionButton from '@/components/QuestionButton';
 import copy from 'copy-to-clipboard';
 
 const SHARE_URL = 'http://covid-info.site/';
-const SHARE_TEXT = ' 新型コロナウイルス感染症対策サイト';
+const SHARE_TEXT = ' 新型コロナウイルス感染症対策サイト #新型コロナウイルス対策 #covid19 #新型肺炎　#新型コロナウイルス対策まとめ ';
 
 export default {
   name: 'HeaderPcBlock',
