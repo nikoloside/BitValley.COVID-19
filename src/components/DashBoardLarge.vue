@@ -240,13 +240,13 @@ export default {
     };
   },
   mounted() {
-    axios.get('http://localhost:8080/api/patient/current')
+    axios.get('http://160.16.196.229:8080/api/patient/current')
       .then((response) => {
         this.TotalPersons = response.data.data.Current;
         this.DiffPersons = response.data.data.Diff;
       });
     const dataList = [];
-    axios.get('http://localhost:8080/api/patient/period')
+    axios.get('http://160.16.196.229:8080/api/patient/period')
       .then((response) => {
         response.data.data.forEach((patientByDate) => {
           const data = {
