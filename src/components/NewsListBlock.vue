@@ -116,6 +116,7 @@ $break-point: 960px;
 
 #NewsListBlock {
   position: relative;
+  margin-top: 24px;
 
   .newsList {
     max-height: 600px;
