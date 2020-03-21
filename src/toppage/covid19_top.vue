@@ -95,7 +95,7 @@ export default {
 .wrap-sp-display{
   display: none;
   @media (max-width: $breakpoint-sp) {
-    display: block;
+    display: flex;
   }
 }
 

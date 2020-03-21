@@ -345,6 +345,9 @@ export default {
         grid-template-rows: 90% 24px;
         grid-template-columns:  18px  90%;
         gap: 4px 8px;
+        @media (max-width: $breakpoint-sp) {
+          height: 50%;
+        }
 
         .unit-group {
             text-align: left;
