@@ -7,6 +7,22 @@
 <script>
 export default {
   name: 'App',
+  head: {
+    title: {
+      inner: '新型コロナウイルス感染症対策サイト',
+    },
+    meta: [
+      { name: 'description', content: '新型コロナウイルス感染症対策サイト' },
+      { name: 'viewport', content: 'width=device-width,initial-scale=1.0,user-scalable=no' },
+      { charset: 'utf-8' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:title', content: '新型コロナウイルス感染症対策サイト' },
+      { property: 'og:url', content: 'covid-info.site' },
+      { property: 'og:og:image', content: '新型コロナウイルス感染症対策サイト' },
+      { property: 'og:og:description', content: '新型コロナウイルス感染症対策サイト' },
+      // ...
+    ],
+  },
 };
 </script>
 

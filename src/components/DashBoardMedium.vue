@@ -43,7 +43,7 @@ export default {
   props: ['request', 'title'],
   mounted() {
     this.BoardTitle = this.title;
-    const url = `http://160.16.196.229:8080/api/patient/${this.request}`;
+    const url = `http://localhost:8080/api/patient/${this.request}`;
     axios.get(url)
       .then((response) => {
         this.TotalPersons = response.data.data.Current;
