@@ -1,7 +1,7 @@
 <template>
   <div id="HeaderPcBlock" class="flex-container-spacebetween">
-    <div class="covid19-logo">
-    </div>
+    <a class="covid19-logo" href='/'>
+    </a>
     <div class="nav flex-container-spacebetween">
       <div class="nav-link flex-container-spacebetween">
         <li><a href="#" v-scroll-to="'#section-infect'">感染情報</a></li>
