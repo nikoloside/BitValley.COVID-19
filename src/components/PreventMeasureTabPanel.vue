@@ -90,6 +90,7 @@ export default {
     }
 
     @media (max-width: 960px) {
+      margin-top: 24px;
       width: 100%;
       max-width: 356px;
     }
