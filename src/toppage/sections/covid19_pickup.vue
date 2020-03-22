@@ -6,7 +6,7 @@
         <div class="icon-pickup-title">PICKUP</div>
       </div>
       <div class="icon-pickup-text">
-        <a href="https://headlines.yahoo.co.jp/hl?a=20200320-00050173-yom-soci">国内感染者が１０００人超え、医療機関や高齢者施設で広がる
+        <a :href="url"> {{title}}
           </a>
         </div>
     </div>
@@ -14,12 +14,24 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'PickUp',
   data() {
     return {
       msg: '这里是PickUp',
+      title: '国内感染者が１０００人超え、医療機関や高齢者施設で広がる',
+      url: 'https://headlines.yahoo.co.jp/hl?a=20200320-00050173-yom-soci',
     };
+  },
+  mounted() {
+    axios.get('https://api.github.com/repos/woshahua/issue_api/issues')
+      .then((response) => {
+        const latestIssue = response.data;
+        this.title = latestIssue[0].title;
+        this.url = latestIssue[0].body;
+      });
   },
 };
 </script>
