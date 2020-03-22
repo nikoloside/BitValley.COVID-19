@@ -47,7 +47,7 @@
 
 <script>
 import QuestionButton from '@/components/QuestionButton';
-import copy from 'copy-to-clipboard';
+import clipboard from 'clipboard-polyfill';
 
 const SHARE_URL = 'http://covid-info.site/';
 const SHARE_TEXT = ' 新型コロナウイルス感染症対策サイト #新型コロナウイルス対策 #covid19 #新型肺炎　#新型コロナウイルス対策まとめ ';
@@ -75,9 +75,10 @@ export default {
     },
   },
   methods: {
-    onLinkCopyButtonClick() {
+    async onLinkCopyButtonClick() {
+      await clipboard.writeText(SHARE_URL);
       // eslint-disable-next-line no-alert
-      copy(SHARE_URL, { onCopy() { alert('URLをコピーしました'); } });
+      alert('URLをコピーしました');
     },
     handleScroll() {
       // Any code to be executed when the window is scrolled
