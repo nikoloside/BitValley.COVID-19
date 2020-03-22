@@ -33,14 +33,20 @@
         v-bind:style="{ left }"
       />
 
-      <div
+      <a
+        href="javascript:void(0);"
         class="region-column"
         v-for="(regionData, index) in regionDatas"
         v-bind:key="regionData.region + index"
         v-bind:style="{ width: `${regionData.count / units[0] * 100}%` }"
       >
-        <div class="region-count">{{ regionData.count }}</div>
-      </div>
+        <div
+          class="region-count"
+          v-bind:class="{ 'region-bind-top': regionData.count / step > unitCount - 2 }"
+        >
+          {{ regionData.count }}
+        </div>
+      </a>
     </div>
   </div>
 </template>
@@ -183,12 +189,12 @@ export default {
   }
 
   .region-column {
+    display: block;
     position: relative;
     margin: 8px 0;
     height: 15px;
     background-color: $color-navy;
     border-radius: 0 4px 4px 0px;
-    cursor: pointer;
 
     &:hover {
       .region-count {
@@ -201,9 +207,9 @@ export default {
     @include noto-font-001em(12px, normal);
     opacity: 0;
     position: absolute;
-    top: 0;
+    top: 50%;
     right: 0;
-    transform: translateY(calc(-100% - 2px));
+    transform: translate(calc(100% + 4px), -50%);
     background-color: #757F8B;
     color: $color-white;
     text-align: center;
@@ -212,6 +218,11 @@ export default {
     border-radius: 15px;
     pointer-events: none;
     transition: opacity .3s ease;
+
+    &.region-bind-top {
+      top: 0;
+      transform: translateY(calc(-100% - 2px));
+    }
   }
 
   .unit-group {
