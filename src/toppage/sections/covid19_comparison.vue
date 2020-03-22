@@ -1,9 +1,8 @@
 <template>
   <div id="covid19-comparison">
     <div class="comparison-catchcopy">
-      風邪、インフルエンザ、新型コロナウイルスの症状には類似点が多いです。
       発熱、倦怠感、咳などの症状があれば、必ず新型コロナウイルスに感染されたというわけではありません。
-      コロナウイルス感染を疑う時、次のテーブルで風邪とインフルエンザの症状と比較して区別しましょう。
+      次のテーブルで風邪とインフルエンザの症状と比較して区別しましょう。
     </div>
     <div class="wrap-shadow">
       <table class="comparison-table">
@@ -143,7 +142,7 @@ export default {
 
   th,td {
     @include noto-font-001em(16px, 500);
-    color: #000000;
+    color: $color-black;
     height: 45px;
     text-align: center;
     vertical-align: middle;
