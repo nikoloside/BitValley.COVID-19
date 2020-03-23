@@ -9,19 +9,21 @@
     </div>
     <div class="infect-number-text flex-container-start flex-direction-column">
       <div class="infect-number-text-bold">
-        世界全感染人数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{normalizeWorldNum}}
+        国内新肺炎回復者数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{normalizeRecoveredNum}}
       </div>
       <div class="infect-number-text-bold">
-        ダイヤモンドプリンセス号感染人数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{normalizeDiamondNum}}
+        国内新肺炎検査実施数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{normalizeTestedNum}}
       </div>
       <div class="infect-number-text-gray">
-        最終更新：{{updatedate}}
+        最終更新：{{ getDateLabel(updatedate) }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+import dayjs from 'dayjs';
 import DashBoardMedium from '@/components/DashBoardMedium';
 import DashBoardLarge from '@/components/DashBoardLarge';
 
@@ -33,19 +35,43 @@ export default {
   },
   data() {
     return {
-      worldInfectNum: 258930,
-      diamondInfectNum: 691,
-      updatedate: '2020年3月21日',
+      recoveredNum: 235,
+      testedNum: 20228,
+      updatedate: '2020年3月22日',
     };
   },
-  computed: {
-    normalizeWorldNum() {
-      const { worldInfectNum } = this;
-      return worldInfectNum.toLocaleString();
+  mounted() {
+    axios.get('http://covid-info.site:8080/api/patient/latest')
+      .then((response) => {
+        this.recoveredNum = response.data.data.Recovered;
+        this.testedNum = response.data.data.Tested;
+      }).catch(() => {
+        // 暫定的な対応
+        this.recoveredNum = 235;
+        this.testedNum = 20228;
+      });
+
+    axios.get('http://covid-info.site:8080/api/patient/updateTime')
+      .then((response) => {
+        this.updatedate = response.data.data.PatientDataUpdateTime;
+      }).catch(() => {
+        // 暫定的な対応
+        this.updatedate = new Date(Date.now() - 864e5);
+      });
+  },
+  methods: {
+    getDateLabel(updatedate) {
+      return dayjs(updatedate).format('YYYY年MM月DD日 HH:mm:ss');
     },
-    normalizeDiamondNum() {
-      const { diamondInfectNum } = this;
-      return diamondInfectNum.toLocaleString();
+  },
+  computed: {
+    normalizeRecoveredNum() {
+      const { recoveredNum } = this;
+      return recoveredNum.toLocaleString();
+    },
+    normalizeTestedNum() {
+      const { testedNum } = this;
+      return testedNum.toLocaleString();
     },
   },
 };
