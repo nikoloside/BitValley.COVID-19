@@ -72,11 +72,11 @@ export default {
   width: 100%;
 }
 .menu-trigger span:nth-of-type(2) {
-  top: 10px;
+  top: 11px;
   width: 100%;
 }
 .menu-trigger span:nth-of-type(3) {
-  bottom: 0;
+  bottom: -1px;
   width: 100%;
 }
 .menu-trigger.active span:nth-of-type(1) {
@@ -89,8 +89,8 @@ export default {
   opacity: 0;
 }
 .menu-trigger.active span:nth-of-type(3) {
-  -webkit-transform: translateY(-8px) rotate(45deg);
-  transform: translateY(-10px) rotate(45deg);
+  -webkit-transform: translateY(-12px) rotate(45deg);
+  transform: translateY(-12px) rotate(45deg);
   width: 100%;
   background-color: $color-white;
 }
