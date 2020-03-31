@@ -1,0 +1,79 @@
+/* ./style/commons/_variables.scss */
+//！ Color
+$color-pink:#FA5292;
+$color-red:#F7685B;
+$color-yellow:#FFCB46;
+$color-green:#31D9A5;
+$color-blue:#109CF1;
+$color-navy:#0452E6;
+$color-purple:#697DDF;
+$color-black:#21262D;
+$color-white:#FFFFFF;
+//！ Color Gray
+$color-darkgray:#3E4753;
+$color-gray:#828E9F;
+$color-lightgray:#AAB5C6;
+$color-blightgray:#CED6E2;
+$color-palegray:#E8ECF2;
+//！ Color background
+$color-background:#FFFFFF;
+//！ Color primary
+$color-primary:#0452E6;
+$color-hover:#AAC2EE;
+$color-disable:#CED6E2;
+$color-secondary:#31D9A5;
+//! UI
+$color-error:#31D9A5;
+$color-success:#22A9ED;
+//！ gradation linear-gradient
+$gradation-blue:linear-gradient(180deg, #0452E6 0%, #1F72FF 100%);
+$gradation-white:linear-gradient(270deg, #D2E2FF 0%, rgba(210, 226, 255, 0) 100%);
+$gradation-mix:linear-gradient(93.94deg, #FA5292 0%, #0553E7 100%);
+//！ shadow box-shadow
+$box-shadow-wrap: 0px 6px 36px #E8ECF2;
+$box-shadow-button: 0px 4px 10px rgba(4, 82, 230, 0.24);
+
+//！ z-index
+$z-index-over: 50;
+$z-index-header: 40;
+$z-index-button: 30;
+$z-index-wrap: 20;
+$z-index-background: 10;
+
+//! break-point
+$breakpoint-highpc : 1280px;
+$breakpoint-pc : 960px;
+$breakpoint-sp : 480px;
+
+//！ mixin Fontを自動生成
+
+@mixin poppins-font($fontsize: 14px, $weight: normal) {
+    font-family: 'Poppins', sans-serif;
+    font-size: $fontsize;
+    line-height: $fontsize *3 / 2;
+    font-style: normal;
+    font-weight: $weight;
+}
+
+@mixin noto-font($fontsize: 14px, $weight: normal) {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: $fontsize;
+    line-height: $fontsize *3 / 2;
+    font-style: normal;
+    font-weight: $weight;
+}
+
+@mixin poppins-font-001em($fontsize: 14px, $weight: normal) {
+    @include poppins-font($fontsize, $weight);
+    letter-spacing: 0.01em;
+}
+
+@mixin noto-font-001em($fontsize: 14px, $weight: normal) {
+    @include noto-font($fontsize, $weight);
+    letter-spacing: 0.01em;
+}
+
+
+// 最外层设置 min-width：960 maxwidth：1280
+// section里面规定好每个内部元件的最低width，高度信息根据宽度的比例设置
+// section外框以外的所有元件位置都根据百分比设置
