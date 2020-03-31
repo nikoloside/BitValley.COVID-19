@@ -6,9 +6,14 @@
         <div class="icon-pickup-title">PICKUP</div>
       </div>
       <div class="icon-pickup-text">
-        <a :href="url"> {{title}}
-          </a>
-        </div>
+        <a :href="newsData[index].url"> {{newsData[index].title}}
+        </a>
+      </div>
+      <div class="scroll-bar">
+        <div class="scroll-upper" v-on:click="calcIndex(-1)"/>
+        <div class="scroll-borderline"/>
+        <div class="scroll-downer" v-on:click="calcIndex(1)"/>
+      </div>
     </div>
   </div>
 </template>
@@ -20,18 +25,31 @@ export default {
   name: 'PickUp',
   data() {
     return {
-      msg: '这里是PickUp',
-      title: '国内感染者が１０００人超え、医療機関や高齢者施設で広がる',
-      url: 'https://headlines.yahoo.co.jp/hl?a=20200320-00050173-yom-soci',
+      title: '-',
+      url: '/',
+      newsData: [],
+      index: 0,
+      showNum: 5,
     };
   },
   mounted() {
+    const list = [];
     axios.get('https://api.github.com/repos/woshahua/issue_api/issues')
       .then((response) => {
-        const latestIssue = response.data;
-        this.title = latestIssue[0].title;
-        this.url = latestIssue[0].body;
+        response.data.forEach((news) => {
+          const data = {
+            title: news.title,
+            url: news.body,
+          };
+          list.push(data);
+        });
       });
+    this.newsData = list;
+  },
+  methods: {
+    calcIndex(val) {
+      this.index = Math.min(Math.max(this.index + val, 0), this.showNum);
+    },
   },
 };
 </script>
@@ -55,6 +73,7 @@ export default {
   width: 100%;
   height: 66px;
   margin: 24px 24px;
+  position: relative;
   @media (max-width: $breakpoint-pc) {
     margin: 8px 16px;
     margin-top: 24px;
@@ -100,5 +119,45 @@ export default {
 }
 .icon-pickup-text {
     @include noto-font-001em(16px, bold);
+    padding-right: 64px;
 }
+
+.scroll-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+  right: 16px;
+
+  .scroll-upper {
+    width: 7.2px;
+    height: 7.2px;
+    border-top: 1.5px solid #828E9F;;
+    border-right: 1.5px solid #828E9F;
+    border-radius: 1px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    cursor: pointer;
+  }
+  .scroll-borderline {
+    width: 32px;
+    border-radius: 1px;
+    border-bottom: 2px solid #CED6E2;
+    margin: 10px 0;
+  }
+  .scroll-downer {
+    width: 7.2px;
+    height: 7.2px;
+    border-top: 1.5px solid #828E9F;;
+    border-right: 1.5px solid #828E9F;
+    border-radius: 1px;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    cursor: pointer;
+  }
+
+}
+
 </style>
