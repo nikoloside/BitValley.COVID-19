@@ -31,7 +31,7 @@
 import clipboard from 'clipboard-polyfill';
 
 const SHARE_URL = 'http://covid-info.site/';
-const SHARE_TEXT = ' 新型コロナウイルス感染症対策サイト #新型コロナウイルス対策 #covid19 #新型肺炎　#新型コロナウイルス対策まとめ ';
+const SHARE_TEXT = ' 「さよならコロナ」1分で新型コロナウイルスのリアルタイム情報をまとめて見るサイト #さよならコロナ #covid19 #新型肺炎 #新型コロナウイルス対策まとめ';
 
 export default {
   name: 'SharePanel',
