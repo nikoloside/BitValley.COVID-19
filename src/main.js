@@ -3,11 +3,14 @@
 import Vue from 'vue';
 import VueHead from 'vue-head';
 import VueScrollTo from 'vue-scrollto';
+import VueI18n from 'vue-i18n';
 import App from './App';
 import router from './router';
 
+
 Vue.config.productionTip = false;
 Vue.use(VueHead);
+Vue.use(VueI18n);
 Vue.use(VueScrollTo, {
   duration: 500,
   offset: -120,
@@ -31,13 +34,6 @@ new Vue({
       return [
         { name: 'description', content: '新型コロナウイルス感染症対策サイト' },
         { name: 'viewport', content: 'width=device-width,initial-scale=1.0,user-scalable=no' },
-        { charset: 'utf-8' },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: '新型コロナウイルス感染症対策サイト' },
-        { property: 'og:url', content: 'http://covid-info.site' },
-        { property: 'og:image', content: 'https://res.cloudinary.com/df6wesepg/image/upload/v1584804046/OGP_qgagfy.png' },
-        { property: 'og:description', content: '「さよならコロナ」1分で新型コロナウイルスのリアルタイム情報をまとめて見るサイト #さよならコロナ #covid19 #新型肺炎 #新型コロナウイルス対策まとめ' },
-        { property: 'twitter:card', content: 'summary_large_image' },
       // ...
       ];
     },
