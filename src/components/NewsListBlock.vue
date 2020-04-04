@@ -56,7 +56,7 @@ export default {
     axios.get('http://covid-info.site:8080/api/news?number=20')
       .then((response) => {
         response.data.data.forEach((news) => {
-          let publishTime = dayjs().subtract(news.PassedHour, 'minute').toISOString();
+          let publishTime = dayjs().subtract(news.PassedMinutes, 'minute').toISOString();
           if (news.PassedMinutes > 60) {
             if (news.PassedHour > 24) {
               publishTime = dayjs().subtract(news.PassedDay, 'day').toISOString();
