@@ -1,24 +1,27 @@
 <template>
   <div id="covid19-infect-region">
-    <div class="desktop-graph-wrapper">
-      <InfectRegionGraphDesktop />
-    </div>
-    <div class="mobile-graph-wrapper">
-      <InfectRegionGraphMobile />
-    </div>
+    <InfectRegionTableBlock />
+
+    <p class="additional-info">
+      感染率：各地域における総人口数のうち、感染した人数の割合
+    </p>
+    <p class="additional-info">
+      <UpdateAtLabel v-bind:update-at="updateAt" />
+    </p>
   </div>
 </template>
 
 <script>
-import InfectRegionGraphDesktop from '@/components/InfectRegionGraphDesktop';
-import InfectRegionGraphMobile from '@/components/InfectRegionGraphMobile';
+import InfectRegionTableBlock from '@/components/InfectRegionTableBlock';
+import UpdateAtLabel from '@/components/UpdateAtLabel';
 
 export default {
   name: 'InfectRegion',
-  components: { InfectRegionGraphDesktop, InfectRegionGraphMobile },
+  components: { InfectRegionTableBlock, UpdateAtLabel },
   data() {
     return {
-      msg: '这里是日本各地的感染情报的页面',
+      // TODO 更新時間を埋める
+      updateAt: new Date(),
     };
   },
 };
@@ -27,19 +30,22 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style  lang="scss" scoped>
 @import "@/commons/_variables.scss";
+$break-point: 480px;
 
 #covid19-infect-region {
-  .mobile-graph-wrapper {
-    display: none;
-  }
+  .additional-info {
+    @include noto-font-001em(14px, normal);
+    padding: 0;
+    margin: 8px 0;
+    color: $color-lightgray;
 
-  @media (max-width: 480px) {
-    .mobile-graph-wrapper {
-      display: block;
+    &:last-child {
+      margin-bottom: 0;
     }
 
-    .desktop-graph-wrapper {
-      display: none;
+    @media (max-width: $break-point) {
+      @include noto-font-001em(10px, normal);
+      margin: 4px 0;
     }
   }
 }

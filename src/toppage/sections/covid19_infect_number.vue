@@ -15,7 +15,7 @@
         国内新肺炎検査実施数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{normalizeTestedNum}}
       </div>
       <div class="infect-number-text-gray">
-        最終更新：{{ getDateLabel(updatedate) }}
+        <UpdateAtLabel v-bind:update-at="updatedate" />
       </div>
     </div>
   </div>
@@ -23,15 +23,16 @@
 
 <script>
 import axios from 'axios';
-import dayjs from 'dayjs';
 import DashBoardMedium from '@/components/DashBoardMedium';
 import DashBoardLarge from '@/components/DashBoardLarge';
+import UpdateAtLabel from '@/components/UpdateAtLabel';
 
 export default {
   name: 'InfectNumber',
   components: {
     DashBoardMedium,
     DashBoardLarge,
+    UpdateAtLabel,
   },
   data() {
     return {
@@ -58,11 +59,6 @@ export default {
         // 暫定的な対応
         this.updatedate = new Date(Date.now() - 864e5);
       });
-  },
-  methods: {
-    getDateLabel(updatedate) {
-      return dayjs(updatedate).format('YYYY年MM月DD日 HH:mm:ss');
-    },
   },
   computed: {
     normalizeRecoveredNum() {

@@ -6,8 +6,10 @@
       <div id="section-infect" class="section wrap-sp-display">
         <div class="section-left" />感染人数</div>
       <InfectNumber></InfectNumber>
-      <div class="section section-region"><div class="section-left" />都道府県别感染人数</div>
-      <InfectRegion></InfectRegion>
+      <div class="section-wrapper wrap-shadow">
+        <div class="section section-region"><div class="section-left" />都道府県别感染人数</div>
+        <InfectRegion />
+      </div>
       <div id="section-news" class="section section-news"><div class="section-left" />ニュース</div>
       <News></News>
       <div id="section-comparison" class="section section-comparison">
@@ -81,6 +83,10 @@ export default {
     background: $color-primary;
     border-radius: 2px;
     margin-right: 9px;
+
+    @media (max-width: $breakpoint-sp) {
+      height: 30px;
+    }
   }
 
   @include noto-font-001em(24px, bold);
@@ -89,7 +95,22 @@ export default {
   }
   @media (max-width: $breakpoint-sp) {
     margin-left: 16px;
+    @include noto-font-001em(20px, bold);
   }
+}
+
+.section-wrapper {
+  margin: 24px;
+  padding: 24px;
+
+  @media (max-width: $breakpoint-sp) {
+    margin: 24px 16px;
+    padding: 24px 16px;
+  }
+}
+
+.section-region {
+  margin: 0;
 }
 
 .wrap-sp-display{
