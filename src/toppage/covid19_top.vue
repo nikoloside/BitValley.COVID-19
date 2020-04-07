@@ -2,22 +2,35 @@
   <div id="wrap">
     <Header></Header>
     <div id="wrap-contents">
+
       <PickUp></PickUp>
-      <div id="section-infect" class="section wrap-sp-display">
-        <div class="section-left" />感染人数</div>
-      <InfectNumber></InfectNumber>
+
       <div class="section-wrapper wrap-shadow">
-        <div class="section section-region"><div class="section-left" />都道府県别感染人数</div>
+        <div id="section-infect" class="section wrap-sp-display">
+          <div class="section-left" />日本感染情報
+        </div>
+        <InfectNumber></InfectNumber>
+      </div>
+
+      <div class="section-wrapper wrap-shadow">
+        <div class="section section-region">
+          <div class="section-left" />都道府県别感染者数
+        </div>
         <InfectRegion />
       </div>
-      <div id="section-news" class="section section-news"><div class="section-left" />ニュース</div>
+
+      <div class="section-wrapper wrap-shadow">
+        <div class="section section-region">
+          <div class="section-left" />世界感染情報
+        </div>
+        <InfectWorld/>
+      </div>
+
+      <div id="section-news" class="section section-news">
+        <div class="section-left" />ニュース
+      </div>
       <News></News>
-      <div id="section-comparison" class="section section-comparison">
-        <div class="section-left" />症状比較</div>
-      <Comparison></Comparison>
-      <div id="section-measure" class="section section-measure">
-        <div class="section-left" />予防対策</div>
-      <Measures></Measures>
+
     </div>
     <Footer></Footer>
   </div>
@@ -28,9 +41,8 @@ import Header from '@/toppage/sections/covid19_header';
 import PickUp from '@/toppage/sections/covid19_pickup';
 import InfectNumber from '@/toppage/sections/covid19_infect_number';
 import InfectRegion from '@/toppage/sections/covid19_infect_region';
+import InfectWorld from '@/toppage/sections/covid19_infect_world';
 import News from '@/toppage/sections/covid19_news';
-import Comparison from '@/toppage/sections/covid19_comparison';
-import Measures from '@/toppage/sections/covid19_measures';
 import Footer from '@/toppage/sections/covid19_footer';
 
 export default {
@@ -40,9 +52,8 @@ export default {
     PickUp,
     InfectNumber,
     InfectRegion,
+    InfectWorld,
     News,
-    Comparison,
-    Measures,
     Footer,
   },
   data() {
