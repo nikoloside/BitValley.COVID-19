@@ -25,9 +25,12 @@ export default {
   name: 'PickUp',
   data() {
     return {
-      title: '-',
-      url: '/',
-      newsData: [],
+      newsData: [
+        {
+          title: '-',
+          url: 'http://covid-info.site/',
+        },
+      ],
       index: 0,
       showNum: 5,
     };

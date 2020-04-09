@@ -39,14 +39,14 @@
         </li>
       </div>
       <div class="question">
-        <QuestionButton></QuestionButton>
+        <SwitchLanguageButton></SwitchLanguageButton>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import QuestionButton from '@/components/QuestionButton';
+import SwitchLanguageButton from '@/components/SwitchLanguageButton';
 import clipboard from 'clipboard-polyfill';
 
 const SHARE_URL = 'http://covid-info.site/';
@@ -55,7 +55,7 @@ const SHARE_TEXT = '「さよならコロナ」1分で新型コロナウイル�
 export default {
   name: 'HeaderPcBlock',
   components: {
-    QuestionButton,
+    SwitchLanguageButton,
   },
   data() {
     return {
