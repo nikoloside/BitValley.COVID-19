@@ -1,17 +1,19 @@
 <template>
     <div id="switch_language_button">
-        <a href="#" v-on:click.prevent="handleClick_changeLanguage('cn')">
-            <div class="text_button">
-                {{this.$i18n.locale}}
+        <div class="language-wrap">
+            <label class="language-now" for="toggle">
+                <div class="language-now-text">
+                 {{ $t("messages.language") }}
+                </div>
+                <div class="language-downer"/>
+            </label>
+        </div>
+        <input type="checkbox" id="toggle">
+        <div class="language-button" v-on:click.prevent="clickNextLang()">
+            <div class="language-button-text">
+                 {{ getNextLang() }}
             </div>
-        </a>
-        <ul>
-            <li>
-                <a href="#" v-on:click.prevent="handleClick_changeLanguage('cn')">
-                {{this.$i18n.locale}}
-                </a>
-            </li>
-        </ul>
+        </div>
     </div>
 </template>
 
@@ -21,7 +23,33 @@ export default {
   data() {
     return {
       msg: 'お問い合わせ',
+      lang: this.$i18n.locale,
     };
+  },
+  methods: {
+    getNextLang() {
+      switch (this.$i18n.locale) {
+        case 'ja':
+          return '中文';
+        case 'cn':
+          return '日本語';
+        default:
+          return '日本語';
+      }
+    },
+    clickNextLang() {
+      switch (this.$i18n.locale) {
+        case 'ja':
+          this.$i18n.locale = 'cn';
+          break;
+        case 'cn':
+          this.$i18n.locale = 'ja';
+          break;
+        default:
+          this.$i18n.locale = 'ja';
+          break;
+      }
+    },
   },
 };
 </script>
@@ -30,60 +58,94 @@ export default {
 <style  lang="scss" scoped>
 @import "@/commons/_variables.scss";
 
-#question_button {
+#switch_language_button {
 
-    width: 136px;
-    height: 42px;
+    position: relative;
+    .language-wrap{
+        width: 136px;
+        height: 42px;
+        border-radius: 21px;
 
-    top: 35px;
-    background: $gradation-blue;
-    box-shadow: $box-shadow-button;
-    border-radius: 4px;
+        position: relative;
+        background: linear-gradient(107.16deg, #1F72FF 0%, #0452E6 100%);
+        box-shadow: $box-shadow-button;
+        z-index: $z-index-header;
+    }
 
-    a {
+    .language-now {
         width: 100%;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
+        z-index: $z-index-over;
+        position: absolute;
     }
-    a:hover {
-        background: $color-hover;
-        border-radius: 4px;
+    .language-now:hover {
+        background: #7BAAFF;
+        border-radius: 21px;
     }
-    a:active {
+    .language-now:active {
         background: #004AD7;
-        border-radius: 4px;
+        border-radius: 21px;
     }
 
-
-    ul{
-      border-radius: 4px;
+    .language-button{
       position: absolute;
       top: -350px;
       transition: all .3s ease;
       -webkit-transition: all .3s ease;
-      padding: 0;
       padding-top: 3vh;
+      padding: 0;
       margin: 0;
-      background-color: rgba(255,255,255,0.7);
+      background-color: $color-white;
       width: 136px;
       height: 72px;
+      cursor: pointer;
+      box-shadow: 0px 6px 36px #E8ECF2;
+      border-radius: 4px;
+      z-index: $z-index-button;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #828E9F;
     }
-    &:hover ul{
-      top: 8vh;
+    .language-button:hover {
+      color: $color-black;
+    }
+    #toggle:checked ~ .language-button{
+      top: 20px;
+    }
+    #toggle:checked ~ .language-now{
+      background: #0452E6;
+    }
+
+    #toggle {
+        display: none;
     }
 }
 
-.text_button {
-    color: $color-white;
-
-    width: 132px;
-    height: 20px;
-    left: calc(50% - 132px/2);
-    top: calc(50% - 20px/2);
-
-    @include poppins-font-001em(13px, 600);
+.language-now-text {
+    @include noto-font-001em(14px, bold);
     text-align: center;
+    color: $color-white;
+    margin-right: 30px;
+    margin-left: 20px;
+}
+.language-downer {
+    width: 7.2px;
+    height: 7.2px;
+    border-top: 1.5px solid $color-white;
+    border-right: 1.5px solid $color-white;
+    border-radius: 1px;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    cursor: pointer;
+}
+.language-button-text{
+    position: absolute;
+    bottom: 16px;
+    @include noto-font-001em(12px, bold);
 }
 </style>
