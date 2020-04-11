@@ -4,10 +4,18 @@
     </a>
     <div class="nav flex-container-spacebetween">
       <div class="nav-link flex-container-spacebetween">
-        <li><a href="#" v-scroll-to="'#section-infect'">感染情報</a></li>
-        <li><a href="#" v-scroll-to="'#section-news'">ニュース</a></li>
-        <li><a href="#" v-scroll-to="'#section-comparison'">症状比較</a></li>
-        <li><a href="#" v-scroll-to="'#section-measure'">予防対策</a></li>
+        <li><a href="#" v-scroll-to="'#section-infect'">
+            {{ $t("messages.headerinfectinfo") }}
+        </a></li>
+        <li><a href="#" v-scroll-to="'#section-news'">
+            {{ $t("messages.headernews") }}
+        </a></li>
+        <li><a href="#" v-scroll-to="'#section-comparison'">
+            {{ $t("messages.headercompare") }}
+        </a></li>
+        <li><a href="#" v-scroll-to="'#section-measure'">
+            {{ $t("messages.headermeasure") }}
+        </a></li>
       </div>
       <div class="social flex-container-spacebetween">
         <div class="social-text">
@@ -244,7 +252,7 @@ export default {
       transition: color .3s ease;
       -webkit-transition: color .3s ease;
       background-color: #fff;
-      z-index: $z-index-over;
+      z-index: $z-index-button;
 
       @media (max-width: $breakpoint-pc) {
           font-size: 14px;

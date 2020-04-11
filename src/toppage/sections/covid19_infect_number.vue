@@ -1,73 +1,174 @@
 <template>
   <div id="covid19-infect-number">
-    <div class="infect-number-left flex-container-start">
-      <DashBoardMedium request="daily" title="日本昨日感染人数"></DashBoardMedium>
-      <DashBoardMedium request="dead" title="日本死亡人数"></DashBoardMedium>
+    <p class="additional-topinfo">
+      <UpdateTimeLabel v-bind:update-time="updateAt" />
+    </p>
+    <div class="infect-info-panel">
+      <ul>
+        <li>
+        <LineGraphTab
+          id="infect-confirm-link"
+          api-id="infect-confirm"
+          bg-class="lt"
+          label="感染者数"
+          v-bind:is-active="isConfirmTabActive"
+          v-bind:on-click="onConfirmTabClick"
+          v-bind:total-persons= "5912"
+          v-bind:diff-persons= "615"
+        />
+        </li>
+        <li>
+        <LineGraphTab
+          id="infect-death-link"
+          api-id="infect-death"
+          bg-class="ct"
+          label="死亡者数"
+          v-bind:is-active="isDeathTabActive"
+          v-bind:on-click="onDeathTabClick"
+          v-bind:total-persons= "99"
+          v-bind:diff-persons= "0"
+        />
+        </li>
+        <li>
+        <LineGraphTab
+          id="infect-recover-link"
+          api-id="infect-recover"
+          bg-class="rt"
+          label="回復者数"
+          v-bind:is-active="isRecoverTabActive"
+          v-bind:on-click="onRecoverTabClick"
+          v-bind:total-persons= "100"
+          v-bind:diff-persons= "0"
+        />
+        </li>
+      </ul>
+      <ul>
+        <li>
+        <LineGraphTab
+          id="none-confirm-link"
+          api-id="none-confirm"
+          bg-class="lb"
+          label="無症状感染者数"
+          v-bind:is-active="isNoneConfirmTabActive"
+          v-bind:on-click="onNoneConfirmTabClick"
+          v-bind:total-persons= "1010"
+          v-bind:diff-persons= "0"
+        />
+        </li>
+        <li>
+        <LineGraphTab
+          id="heavy-confirm-link"
+          api-id="heavy-confirm"
+          bg-class="cb"
+          label="重症者数"
+          v-bind:is-active="isHeavyConfirmTabActive"
+          v-bind:on-click="onHeavyConfirmTabClick"
+          v-bind:total-persons= "200"
+          v-bind:diff-persons= "-5"
+        />
+        </li>
+        <li>
+        <LineGraphTab
+          id="pcr-test-link"
+          api-id="pcr-test"
+          bg-class="rb"
+          label="PCR検査人数"
+          v-bind:is-active="isPCRTestTabActive"
+          v-bind:on-click="onPCRTestTabClick"
+          v-bind:total-persons= "40020"
+          v-bind:diff-persons= "-4"
+        />
+        </li>
+      </ul>
     </div>
-    <div class="infect-number-right flex-container-start">
-      <DashBoardLarge></DashBoardLarge>
+    <div class="infect-info-graph">
+      <LineGraph/>
     </div>
-    <div class="infect-number-text flex-container-start flex-direction-column">
-      <div class="infect-number-text-bold">
-        国内新肺炎回復者数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{normalizeRecoveredNum}}
-      </div>
-      <div class="infect-number-text-bold">
-        国内新肺炎検査実施数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{normalizeTestedNum}}
-      </div>
-      <div class="infect-number-text-gray">
-        <UpdateAtLabel v-bind:update-at="updatedate" />
-      </div>
-    </div>
+    <p class="additional-info">
+      <UpdateAtLabel v-bind:update-at="updateAt" />
+    </p>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import DashBoardMedium from '@/components/DashBoardMedium';
-import DashBoardLarge from '@/components/DashBoardLarge';
+import LineGraph from '@/components/LineGraph';
+import LineGraphTab from '@/components/LineGraphTab';
 import UpdateAtLabel from '@/components/UpdateAtLabel';
+import UpdateTimeLabel from '@/components/UpdateTimeLabel';
+
+const TAB = {
+  CONFIRM: 'confirm',
+  DEATH: 'death',
+  RECOVER: 'recover',
+  NONECONFIRM: 'noneconfirm',
+  HEAVYCONFIRM: 'heavyconfirm',
+  PCRTEST: 'pcrtest',
+};
 
 export default {
   name: 'InfectNumber',
   components: {
-    DashBoardMedium,
-    DashBoardLarge,
+    LineGraph,
+    LineGraphTab,
     UpdateAtLabel,
+    UpdateTimeLabel,
   },
   data() {
     return {
-      recoveredNum: 235,
-      testedNum: 20228,
-      updatedate: '2020年3月22日',
+      activeTab: TAB.CONFIRM,
+      updatedate: '-',
+      // TODO 更新時間を埋める
+      updateAt: new Date(),
     };
   },
   mounted() {
-    axios.get('http://covid-info.site:8080/api/patient/latest')
-      .then((response) => {
-        this.recoveredNum = response.data.data.Recovered;
-        this.testedNum = response.data.data.Tested;
-      }).catch(() => {
-        // 暫定的な対応
-        this.recoveredNum = 235;
-        this.testedNum = 20228;
-      });
-
     axios.get('http://covid-info.site:8080/api/patient/updateTime')
       .then((response) => {
-        this.updatedate = response.data.data.PatientDataUpdateTime;
+        this.updateAt = response.data.data.PatientDataUpdateTime;
       }).catch(() => {
         // 暫定的な対応
-        this.updatedate = new Date(Date.now() - 864e5);
+        this.updateAt = new Date(Date.now() - 864e5);
       });
   },
   computed: {
-    normalizeRecoveredNum() {
-      const { recoveredNum } = this;
-      return recoveredNum.toLocaleString();
+    isConfirmTabActive() {
+      return this.activeTab === TAB.CONFIRM;
     },
-    normalizeTestedNum() {
-      const { testedNum } = this;
-      return testedNum.toLocaleString();
+    isDeathTabActive() {
+      return this.activeTab === TAB.DEATH;
+    },
+    isRecoverTabActive() {
+      return this.activeTab === TAB.RECOVER;
+    },
+    isNoneConfirmTabActive() {
+      return this.activeTab === TAB.NONECONFIRM;
+    },
+    isHeavyConfirmTabActive() {
+      return this.activeTab === TAB.HEAVYCONFIRM;
+    },
+    isPCRTestTabActive() {
+      return this.activeTab === TAB.PCRTEST;
+    },
+  },
+  methods: {
+    onConfirmTabClick() {
+      this.activeTab = TAB.CONFIRM;
+    },
+    onDeathTabClick() {
+      this.activeTab = TAB.DEATH;
+    },
+    onRecoverTabClick() {
+      this.activeTab = TAB.RECOVER;
+    },
+    onNoneConfirmTabClick() {
+      this.activeTab = TAB.NONECONFIRM;
+    },
+    onHeavyConfirmTabClick() {
+      this.activeTab = TAB.HEAVYCONFIRM;
+    },
+    onPCRTestTabClick() {
+      this.activeTab = TAB.PCRTEST;
     },
   },
 };
@@ -79,76 +180,39 @@ export default {
 
 #covid19-infect-number {
   display: flex;
-  height: 203px;
-  margin: 16px 24px;
-  margin-bottom: 32px;
-
-  .infect-number-left {
-    align-items: start;
-    width: 50%;
+  flex-direction: column;
+  height: auto;
+  position: relative;
+  .additional-topinfo{
+    top: -24px;
   }
+}
 
-  .infect-number-right {
-    align-items: start;
-    width: 50%;
-  }
-
-
-  .infect-number-text {
-    text-align: left;
-    align-items: flex-start;
-    position: absolute;
-    padding-top: 121px;
-
-    .infect-number-text-bold {
-      @include noto-font-001em(14px, bold);
-      margin-bottom: 8px;
-    }
-    .infect-number-text-gray {
-      @include noto-font-001em(14px, normal);
-      color: $color-lightgray;
-    }
-  }
-
-  @media (max-width: $breakpoint-pc) {
+.infect-info-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:auto;
+  padding: 16px 0;
+  ul{
     display: flex;
-    flex-direction: column;
-    height: auto;
-    margin: 16px 16px;
-    margin-bottom: 32px;
-    .infect-number-left {
-      width: 100%;
-    }
-    .infect-number-right {
-      width: 100%;
-      display: block;
-    }
-    .infect-number-text {
-      position:static;
-      display: block;
-      padding: 16px 16px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    li{
+      width: 40%;
+      margin: 0px;
     }
   }
+}
 
-  @media (max-width: $breakpoint-sp) {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    margin: 16px 16px;
-    .infect-number-left {
-      display: block;
-      width: 100%;
-    }
-    .infect-number-right {
-      width: 100%;
-      display: block;
-    }
-    .infect-number-text {
-      position:static;
-      display: block;
-      padding: 16px 0;
-    }
-
-  }
+.infect-info-graph{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: auto;
 }
 </style>

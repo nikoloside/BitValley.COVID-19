@@ -1,5 +1,8 @@
 <template>
   <div id="covid19-infect-region">
+    <p class="additional-topinfo">
+      <UpdateTimeLabel v-bind:update-time="updateAt" />
+    </p>
     <InfectRegionTableBlock />
 
     <p class="additional-info">
@@ -13,16 +16,27 @@
 
 <script>
 import InfectRegionTableBlock from '@/components/InfectRegionTableBlock';
+import axios from 'axios';
 import UpdateAtLabel from '@/components/UpdateAtLabel';
+import UpdateTimeLabel from '@/components/UpdateTimeLabel';
 
 export default {
   name: 'InfectRegion',
-  components: { InfectRegionTableBlock, UpdateAtLabel },
+  components: { InfectRegionTableBlock, UpdateAtLabel, UpdateTimeLabel },
   data() {
     return {
       // TODO 更新時間を埋める
       updateAt: new Date(),
     };
+  },
+  mounted() {
+    axios.get('http://covid-info.site:8080/api/patient/updateTime')
+      .then((response) => {
+        this.updateAt = response.data.data.PatientDataUpdateTime;
+      }).catch(() => {
+        // 暫定的な対応
+        this.updateAt = new Date(Date.now() - 864e5);
+      });
   },
 };
 </script>
@@ -33,20 +47,6 @@ export default {
 $break-point: 480px;
 
 #covid19-infect-region {
-  .additional-info {
-    @include noto-font-001em(14px, normal);
-    padding: 0;
-    margin: 8px 0;
-    color: $color-lightgray;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    @media (max-width: $break-point) {
-      @include noto-font-001em(10px, normal);
-      margin: 4px 0;
-    }
-  }
+  position: relative;
 }
 </style>

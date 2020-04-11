@@ -5,25 +5,37 @@
 
       <PickUp></PickUp>
 
-      <div class="section-wrapper wrap-shadow">
-        <div id="section-infect" class="section wrap-sp-display">
-          <div class="section-left" />日本感染情報
+
+      <div class="section-dashboard">
+      <div class="section-japan">
+        <div id="section-infect" class="section-wrapper wrap-shadow section-infect">
+          <div class="section">
+            <div class="section-left" />日本感染情報
+          </div>
+          <InfectNumber></InfectNumber>
         </div>
-        <InfectNumber></InfectNumber>
+
+        <div id="section-region" class="section-wrapper wrap-shadow section-region">
+          <div class="section">
+            <div class="section-left" />都道府県别感染者数
+          </div>
+          <InfectRegion />
+        </div>
       </div>
 
-      <div class="section-wrapper wrap-shadow">
-        <div class="section section-region">
-          <div class="section-left" />都道府県别感染者数
-        </div>
-        <InfectRegion />
-      </div>
-
-      <div class="section-wrapper wrap-shadow">
-        <div class="section section-region">
+      <div id="section-world" class="section-wrapper wrap-shadow section-world">
+        <div class="section">
           <div class="section-left" />世界感染情報
         </div>
         <InfectWorld/>
+      </div>
+      </div>
+
+      <div id="section-checkmap" class="section-wrapper wrap-shadow section-checkmap">
+        <div class="section">
+          <div class="section-left" />事例チェックマップ
+        </div>
+        <CheckMap/>
       </div>
 
       <div id="section-news" class="section section-news">
@@ -42,6 +54,7 @@ import PickUp from '@/toppage/sections/covid19_pickup';
 import InfectNumber from '@/toppage/sections/covid19_infect_number';
 import InfectRegion from '@/toppage/sections/covid19_infect_region';
 import InfectWorld from '@/toppage/sections/covid19_infect_world';
+import CheckMap from '@/toppage/sections/covid19_check_map';
 import News from '@/toppage/sections/covid19_news';
 import Footer from '@/toppage/sections/covid19_footer';
 
@@ -53,6 +66,7 @@ export default {
     InfectNumber,
     InfectRegion,
     InfectWorld,
+    CheckMap,
     News,
     Footer,
   },
@@ -120,10 +134,6 @@ export default {
   }
 }
 
-.section-region {
-  margin: 0;
-}
-
 .wrap-sp-display{
   display: none;
   @media (max-width: $breakpoint-sp) {
@@ -131,7 +141,94 @@ export default {
   }
 }
 
+// ver1.2仕様 必须通过列表进行切换
+.section-dashboard {
+  display: flex;
+  @media (max-width: $breakpoint-pc) {
+    flex-direction: column;
+  }
+}
+.section-japan {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  @media (max-width: $breakpoint-pc) {
+    width:100%;
+  }
+}
+.section-infect {
+  .section {
+    margin-left: 0px;
+  }
+  margin: 12px 24px;
+  @media (max-width: $breakpoint-pc) {
+    margin: 12px 16px;
+  }
+}
+.section-region {
+  .section {
+    margin-left: 0px;
+  }
+  margin: 12px 24px;
+  @media (max-width: $breakpoint-pc) {
+    margin: 12px 16px;
+  }
+}
+.section-world {
+  .section {
+    margin-left: 0px;
+  }
+  width: 50%;
+  margin-left:0px;
+  margin-right:24px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  @media (max-width: $breakpoint-pc) {
+    width: auto;
+    margin: 12px 16px;
+  }
+}
+
+.additional-topinfo {
+  @include noto-font-001em(14px, bold);
+  padding: 0;
+  margin: 8px 0;
+  color: $color-gray;
+  position: absolute;
+  top: -48px;
+  right: 0px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: $breakpoint-sp) {
+    @include noto-font-001em(10px, normal);
+    margin: 4px 0;
+  }
+}
+
+.additional-info {
+  @include noto-font-001em(14px, normal);
+  padding: 0;
+  margin: 8px 0;
+  color: $color-lightgray;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: $breakpoint-sp) {
+    @include noto-font-001em(10px, normal);
+    margin: 4px 0;
+  }
+}
+
 // link的共通样式
+ul {
+  list-style:none;
+}
+
 a {
   text-decoration: none;
   color:$color-black;

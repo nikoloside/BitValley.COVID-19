@@ -8,22 +8,12 @@ import App from './App';
 import router from './router';
 
 // 言語の設定
-const languageMeta = require('./assets/language/meta.json');
-const languageHeader = require('./assets/language/header.json');
-const languageData = require('./assets/language/data.json');
-const languageTitle = require('./assets/language/title.json');
-const languagefooter = require('./assets/language/footer.json');
-const languageApipath = require('./assets/language/apipath.json');
+const languageMessages = require('./assets/language/messages.json');
 
 Vue.use(VueI18n);
 const vuei18n = new VueI18n({
   locale: 'ja', // デフォルト言語はjaにしておくが、ブラウザの言語を拾ってきてここに入れる => 言語変更されたら書き換える
-  meta: languageMeta,
-  header: languageHeader,
-  data: languageData,
-  title: languageTitle,
-  footer: languagefooter,
-  api: languageApipath,
+  messages: languageMessages,
 });
 
 Vue.config.productionTip = false;
