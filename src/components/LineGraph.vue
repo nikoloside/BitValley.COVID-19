@@ -4,7 +4,7 @@
     <div class="unit-group">
         <div class="unit"
         v-for="unit in units" v-bind:key="unit"
-        v-bind:style="{ height: `${100 / unitCount+3 }%` }"
+        v-bind:style="{ height: `${100 / unitCount + 2 }%` }"
         >
             {{ unit }}
         </div>
@@ -89,38 +89,54 @@ export default {
   name: 'LineGraph',
   data() {
     return {
-      unitCount: 6,
-      labelCount: 5,
+      unitCount: 8,
+      labelCount: 9,
       infectDatas: [
         {
-          date: '03.17',
-          count: 881,
+          date: '-',
+          count: 0,
         },
         {
-          date: '03.18',
-          count: 915,
+          date: '-',
+          count: 20,
         },
         {
-          date: '03.19',
-          count: 956,
+          date: '-',
+          count: 50,
         },
         {
-          date: '03.20',
-          count: 1010,
+          date: '-',
+          count: 100,
         },
         {
-          date: '03.21',
-          count: 1010,
+          date: '-',
+          count: 150,
+        },
+        {
+          date: '-',
+          count: 200,
+        },
+        {
+          date: '-',
+          count: 250,
+        },
+        {
+          date: '-',
+          count: 190,
+        },
+        {
+          date: '-',
+          count: 200,
         },
       ],
     };
   },
   computed: {
     graphWidth() {
-      return 283;
+      return 450;
     },
     graphHeight() {
-      return 143;
+      return 200;
     },
     normalizeTotalPersons() {
       const { TotalPersons } = this;
@@ -191,16 +207,15 @@ export default {
 @import "@/commons/_variables.scss";
 
 #LineGraph {
-  max-width: 385px;
+  max-width: 960px;
+  min-height: 230px;
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-rows: 90% 24px;
-  grid-template-columns:  18px  90%;
+  grid-template-columns:  18px  95%;
   gap: 4px 8px;
-  @media (max-width: $breakpoint-sp) {
-    height: 50%;
-  }
+  padding: 24px 0;
 
   .unit-group {
     text-align: left;
@@ -210,7 +225,7 @@ export default {
     .unit {
         text-align: right;
         position:relative;
-        top: -5px;
+        top: -10px;
     }
   }
   .graph-wrapper {
@@ -231,7 +246,7 @@ export default {
     width: 100%;
     height: 100%;
     svg {
-        height: 140px;
+        height: 100%;
         width: 100%;
     }
 
