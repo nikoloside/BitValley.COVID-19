@@ -33,30 +33,37 @@
 </template>
 
 <script>
-// import axios from 'axios';
 import increaseIcon from '../assets/image/increase_simple.svg';
 import decreaseIcon from '../assets/image/decrease_simple.svg';
 import equalizeIcon from '../assets/image/equalize_simple.svg';
 
 export default {
   name: 'LineGraphTab',
-  props: {
-    id: String,
-    apiId: String,
-    bgClass: String,
-    label: String,
-    isActive: Boolean,
-    onClick: Function,
-    totalPersons: Number,
-    diffPersons: Number,
-  },
+  // props: {
+  //   id: String,
+  //   apiId: String,
+  //   bgClass: String,
+  //   label: String,
+  //   isActive: Boolean,
+  //   onClick: Function,
+  //   totalPersons: Number,
+  //   diffPersons: Number,
+  // },
+  props: ['id', 'apiId', 'bgClass', 'label', 'isActive', 'onClick', 'totalPersons', 'diffPersons'],
   data() {
     return {
       total: Number(this.totalPersons),
       diff: Number(this.diffPersons),
     };
   },
-
+  watch: {
+    totalPersons: {
+      handler(val) {
+        this.totalPersons = val;
+      },
+      deep: true,
+    },
+  },
   computed: {
     normalizeTotalPersons() {
       const { total } = this;
