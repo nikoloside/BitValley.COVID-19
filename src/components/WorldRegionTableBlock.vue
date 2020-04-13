@@ -7,7 +7,7 @@
           <th class="confirm-number-column">感染人数</th>
           <th class="recover-number-column">回復者数</th>
           <th class="death-number-column">死亡者数</th>
-          <th class="rate-column">感染率</th>
+          <th class="rate-column">死亡率</th>
         </tr>
       </thead>
       <tbody>
@@ -144,16 +144,15 @@ export default {
   },
   mounted() {
     const dataList = [];
-    axios.get('http://covid-info.site:8080/api/patient/location')
+    axios.get('http://covid-info.site:8080/api/patient/global/country')
       .then((response) => {
         response.data.data.forEach((region) => {
           const data = {
             region: region.Location,
-            confirm: region.Sum,
-            recover: region.Sum,
-            death: region.Sum,
-            // TODO 感染率を埋める
-            rate: 0.00001689,
+            confirm: region.Confirmed,
+            recover: region.Recovered,
+            death: region.Deaths,
+            rate: region.DeathRate,
           };
           dataList.push(data);
         });

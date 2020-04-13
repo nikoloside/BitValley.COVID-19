@@ -122,13 +122,14 @@ export default {
     axios.get('http://covid-info.site:8080/api/patient/location')
       .then((response) => {
         response.data.data.forEach((region) => {
-          const data = {
-            region: region.Location,
-            count: region.Sum,
-            // TODO 感染率を埋める
-            rate: 0.00001689,
-          };
-          dataList.push(data);
+          if (region.Location !== '不明' && region.Location !== '空港検疫') {
+            const data = {
+              region: region.Location,
+              count: region.Sum,
+              rate: region.InfectionRate,
+            };
+            dataList.push(data);
+          }
         });
       });
     this.regionDatas = dataList;

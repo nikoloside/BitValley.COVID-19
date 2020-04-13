@@ -13,8 +13,8 @@
         label="感染者数"
         v-bind:is-active="false"
         v-bind:on-click="null"
-        v-bind:total-persons= "5912"
-        v-bind:diff-persons= "615"
+        v-bind:total-persons="totalPersons"
+        v-bind:diff-persons="totalDiffs"
       />
       </li>
       <li>
@@ -25,8 +25,8 @@
         label="死亡者数"
         v-bind:is-active="false"
         v-bind:on-click="null"
-        v-bind:total-persons= "99"
-        v-bind:diff-persons= "0"
+        v-bind:total-persons="totalDeathPersons"
+        v-bind:diff-persons="totalDeathDiffs"
       />
       </li>
       <li>
@@ -37,8 +37,8 @@
         label="回復者数"
         v-bind:is-active="false"
         v-bind:on-click="null"
-        v-bind:total-persons= "99"
-        v-bind:diff-persons= "0"
+        v-bind:total-persons="totalRecoverPersons"
+        v-bind:diff-persons="totalRecoverDiffs"
       />
       </li>
     </ul>
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import WorldRegionTableBlock from '@/components/WorldRegionTableBlock';
 import LineGraphTab from '@/components/LineGraphTab';
 import WorldRegionMap from '@/components/WorldRegionMap';
@@ -60,18 +61,31 @@ import UpdateTimeLabel from '@/components/UpdateTimeLabel';
 
 export default {
   name: 'InfectRegion',
+  data() {
+    return {
+      // TODO 更新時間を埋める
+      totalPersons: 10000,
+      totalDiffs: 100,
+      totalRecoverPersons: 200,
+      totalRecoverDiffs: 300,
+      totalDeathPersons: 400,
+      totalDeathDiffs: 500,
+      updateAt: new Date(),
+    };
+  },
+  mounted() {
+    axios.get('http://covid-info.site:8080/api/patient/global/current')
+      .then((response) => {
+        this.$forceUpdate();
+        this.$set(this.totalPersons, response.data.data.Confirmed, true);
+      });
+  },
   components: {
     LineGraphTab,
     WorldRegionMap,
     WorldRegionTableBlock,
     UpdateAtLabel,
     UpdateTimeLabel,
-  },
-  data() {
-    return {
-      // TODO 更新時間を埋める
-      updateAt: new Date(),
-    };
   },
 };
 </script>
