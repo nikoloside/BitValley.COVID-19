@@ -122,10 +122,10 @@ export default {
       display: none;
   }
   .covid19-logo {
-    background-image:url('../assets/image/logo.svg');
+    background-image:url('../assets/image/logo@2x.png');
     background-size: 100%;
     background-repeat: no-repeat;
-    max-width: 342.02px;
+    max-width: 247px;
     width: 32%;
     height: 50px;
     margin-left: 16px;
@@ -207,7 +207,7 @@ export default {
 
     .covid19-logo {
         position: absolute;
-        min-width: 300px;
+        width: 247px;
         top: 24px;
         left: 16px;
         margin-left: 0;

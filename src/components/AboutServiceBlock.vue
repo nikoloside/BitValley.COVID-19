@@ -4,7 +4,8 @@
       <img
         class="service-logo"
         alt="新型コロナウイルス対策"
-        src="../assets/image/logo.svg"
+        src="../assets/image/logo.png"
+        srcset="../assets/image/logo@2x.png"
       />
 
       <div class="share-panel-desktop-wrapper">

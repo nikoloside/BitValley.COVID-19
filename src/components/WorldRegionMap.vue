@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 <template>
   <div id="WorldRegionMap">
       <div id='app'></div>
@@ -6,30 +7,131 @@
 
 
 <script>
-import 'leaflet/dist/leaflet.css';
 import Leaf from 'leaflet';
+import worldJson from '../assets/map/custom.geo.json';
 
-const southWest = Leaf.latLng(-89.98155760646617, -60);
-const northEast = Leaf.latLng(89.99346179538875, 300);
+// 世界地図の境界線をかす
+const southWest = Leaf.latLng(-89.98155760646617, -180);
+const northEast = Leaf.latLng(89.99346179538875, 180);
 const bounds = Leaf.latLngBounds(southWest, northEast);
+let geojson;
+let map;
+let marker;
 
 export default {
   name: 'WorldRegionMap',
   data() {
     return {
+      worldData: worldJson,
+      confirmData:
+        {
+          China: 90000,
+          Japan: 900,
+        },
     };
   },
   mounted() {
-    Leaf.map('app', {
-      center: Leaf.latLng(35.6825, 139.752778),
-      zoom: 1,
-      minZoom: 1,
-      maxZoom: 5,
-      maxBounds: bounds,
-      maxBoundsViscosity: 1.0,
-    }).addLayer(
-      Leaf.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png'),
-    );
+    this.mapCreate();
+  },
+  methods: {
+    // 指标调色板
+    onAddColorPanel() {
+      const labels = [];
+      const div = Leaf.DomUtil.create('div', 'legend');
+      const grades = [0, 99, 100, 1000, 5000, 10000, 100000];
+      const words = ['0人', '1~99人', '100~999人', '1000~4999人', '5000~10000人', '1万人以上', '10万人以上'];
+      for (let i = grades.length - 1; i >= 0; i -= 1) {
+        // eslint-disable-next-line prefer-template
+        labels.push('<i style="background:' + this.getColor(grades[i]) + '"></i> ' + words[i]);
+      }
+      div.innerHTML += labels.join('<br>');
+      return div;
+    },
+    // 密度调色盘
+    getColor(d) {
+      if (d >= 100000) {
+        return '#56141C';
+      }
+      if (d >= 10000) {
+        return '#871212';
+      }
+      if (d >= 5000) {
+        return '#A52121';
+      }
+      if (d >= 1000) {
+        return '#D33939';
+      }
+      if (d >= 100) {
+        return '#F7685B';
+      }
+      if (d > 0) {
+        return '#FF9578';
+      }
+      return '#FFFFFF';
+    },
+    // FillColorの色を生成
+    style(feature) {
+      return {
+        fillColor: this.getColor(this.confirmData[feature.properties.name]),
+        weight: 0,
+        opacity: 0,
+        color: 'white',
+        dashArray: '',
+        fillOpacity: 0.7,
+      };
+    },
+    // MoverOver的event的样式
+    highlightFeature(e) {
+      const layer = e.target;
+      layer.setStyle({
+        weight: 0,
+        opacity: 0,
+        dashArray: '',
+        fillColor: '#0452E6',
+        fillOpacity: 0.7,
+      });
+      if (!Leaf.Browser.ie && !Leaf.Browser.opera && !Leaf.Browser.edge) {
+        layer.bringToFront();
+
+        marker = Leaf.marker(e.latlng).addTo(map)
+          .bindPopup('A pretty CSS3 popup.<br/> Easily customizable.')
+          .openPopup();
+      }
+    },
+    resetHighlight(e) {
+      geojson.resetStyle(e.target);
+      // info.update();
+      marker.closePopup();
+    },
+    onEachFeature(feature, layer) {
+      layer.on({
+        mouseover: this.highlightFeature,
+        mouseout: this.resetHighlight,
+        // click: this.highlightFeature,
+      });
+    },
+    // マップオブジェクト生成
+    mapCreate() {
+      map = Leaf.map('app', {
+        center: Leaf.latLng(35.6825, 139.752778),
+        zoom: 1,
+        minZoom: 1,
+        maxZoom: 4,
+        maxBounds: bounds,
+        maxBoundsViscosity: 1.0,
+      }).addLayer(
+        Leaf.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png'),
+      );
+      // 実際JSONを描く
+      geojson = Leaf.geoJson(this.worldData, {
+        style: this.style,
+        onEachFeature: this.onEachFeature,
+      }).addTo(map);
+
+      const legend = Leaf.control({ position: 'bottomleft' });
+      legend.onAdd = this.onAddColorPanel;
+      legend.addTo(map);
+    },
   },
 };
 </script>
@@ -48,6 +150,6 @@ export default {
   height: 100%;
   border-radius: 12px;
   z-index: $z-index-button;
+  background-color:#E8ECF2;
 }
-
 </style>

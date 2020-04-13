@@ -156,6 +156,16 @@ export default {
           };
           dataList.push(data);
         });
+      }).catch(() => {
+        // 暫定的な対応
+        const data = {
+          region: '-',
+          confirm: 0,
+          recover: 0,
+          death: 0,
+          rate: 0.0,
+        };
+        dataList.push(data);
       });
     this.regionDatas = dataList;
   },
