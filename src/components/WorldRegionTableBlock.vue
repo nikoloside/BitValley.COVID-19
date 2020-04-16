@@ -12,10 +12,10 @@
       </thead>
       <tbody>
         <tr
-          v-for="regionData in regionDatas"
+          v-for="(regionData, index) in regionDatas"
           v-bind:key="regionData.region + index"
         >
-          <td class="region-column">{{regionData.region}}</td>
+          <td class="region-column">{{regionLangName(regionData.region)}}</td>
           <td class="confirm-number-column">{{regionData.confirm.toLocaleString()}}</td>
           <td class="recover-number-column">{{regionData.recover.toLocaleString()}}</td>
           <td class="death-number-column">{{regionData.death.toLocaleString()}}</td>
@@ -28,11 +28,14 @@
 
 <script>
 import axios from 'axios';
+import countryJson from '../assets/language/country.json';
 
 export default {
   name: 'InfectRegionTableBlock',
   data() {
     return {
+      lang: this.$i18n.locale,
+      countryData: countryJson,
       regionDatas: [
         {
           region: '東京都',
@@ -168,6 +171,29 @@ export default {
         dataList.push(data);
       });
     this.regionDatas = dataList;
+  },
+  methods: {
+    regionLangName(name) {
+      let countryName = name;
+      const nameObject = this.countryData[name];
+
+      if (!nameObject) {
+        return name;
+      }
+      switch (this.lang) {
+        case 'ja':
+          countryName = nameObject.ja;
+          break;
+        case 'cn':
+          countryName = nameObject.cn;
+          break;
+        default:
+          countryName = nameObject.ja;
+          break;
+      }
+
+      return countryName;
+    },
   },
   computed: {
     maxCount() {

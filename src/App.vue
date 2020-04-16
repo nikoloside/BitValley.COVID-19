@@ -81,4 +81,27 @@ export default {
     border-radius: 4px;
   }
 }
+.custom .leaflet-popup-tip {
+  display: none;
+}
+.custom .leaflet-popup-content-wrapper {
+  background: #192A3E;
+  opacity: 0.6;
+  border-radius: 4px;
+}
+.world-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: $color-white;
+}
+.world-country {
+  @include noto-font-001em(12px, 500);
+  color: $color-white;
+}
+.world-data {
+  @include poppins-font-001em(8px, 500);
+  color: $color-white;
+}
 </style>

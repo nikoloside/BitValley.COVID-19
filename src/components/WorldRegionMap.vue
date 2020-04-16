@@ -9,6 +9,7 @@
 <script>
 import Leaf from 'leaflet';
 import worldJson from '../assets/map/custom.geo.json';
+import countryJson from '../assets/language/country.json';
 
 // 世界地図の境界線をかす
 const southWest = Leaf.latLng(-89.98155760646617, -180);
@@ -17,12 +18,16 @@ const bounds = Leaf.latLngBounds(southWest, northEast);
 let geojson;
 let map;
 let marker;
+let popup;
+let nowfeature;
 
 export default {
   name: 'WorldRegionMap',
   data() {
     return {
+      lang: this.$i18n.locale,
       worldData: worldJson,
+      countryData: countryJson,
       confirmData:
         {
           China: 90000,
@@ -92,20 +97,63 @@ export default {
       });
       if (!Leaf.Browser.ie && !Leaf.Browser.opera && !Leaf.Browser.edge) {
         layer.bringToFront();
-
-        marker = Leaf.marker(e.latlng).addTo(map)
-          .bindPopup('A pretty CSS3 popup.<br/> Easily customizable.')
-          .openPopup();
+        marker.setLatLng(e.latlng);
+        if (!popup.isOpen()) {
+          popup.setContent(nowfeature.properties.name);
+          map.openPopup(popup);
+        }
       }
     },
     resetHighlight(e) {
       geojson.resetStyle(e.target);
       // info.update();
-      marker.closePopup();
+      map.closePopup();
     },
     onEachFeature(feature, layer) {
       layer.on({
-        mouseover: this.highlightFeature,
+        mouseover: function over(event) {
+          layer.setStyle({
+            weight: 0,
+            opacity: 0,
+            dashArray: '',
+            fillColor: '#0452E6',
+            fillOpacity: 0.7,
+          });
+          if (!Leaf.Browser.ie && !Leaf.Browser.opera && !Leaf.Browser.edge) {
+            layer.bringToFront();
+            marker.setLatLng(event.latlng);
+            if (!popup.isOpen()) {
+              let country = '未知言語';
+              switch (this.lang) {
+                case 'ja':
+                  country = countryJson[feature.properties.name].ja;
+                  break;
+                case 'cn':
+                  country = countryJson[feature.properties.name].cn;
+                  break;
+                default:
+                  country = countryJson[feature.properties.name].ja;
+                  break;
+              }
+
+              let div = '<div class="world-content">';
+              // eslint-disable-next-line prefer-template
+              div = div + '<div class="world-country">' + country + '</div>';
+              // eslint-disable-next-line prefer-template
+              div = div + '<div class="world-data">感染者数:' + country + '</div>';
+              // eslint-disable-next-line prefer-template
+              div = div + '<div class="world-data">死亡者数:' + country + '</div>';
+              // eslint-disable-next-line prefer-template
+              div = div + '<div class="world-data">回復者数:' + country + '</div>';
+              // eslint-disable-next-line prefer-template
+              div += '</div>';
+
+              // eslint-disable-next-line prefer-template
+              popup.setContent(div);
+              map.openPopup(popup);
+            }
+          }
+        },
         mouseout: this.resetHighlight,
         // click: this.highlightFeature,
       });
@@ -127,10 +175,22 @@ export default {
         style: this.style,
         onEachFeature: this.onEachFeature,
       }).addTo(map);
-
+      // legend就是注释
       const legend = Leaf.control({ position: 'bottomleft' });
       legend.onAdd = this.onAddColorPanel;
       legend.addTo(map);
+      // create popup contents
+      const customPopup = '';
+      const customOptions = {
+        minWidth: '74',
+        minHeight: '68',
+        closeButton: false,
+        className: 'custom',
+      };
+      popup = Leaf.popup(customOptions).setContent(customPopup);
+      // markerとpopup
+      marker = Leaf.marker(Leaf.latLng(35.6825, 139.752778)).addTo(map)
+        .bindPopup(popup);
     },
   },
 };

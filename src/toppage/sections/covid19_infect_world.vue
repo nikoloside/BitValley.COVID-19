@@ -12,7 +12,7 @@
         bg-class="none"
         label="感染者数"
         v-bind:is-active="false"
-        v-bind:on-click="null"
+        v-bind:on-click="{}"
         v-bind:total-persons="totalPersons"
         v-bind:diff-persons="totalDiffs"
       />
@@ -24,7 +24,7 @@
         bg-class="none"
         label="死亡者数"
         v-bind:is-active="false"
-        v-bind:on-click="null"
+        v-bind:on-click="{}"
         v-bind:total-persons="totalDeathPersons"
         v-bind:diff-persons="totalDeathDiffs"
       />
@@ -36,7 +36,7 @@
         bg-class="none"
         label="回復者数"
         v-bind:is-active="false"
-        v-bind:on-click="null"
+        v-bind:on-click="{}"
         v-bind:total-persons="totalRecoverPersons"
         v-bind:diff-persons="totalRecoverDiffs"
       />
