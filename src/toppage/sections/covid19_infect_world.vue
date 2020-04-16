@@ -12,7 +12,7 @@
         bg-class="none"
         label="感染者数"
         v-bind:is-active="false"
-        v-bind:on-click="null"
+        v-bind:on-click="{}"
         v-bind:total-persons="totalPersons"
         v-bind:diff-persons="totalDiffs"
       />
@@ -24,7 +24,7 @@
         bg-class="none"
         label="死亡者数"
         v-bind:is-active="false"
-        v-bind:on-click="null"
+        v-bind:on-click="{}"
         v-bind:total-persons="totalDeathPersons"
         v-bind:diff-persons="totalDeathDiffs"
       />
@@ -36,7 +36,7 @@
         bg-class="none"
         label="回復者数"
         v-bind:is-active="false"
-        v-bind:on-click="null"
+        v-bind:on-click="{}"
         v-bind:total-persons="totalRecoverPersons"
         v-bind:diff-persons="totalRecoverDiffs"
       />
@@ -107,6 +107,41 @@ export default {
       width: 40%;
       margin: 0px;
     }
+  }
+}
+
+.marker {
+  text-align: center;
+  color: white;
+  font-size: 16;
+  border-radius: 8px;
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.4);
+}
+.red {
+  background: red;
+}
+.info {
+  padding: 6px 8px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+
+  h4 {
+    margin: 0 0 5px;
+    color: #777;
+  }
+}
+.legend {
+  line-height: 18px;
+  color: #555;
+  i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
   }
 }
 </style>

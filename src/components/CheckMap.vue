@@ -20,7 +20,7 @@ export default {
     };
   },
   mounted() {
-    Leaf.map('map', {
+    const map = Leaf.map('map', {
       center: Leaf.latLng(35.6825, 139.752778),
       zoom: 15,
       minZoom: 1,
@@ -29,6 +29,17 @@ export default {
       maxBoundsViscosity: 1.0,
     }).addLayer(
       Leaf.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png'),
+    );
+    map.on(
+      'click',
+      p => map.addLayer(
+        Leaf.marker(
+          p.latlng,
+          {
+            icon: Leaf.divIcon({ className: 'red marker', iconSize: [60, 60] }),
+          },
+        ),
+      ),
     );
   },
 };

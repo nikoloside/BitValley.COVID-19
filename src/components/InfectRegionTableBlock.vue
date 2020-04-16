@@ -11,7 +11,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="regionData in regionDatas"
+          v-for="(regionData, index) in regionDatas"
           v-bind:key="regionData.region + index"
         >
           <td class="region-column">{{regionData.region}}</td>
