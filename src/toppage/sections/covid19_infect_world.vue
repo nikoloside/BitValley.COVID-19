@@ -68,21 +68,21 @@ export default {
     };
   },
   mounted() {
-    axios.get('http://covid-info.site:8080/api/patient/global/current')
+    axios.get('https://api.survival-jp.com/api/patient/global/current')
       .then((response) => {
         this.totalPersons = response.data.data.Confirmed;
         this.totalDeathPersons = response.data.data.Deaths;
         this.totalRecoverPersons = response.data.data.Recovered;
       });
 
-    axios.get('http://covid-info.site:8080/api/patient/global/growth')
+    axios.get('https://api.survival-jp.com/api/patient/global/growth')
       .then((response) => {
         this.totalDiffs = response.data.data.NewConfirmed;
         this.totalDeathDiffs = response.data.data.NewDeaths;
         this.totalRecoverDiffs = response.data.data.NewRecovered;
       });
 
-    axios.get('http://covid-info.site:8080/api/patient/updateTime')
+    axios.get('https://api.survival-jp.com/api/patient/updateTime')
       .then((response) => {
         this.updateAt = response.data.data.PatientDataUpdateTime;
       }).catch(() => {

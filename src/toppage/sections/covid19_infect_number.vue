@@ -132,7 +132,7 @@ export default {
     };
   },
   mounted() {
-    axios.get('http://covid-info.site:8080/api/patient/latest')
+    axios.get('https://api.survival-jp.com/api/patient/latest')
       .then((response) => {
         const data = response.data.data;
         this.totalConfirmed = data.Confirmed;
@@ -142,7 +142,7 @@ export default {
         this.totalTested = data.Tested;
       });
 
-    axios.get('http://covid-info.site:8080/api/patient/updateTime')
+    axios.get('https://api.survival-jp.com/api/patient/updateTime')
       .then((response) => {
         this.updateAt = response.data.data.PatientDataUpdateTime;
       }).catch(() => {

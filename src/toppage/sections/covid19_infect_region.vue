@@ -30,7 +30,7 @@ export default {
     };
   },
   mounted() {
-    axios.get('http://covid-info.site:8080/api/patient/updateTime')
+    axios.get('https://api.survival-jp.com/api/patient/updateTime')
       .then((response) => {
         this.updateAt = response.data.data.PatientDataUpdateTime;
       }).catch(() => {

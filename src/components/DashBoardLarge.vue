@@ -152,13 +152,13 @@ export default {
     };
   },
   mounted() {
-    axios.get('http://covid-info.site:8080/api/patient/current')
+    axios.get('https://api.survival-jp.com/api/patient/current')
       .then((response) => {
         this.TotalPersons = response.data.data.Current;
         this.DiffPersons = response.data.data.Diff;
       });
     const dataList = [];
-    axios.get('http://covid-info.site:8080/api/patient/period')
+    axios.get('https://api.survival-jp.com/api/patient/period')
       .then((response) => {
         response.data.data.forEach((patientByDate) => {
           const data = {

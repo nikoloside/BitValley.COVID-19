@@ -119,7 +119,7 @@ export default {
   },
   mounted() {
     const dataList = [];
-    axios.get('http://covid-info.site:8080/api/patient/location')
+    axios.get('https://api.survival-jp.com/api/patient/location')
       .then((response) => {
         response.data.data.forEach((region) => {
           if (region.Location !== '不明' && region.Location !== '空港検疫') {

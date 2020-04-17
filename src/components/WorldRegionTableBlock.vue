@@ -147,7 +147,7 @@ export default {
   },
   mounted() {
     const dataList = [];
-    axios.get('http://covid-info.site:8080/api/patient/global/country')
+    axios.get('https://api.survival-jp.com/api/patient/global/country')
       .then((response) => {
         response.data.data.forEach((region) => {
           const data = {
