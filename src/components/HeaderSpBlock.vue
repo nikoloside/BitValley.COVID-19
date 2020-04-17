@@ -46,10 +46,10 @@ export default {
   }
 
   .covid19-logo {
-    background-image:url('../assets/image/logo.svg');
+    background-image:url('../assets/image/logo.png');
     background-size: 100%;
     background-repeat: no-repeat;
-    width: 248px;
+    width: 227px;
     height: 36px;
     position: absolute;
     top: 18px;

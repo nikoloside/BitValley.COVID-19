@@ -22,8 +22,6 @@ export default {
   name: 'SwitchLanguageButton',
   data() {
     return {
-      msg: 'お問い合わせ',
-      lang: this.$i18n.locale,
     };
   },
   methods: {
