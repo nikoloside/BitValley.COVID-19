@@ -13,8 +13,8 @@
           label="感染者数"
           v-bind:is-active="isConfirmTabActive"
           v-bind:on-click="onConfirmTabClick"
-          v-bind:total-persons= "5912"
-          v-bind:diff-persons= "615"
+          v-bind:total-persons= "totalConfirmed"
+          v-bind:diff-persons= "newConfirmed"
         />
         </li>
         <li>
@@ -25,8 +25,8 @@
           label="死亡者数"
           v-bind:is-active="isDeathTabActive"
           v-bind:on-click="onDeathTabClick"
-          v-bind:total-persons= "99"
-          v-bind:diff-persons= "0"
+          v-bind:total-persons= "totalDeaths"
+          v-bind:diff-persons= "newDeaths"
         />
         </li>
         <li>
@@ -37,8 +37,8 @@
           label="回復者数"
           v-bind:is-active="isRecoverTabActive"
           v-bind:on-click="onRecoverTabClick"
-          v-bind:total-persons= "100"
-          v-bind:diff-persons= "0"
+          v-bind:total-persons= "totalRecovered"
+          v-bind:diff-persons= "newRecovered"
         />
         </li>
       </ul>
@@ -63,8 +63,8 @@
           label="重症者数"
           v-bind:is-active="isHeavyConfirmTabActive"
           v-bind:on-click="onHeavyConfirmTabClick"
-          v-bind:total-persons= "200"
-          v-bind:diff-persons= "-5"
+          v-bind:total-persons= "totalCritical"
+          v-bind:diff-persons= "newCritical"
         />
         </li>
         <li>
@@ -75,8 +75,8 @@
           label="PCR検査人数"
           v-bind:is-active="isPCRTestTabActive"
           v-bind:on-click="onPCRTestTabClick"
-          v-bind:total-persons= "40020"
-          v-bind:diff-persons= "-4"
+          v-bind:total-persons= "totalTested"
+          v-bind:diff-persons= "newTested"
         />
         </li>
       </ul>
@@ -118,11 +118,30 @@ export default {
     return {
       activeTab: TAB.CONFIRM,
       updatedate: '-',
-      // TODO 更新時間を埋める
+      totalConfirmed: 0,
+      newConfirmed: 0,
+      totalCritical: 0,
+      newCritical: 0,
+      totalDeaths: 0,
+      newDeaths: 0,
+      totalRecovered: 0,
+      newRecovered: 0,
+      totalTested: 0,
+      newTested: 0,
       updateAt: new Date(),
     };
   },
   mounted() {
+    axios.get('http://covid-info.site:8080/api/patient/latest')
+      .then((response) => {
+        const data = response.data.data;
+        this.totalConfirmed = data.Confirmed;
+        this.totalDeaths = data.Dead;
+        this.totalRecovered = data.Recovered;
+        this.totalCritical = data.Critical;
+        this.totalTested = data.Tested;
+      });
+
     axios.get('http://covid-info.site:8080/api/patient/updateTime')
       .then((response) => {
         this.updateAt = response.data.data.PatientDataUpdateTime;

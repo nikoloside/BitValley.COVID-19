@@ -8,11 +8,9 @@
       <li>
       <LineGraphTab
         id="world-confirm-link"
-        api-id="world-confirm"
-        bg-class="none"
         label="感染者数"
-        v-bind:is-active="false"
-        v-bind:on-click="{}"
+        :is-active="false"
+        bg-class="none"
         v-bind:total-persons="totalPersons"
         v-bind:diff-persons="totalDiffs"
       />
@@ -20,11 +18,9 @@
       <li>
       <LineGraphTab
         id="world-death-link"
-        api-id="world-death"
-        bg-class="none"
         label="死亡者数"
-        v-bind:is-active="false"
-        v-bind:on-click="{}"
+        :is-active="false"
+        bg-class="none"
         v-bind:total-persons="totalDeathPersons"
         v-bind:diff-persons="totalDeathDiffs"
       />
@@ -32,11 +28,9 @@
       <li>
       <LineGraphTab
         id="world-recover-link"
-        api-id="world-recover"
-        bg-class="none"
         label="回復者数"
-        v-bind:is-active="false"
-        v-bind:on-click="{}"
+        :is-active="false"
+        bg-class="none"
         v-bind:total-persons="totalRecoverPersons"
         v-bind:diff-persons="totalRecoverDiffs"
       />
@@ -76,8 +70,24 @@ export default {
   mounted() {
     axios.get('http://covid-info.site:8080/api/patient/global/current')
       .then((response) => {
-        this.$forceUpdate();
-        this.$set(this.totalPersons, response.data.data.Confirmed, true);
+        this.totalPersons = response.data.data.Confirmed;
+        this.totalDeathPersons = response.data.data.Deaths;
+        this.totalRecoverPersons = response.data.data.Recovered;
+      });
+
+    axios.get('http://covid-info.site:8080/api/patient/global/growth')
+      .then((response) => {
+        this.totalDiffs = response.data.data.NewConfirmed;
+        this.totalDeathDiffs = response.data.data.NewDeaths;
+        this.totalRecoverDiffs = response.data.data.NewRecovered;
+      });
+
+    axios.get('http://covid-info.site:8080/api/patient/updateTime')
+      .then((response) => {
+        this.updateAt = response.data.data.PatientDataUpdateTime;
+      }).catch(() => {
+        // 暫定的な対応
+        this.updateAt = new Date(Date.now() - 864e5);
       });
   },
   components: {

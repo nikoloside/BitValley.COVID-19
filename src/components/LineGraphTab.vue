@@ -1,13 +1,12 @@
 <template>
   <a
-    v-bind:id="id"
-    v-bind:href="`##${apiId}`"
+    :id="tapId"
+    :href="`##${apiId}`"
     role="tab"
-    v-bind:aria-controls="apiId"
-    v-bind:aria-selected="isActive"
+    :aria-controls="apiId"
+    :aria-selected="isActive"
     class="line-graph-tab"
-    v-bind:class="[bgClass, { active: isActive }]"
-    v-on:click="onClick"
+    :class="[bgClass, { active: isActive }]"
   >
     <div class="tab-title">
       {{ label }}
@@ -39,17 +38,16 @@ import equalizeIcon from '../assets/image/equalize_simple.svg';
 
 export default {
   name: 'LineGraphTab',
-  // props: {
-  //   id: String,
-  //   apiId: String,
-  //   bgClass: String,
-  //   label: String,
-  //   isActive: Boolean,
-  //   onClick: Function,
-  //   totalPersons: Number,
-  //   diffPersons: Number,
-  // },
-  props: ['id', 'apiId', 'bgClass', 'label', 'isActive', 'onClick', 'totalPersons', 'diffPersons'],
+  props: {
+    id: String,
+    apiId: String,
+    bgClass: String,
+    label: String,
+    isActive: Boolean,
+    onClick: Function,
+    totalPersons: Number,
+    diffPersons: Number,
+  },
   data() {
     return {
       total: Number(this.totalPersons),
@@ -57,11 +55,12 @@ export default {
     };
   },
   watch: {
-    totalPersons: {
-      handler(val) {
-        this.totalPersons = val;
-      },
-      deep: true,
+    totalPersons() {
+      this.total = Number(this.totalPersons);
+      this.handleClick = this.onClick;
+    },
+    diffPersons() {
+      this.diff = Number(this.diffPersons);
     },
   },
   computed: {
