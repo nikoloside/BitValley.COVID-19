@@ -87,6 +87,7 @@
 
 export default {
   name: 'LineGraph',
+  props: ['lineData'],
   data() {
     return {
       unitCount: 8,
@@ -130,6 +131,13 @@ export default {
         },
       ],
     };
+  },
+  watch: {
+    lineData() {
+      this.infectDatas = this.lineData;
+      this.unitCount = this.lineData.length - 1;
+      this.labelCount = this.lineData.length;
+    },
   },
   computed: {
     graphWidth() {

@@ -82,7 +82,7 @@
       </ul>
     </div>
     <div class="infect-info-graph">
-      <LineGraph/>
+      <LineGraph v-bind:line-data="graphList" />
     </div>
     <p class="additional-info">
       <UpdateAtLabel v-bind:update-at="updateAt" />
@@ -93,7 +93,7 @@
 <script>
 import axios from 'axios';
 import LineGraph from '@/components/LineGraph';
-import LineGraphTab from '@/components/LineGraphTab';
+import LineGraphTab from '@/components/LineGraphTabClickable';
 import UpdateAtLabel from '@/components/UpdateAtLabel';
 import UpdateTimeLabel from '@/components/UpdateTimeLabel';
 
@@ -128,6 +128,12 @@ export default {
       newRecovered: 0,
       totalTested: 0,
       newTested: 0,
+      confirmedList: [],
+      recoveredList: [],
+      criticalList: [],
+      testedList: [],
+      deathList: [],
+      graphList: [],
       updateAt: new Date(),
     };
   },
@@ -141,6 +147,45 @@ export default {
         this.totalCritical = data.Critical;
         this.totalTested = data.Tested;
       });
+
+
+    axios.get('https://api.survival-jp.com/api/patient/period')
+      .then((response) => {
+        this.confirmedList = [];
+        this.recoveredList = [];
+        this.testedList = [];
+        this.deathList = [];
+        this.criticalList = [];
+        response.data.data.forEach((patientByDate) => {
+          const dead = {
+            date: patientByDate.Date,
+            count: Number(patientByDate.Dead),
+          };
+          this.deathList.push(dead);
+          const recovered = {
+            date: patientByDate.Date,
+            count: Number(patientByDate.Recovered),
+          };
+          this.recoveredList.push(recovered);
+          const critical = {
+            date: patientByDate.Date,
+            count: Number(patientByDate.Critical),
+          };
+          this.criticalList.push(critical);
+          const tested = {
+            date: patientByDate.Date,
+            count: Number(patientByDate.Tested),
+          };
+          this.testedList.push(tested);
+          const confirmed = {
+            date: patientByDate.Date,
+            count: Number(patientByDate.Confirmed),
+          };
+          this.confirmedList.push(confirmed);
+        });
+        this.graphList = this.confirmedList;
+      });
+
 
     axios.get('https://api.survival-jp.com/api/patient/updateTime')
       .then((response) => {
@@ -172,21 +217,27 @@ export default {
   },
   methods: {
     onConfirmTabClick() {
+      this.graphList = this.confirmedList;
       this.activeTab = TAB.CONFIRM;
     },
     onDeathTabClick() {
+      this.graphList = this.deathList;
       this.activeTab = TAB.DEATH;
     },
     onRecoverTabClick() {
+      this.graphList = this.recoveredList;
       this.activeTab = TAB.RECOVER;
     },
     onNoneConfirmTabClick() {
+      this.graphList = this.deathList;
       this.activeTab = TAB.NONECONFIRM;
     },
     onHeavyConfirmTabClick() {
+      this.graphList = this.criticalList;
       this.activeTab = TAB.HEAVYCONFIRM;
     },
     onPCRTestTabClick() {
+      this.graphList = this.testedList;
       this.activeTab = TAB.PCRTEST;
     },
   },
