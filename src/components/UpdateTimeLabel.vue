@@ -18,9 +18,15 @@ export default {
   },
   methods: {
     getDateTimeAttr(time) {
+      if (time.toString() === 'Invalid Date') {
+        return '-';
+      }
       return dayjs(time).toISOString();
     },
     getDateLabel(time) {
+      if (time.toString() === 'Invalid Date') {
+        return '-';
+      }
       return dayjs(time).format('MM月DD日 HH:mm');
     },
   },

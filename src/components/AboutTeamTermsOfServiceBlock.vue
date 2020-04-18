@@ -12,7 +12,7 @@
           v-on:click="onAboutTeamTabLinkClick"
           v-bind:class="{ active: isAboutTeamTabActive }"
         >
-          BitValley-Meliponinae
+          {{ $t("messages.aboutUsTitle") }}
         </a>
       </li>
       <li class="tab-link-wrapper" role="presentation">
@@ -26,7 +26,7 @@
           v-on:click="onTermsOfServiceTabClick"
           v-bind:class="{ active: isTermsOfServiceTabActive }"
         >
-          利用規約
+          {{ $t("messages.rulesTitle") }}
         </a>
       </li>
     </ul>
@@ -39,11 +39,11 @@
       class="tab-panel"
       v-bind:class="{ active: isAboutTeamTabActive }"
     >
-      渋谷で働いているエンジニア・デザイナーチームです。
+      {{ $t("messages.aboutUs1") }}
       <br />
-      世界中に感染拡大が続く新型コロナウイルスに対し、小さくとも何かお力添えいただきたく存じます。
+      {{ $t("messages.aboutUs2") }}
       <br />
-      日本に住む皆様が一刻も早く安心して暮らせるよう、心から願っております。
+      {{ $t("messages.aboutUs3") }}
       <br />
     </p>
     <p
@@ -54,24 +54,23 @@
       class="tab-panel"
       v-bind:class="{ active: isTermsOfServiceTabActive }"
     >
-      <strong>本サイトのデータソースについて</strong>
+      <strong>{{ $t("messages.rulesTitle") }}</strong>
       <br />
-      本サイト感染人数に関するデータは厚生労働省の発表する情報を基に更新しております。
+      {{$t("messages.rulesDataSource1")}}
       <br />
-      本サイト感染症状及び予防対策内容については、日本と中国の政府機関と医療企業が提供する情報を基に更新しております。
+      {{$t("messages.rulesDataSource2")}}
       <br />
-      当サイトでは、速報性よりも信頼性を重要視しますが、情報を迅速にお伝えするために上記に限らず下記の場合により情報を追加編集削除する場合があります。
+      {{$t("messages.rulesDataSource3")}}
       <br />
-      なお、その場合でも上記の一次情報源が公開され次第、可及的速やかに一次情報源との整合性確認ならびに情報源の差替公開を行うものとします。
+      {{$t("messages.rulesDataSource4")}}
       <br />
-      <strong>情報の利用について</strong>
+      <strong>{{$t("messages.rulesUsageTitle")}}</strong>
       <br />
-      本サイトで公開しているすべての情報について、閲覧者は無償でご覧頂くことができます。
+      {{$t("messages.rulesUsage1")}}
       <br />
-      本サイトに掲載されているデータ、感染症状及び予防対策の内容は、全て必ず正しいと限れれません。
-      特に、中国からの感染症状及び予防対策に関する情報は日本での状況に適用できない場合があります。ご参考の際は、ご注意ください。
+      {{$t("messages.rulesUsage2")}}
       <br />
-      本サイトの製作者は利用者が本サイトの情報を用いて行う一切の行為について責任を負うものではありません。
+      {{$t("messages.rulesUsage3")}}
       <br />
       <br />
     </p>

@@ -3,10 +3,10 @@
     <table class="infect-region-table">
       <thead>
         <tr>
-          <th class="region-column">都道府県</th>
+          <th class="region-column">{{ $t("messages.datajapanregion") }}</th>
           <th class="count-graph-column"></th>
-          <th class="count-number-column">感染人数</th>
-          <th class="rate-column">感染率</th>
+          <th class="count-number-column">{{ $t("messages.datajapanconfirm") }}</th>
+          <th class="rate-column">{{ $t("messages.datajapanconfirmrate") }}</th>
         </tr>
       </thead>
       <tbody>
@@ -119,7 +119,7 @@ export default {
   },
   mounted() {
     const dataList = [];
-    axios.get('http://covid-info.site:8080/api/patient/location')
+    axios.get('https://api.survival-jp.com/api/patient/location')
       .then((response) => {
         response.data.data.forEach((region) => {
           if (region.Location !== '不明' && region.Location !== '空港検疫') {

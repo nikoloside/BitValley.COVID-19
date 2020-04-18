@@ -10,14 +10,14 @@
       <div class="section-japan">
         <div id="section-infect" class="section-wrapper wrap-shadow section-infect">
           <div class="section">
-            <div class="section-left" />日本感染情報
+            <div class="section-left" />{{ $t("messages.titlejapan") }}
           </div>
           <InfectNumber></InfectNumber>
         </div>
 
         <div id="section-region" class="section-wrapper wrap-shadow section-region">
           <div class="section">
-            <div class="section-left" />都道府県别感染者数
+            <div class="section-left" />{{ $t("messages.titleregion") }}
           </div>
           <InfectRegion />
         </div>
@@ -25,7 +25,7 @@
 
       <div id="section-world" class="section-wrapper wrap-shadow section-world">
         <div class="section">
-          <div class="section-left" />世界感染情報
+          <div class="section-left" />{{ $t("messages.titleworld") }}
         </div>
         <InfectWorld/>
       </div>
@@ -33,13 +33,13 @@
 
       <div id="section-checkmap" class="section-wrapper wrap-shadow section-checkmap">
         <div class="section">
-          <div class="section-left" />事例チェックマップ
+          <div class="section-left" />{{ $t("messages.titlecheckmap") }}
         </div>
         <CheckMap/>
       </div>
 
       <div id="section-news" class="section section-news">
-        <div class="section-left" />ニュース
+        <div class="section-left" />{{ $t("messages.titlenews") }}
       </div>
       <News></News>
 

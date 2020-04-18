@@ -10,7 +10,7 @@
           id="infect-confirm-link"
           api-id="infect-confirm"
           bg-class="lt"
-          label="感染者数"
+          label="messages.datajapanconfirm"
           v-bind:is-active="isConfirmTabActive"
           v-bind:on-click="onConfirmTabClick"
           v-bind:total-persons= "totalConfirmed"
@@ -22,7 +22,7 @@
           id="infect-death-link"
           api-id="infect-death"
           bg-class="ct"
-          label="死亡者数"
+          label="messages.datajapandeath"
           v-bind:is-active="isDeathTabActive"
           v-bind:on-click="onDeathTabClick"
           v-bind:total-persons= "totalDeaths"
@@ -34,7 +34,7 @@
           id="infect-recover-link"
           api-id="infect-recover"
           bg-class="rt"
-          label="回復者数"
+          label="messages.datajapanrecover"
           v-bind:is-active="isRecoverTabActive"
           v-bind:on-click="onRecoverTabClick"
           v-bind:total-persons= "totalRecovered"
@@ -48,10 +48,10 @@
           id="none-confirm-link"
           api-id="none-confirm"
           bg-class="lb"
-          label="無症状感染者数"
+          label="messages.datanoneconfirm"
           v-bind:is-active="isNoneConfirmTabActive"
           v-bind:on-click="onNoneConfirmTabClick"
-          v-bind:total-persons= "1010"
+          v-bind:total-persons= "0"
           v-bind:diff-persons= "0"
         />
         </li>
@@ -60,7 +60,7 @@
           id="heavy-confirm-link"
           api-id="heavy-confirm"
           bg-class="cb"
-          label="重症者数"
+          label="messages.dataheavyconfirm"
           v-bind:is-active="isHeavyConfirmTabActive"
           v-bind:on-click="onHeavyConfirmTabClick"
           v-bind:total-persons= "totalCritical"
@@ -72,7 +72,7 @@
           id="pcr-test-link"
           api-id="pcr-test"
           bg-class="rb"
-          label="PCR検査人数"
+          label="messages.datapcrtest"
           v-bind:is-active="isPCRTestTabActive"
           v-bind:on-click="onPCRTestTabClick"
           v-bind:total-persons= "totalTested"
@@ -132,7 +132,7 @@ export default {
     };
   },
   mounted() {
-    axios.get('http://covid-info.site:8080/api/patient/latest')
+    axios.get('https://api.survival-jp.com/api/patient/latest')
       .then((response) => {
         const data = response.data.data;
         this.totalConfirmed = data.Confirmed;
@@ -142,12 +142,12 @@ export default {
         this.totalTested = data.Tested;
       });
 
-    axios.get('http://covid-info.site:8080/api/patient/updateTime')
+    axios.get('https://api.survival-jp.com/api/patient/updateTime')
       .then((response) => {
-        this.updateAt = response.data.data.PatientDataUpdateTime;
+        this.updateAt = new Date(response.data.data.PatientDataUpdateTime);
       }).catch(() => {
         // 暫定的な対応
-        this.updateAt = new Date(Date.now() - 864e5);
+        this.updateAt = new Date('-');
       });
   },
   computed: {

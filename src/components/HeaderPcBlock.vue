@@ -7,19 +7,16 @@
         <li><a href="#" v-scroll-to="'#section-infect'">
             {{ $t("messages.headerinfectinfo") }}
         </a></li>
+        <li><a href="#" v-scroll-to="'#section-checkmap'">
+            {{ $t("messages.headermap") }}
+        </a></li>
         <li><a href="#" v-scroll-to="'#section-news'">
             {{ $t("messages.headernews") }}
-        </a></li>
-        <li><a href="#" v-scroll-to="'#section-comparison'">
-            {{ $t("messages.headercompare") }}
-        </a></li>
-        <li><a href="#" v-scroll-to="'#section-measure'">
-            {{ $t("messages.headermeasure") }}
         </a></li>
       </div>
       <div class="social flex-container-spacebetween">
         <div class="social-text">
-            シェア
+            {{ $t("messages.headershare") }}
         </div>
         <li>
             <a

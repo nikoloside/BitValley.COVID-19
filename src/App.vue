@@ -48,13 +48,18 @@ export default {
 }
 
 // 这里开始是地图的css
-.marker {
+
+//! check map
+.check-map-marker {
   text-align: center;
   color: white;
   font-size: 16;
   border-radius: 8px;
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.4);
 }
+
+//! world map
+// 左下角注释
 .info {
   padding: 6px 8px;
   font: 14px/16px Arial, Helvetica, sans-serif;
@@ -81,13 +86,16 @@ export default {
     border-radius: 4px;
   }
 }
+// hover弹出窗口
 .custom .leaflet-popup-tip {
   display: none;
 }
 .custom .leaflet-popup-content-wrapper {
   background: #192A3E;
-  opacity: 0.6;
+  opacity: 0.8;
   border-radius: 4px;
+  padding: 0;
+  margin: 0;
 }
 .world-content {
   display: flex;
@@ -95,6 +103,7 @@ export default {
   align-items: center;
   flex-direction: column;
   color: $color-white;
+  padding: 4px;
 }
 .world-country {
   @include noto-font-001em(12px, 500);
@@ -103,5 +112,10 @@ export default {
 .world-data {
   @include poppins-font-001em(8px, 500);
   color: $color-white;
+  text-align: left;
+}
+
+.invisible-map-marker {
+  display: none;
 }
 </style>

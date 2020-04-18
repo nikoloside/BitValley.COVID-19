@@ -91,7 +91,7 @@ export default {
 
     .language-button{
       position: absolute;
-      top: -350px;
+      top: -20px;
       transition: all .3s ease;
       -webkit-transition: all .3s ease;
       padding-top: 3vh;
@@ -104,16 +104,21 @@ export default {
       box-shadow: 0px 6px 36px #E8ECF2;
       border-radius: 4px;
       z-index: $z-index-button;
-      display: flex;
       align-items: center;
       justify-content: center;
       color: #828E9F;
+      pointer-events: none;
+      display: flex;
+      opacity: 0;
     }
     .language-button:hover {
       color: $color-black;
     }
     #toggle:checked ~ .language-button{
       top: 20px;
+      pointer-events: visible;
+      display: flex;
+      opacity: 1;
     }
     #toggle:checked ~ .language-now{
       background: #0452E6;

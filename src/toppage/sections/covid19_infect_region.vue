@@ -30,12 +30,12 @@ export default {
     };
   },
   mounted() {
-    axios.get('http://covid-info.site:8080/api/patient/updateTime')
+    axios.get('https://api.survival-jp.com/api/patient/updateTime')
       .then((response) => {
-        this.updateAt = response.data.data.PatientDataUpdateTime;
+        this.updateAt = new Date(response.data.data.PatientDataUpdateTime);
       }).catch(() => {
         // 暫定的な対応
-        this.updateAt = new Date(Date.now() - 864e5);
+        this.updateAt = new Date('-');
       });
   },
 };

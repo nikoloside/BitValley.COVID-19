@@ -9,16 +9,21 @@
         <div class="spmodal-content" @click="$emit('close')">
           <div class="sp-header-menu">
             <div class="sp-nav">
-              <a href="#" v-scroll-to="'#section-infect'">感染情報</a>
-              <a href="#" v-scroll-to="'#section-news'">ニュース</a>
-              <a href="#" v-scroll-to="'#section-comparison'">症状比較</a>
-              <a href="#" v-scroll-to="'#section-measure'">予防対策</a>
+              <a href="#" v-scroll-to="'#section-infect'">{{ $t("messages.headerinfectinfo") }}</a>
+              <a href="#" v-scroll-to="'#section-checkmap'">{{ $t("messages.headermap") }}</a>
+              <a href="#" v-scroll-to="'#section-news'"> {{ $t("messages.headernews") }}</a>
+            </div>
+          </div>
+          <div class="sp-language flex-container-spacebetween">
+            <div class="sp-language-text">言語設定</div>
+            <div class="sp-language-button">
+              <a>日本語</a><div class="sp-border"></div><a>中文</a>
             </div>
           </div>
           <div class="sp-footer">
             <div class="sp-footer-wrap">
             <div class="sp-footer-text">
-              シェア
+              {{ $t("messages.headershare") }}
             </div>
             <SharePanel />
             <QuestionButton />
@@ -42,6 +47,11 @@ export default {
   components: {
     SharePanel,
     QuestionButton,
+  },
+  data() {
+    return {
+      langIndex: 0,
+    };
   },
   created() {
     window.addEventListener('touchmove',
@@ -202,6 +212,30 @@ export default {
 
   .spmodal-window {
     opacity: 0;
+  }
+}
+// 言語sp
+.sp-language {
+  width: 100%;
+  position: absolute;
+  bottom: 252px;
+  @include noto-font-001em(16px, bold);
+
+  .sp-language-text {
+    padding: 24px;
+    color: $color-white;
+  }
+  .sp-language-button {
+    display: flex;
+    .sp-border {
+      border-radius: 2px;
+      border-left: solid 3px rgba(255, 255, 255, 0.5);
+      margin: 0 16px;
+    }
+    a{
+      color: $color-white;
+    }
+    padding: 24px;
   }
 }
 </style>

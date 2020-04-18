@@ -43,7 +43,7 @@ export default {
   props: ['request', 'title'],
   mounted() {
     this.BoardTitle = this.title;
-    const url = `http://covid-info.site:8080/api/patient/${this.request}`;
+    const url = `https://api.survival-jp.com/api/patient/${this.request}`;
     axios.get(url)
       .then((response) => {
         this.TotalPersons = response.data.data.Current;
