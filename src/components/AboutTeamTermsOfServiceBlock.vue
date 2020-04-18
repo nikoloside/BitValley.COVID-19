@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 <template>
   <div id="AboutTeamTermsOfServiceBlock">
     <ul class="tab-link-list" role="tablist">
@@ -74,12 +75,25 @@
       <br />
       <br />
     </p>
+    <div class="logo-koi">
+      <img src="../assets/image/koi.png"
+        srcset="../assets/image/koi.png 1x,
+             ../assets/image/koi@2x.png 2x"
+     alt="Example image" />
+    </div>
   </div>
 </template>
 
 <script>
 const ABOUT_TEAM_TAB = 'about-team';
 const TERMS_OF_SERVICE_TAB = 'terms-of-service';
+
+const photos = {
+  // eslint-disable-next-line global-require
+  1: require('../assets/image/koi.png'),
+  // eslint-disable-next-line global-require
+  2: require('/assets/image/koi@2x.png'),
+};
 
 export default {
   name: 'AboutTeamTermServiceBlock',
@@ -94,6 +108,9 @@ export default {
     },
     isTermsOfServiceTabActive() {
       return this.activeTab === TERMS_OF_SERVICE_TAB;
+    },
+    photos() {
+      return photos;
     },
   },
   methods: {
