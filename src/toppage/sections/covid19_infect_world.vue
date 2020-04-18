@@ -8,7 +8,7 @@
       <li>
       <LineGraphTab
         id="world-confirm-link"
-        label="感染者数"
+        label="messages.datajapanconfirm"
         :is-active="false"
         bg-class="none"
         v-bind:total-persons="totalPersons"
@@ -18,7 +18,7 @@
       <li>
       <LineGraphTab
         id="world-death-link"
-        label="死亡者数"
+        label="messages.datajapandeath"
         :is-active="false"
         bg-class="none"
         v-bind:total-persons="totalDeathPersons"
@@ -28,7 +28,7 @@
       <li>
       <LineGraphTab
         id="world-recover-link"
-        label="回復者数"
+        label="messages.datajapanrecover"
         :is-active="false"
         bg-class="none"
         v-bind:total-persons="totalRecoverPersons"
@@ -58,12 +58,12 @@ export default {
   data() {
     return {
       // TODO 更新時間を埋める
-      totalPersons: 10000,
-      totalDiffs: 100,
-      totalRecoverPersons: 200,
-      totalRecoverDiffs: 300,
-      totalDeathPersons: 400,
-      totalDeathDiffs: 500,
+      totalPersons: 0,
+      totalDiffs: 0,
+      totalRecoverPersons: 0,
+      totalRecoverDiffs: 0,
+      totalDeathPersons: 0,
+      totalDeathDiffs: 0,
       updateAt: new Date(),
     };
   },
@@ -84,10 +84,10 @@ export default {
 
     axios.get('https://api.survival-jp.com/api/patient/updateTime')
       .then((response) => {
-        this.updateAt = response.data.data.PatientDataUpdateTime;
+        this.updateAt = new Date(response.data.data.PatientDataUpdateTime);
       }).catch(() => {
         // 暫定的な対応
-        this.updateAt = new Date(Date.now() - 864e5);
+        this.updateAt = new Date('-');
       });
   },
   components: {

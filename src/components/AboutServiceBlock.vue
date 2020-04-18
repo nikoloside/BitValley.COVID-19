@@ -14,13 +14,16 @@
     </h3>
 
     <p class="service-description">
-      当サイトは日本における新型コロナウイルスの最新感染情報と日中のコロナウイルスに関する予防対策情報をまとめてお伝えします。
+      {{$t("messages.aboutSite1")}}
       <br />
-      日本で住む方がウイルスの情報をより把握できるようにすることを目的としています。
+      {{$t("messages.aboutSite2")}}
+      <br />
+      {{$t("messages.aboutSite3")}}
+      <br />
     </p>
 
     <div class="share-panel-mobile-wrapper">
-      <h4 class="share-title">シェア</h4>
+      <h4 class="share-title">{{ $t("messages.headershare") }}</h4>
       <SharePanel />
     </div>
   </article>

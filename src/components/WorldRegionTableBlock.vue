@@ -3,11 +3,11 @@
     <table class="world-region-table">
       <thead>
         <tr>
-          <th class="region-column">国・地域</th>
-          <th class="confirm-number-column">感染人数</th>
-          <th class="recover-number-column">回復者数</th>
-          <th class="death-number-column">死亡者数</th>
-          <th class="rate-column">死亡率</th>
+          <th class="region-column">{{ $t("messages.datacountryregion") }}</th>
+          <th class="confirm-number-column">{{ $t("messages.datajapanconfirm") }}</th>
+          <th class="recover-number-column">{{ $t("messages.datajapanrecover") }}</th>
+          <th class="death-number-column">{{ $t("messages.datajapandeath") }}</th>
+          <th class="rate-column">{{ $t("messages.datadeathrate") }}</th>
         </tr>
       </thead>
       <tbody>
@@ -15,11 +15,11 @@
           v-for="(regionData, index) in regionDatas"
           v-bind:key="regionData.region + index"
         >
-          <td class="region-column">{{regionLangName(regionData.region)}}</td>
+          <td class="region-column">{{ $t('messages.' + regionData.region.replace('\'', '')) }}</td>
           <td class="confirm-number-column">{{regionData.confirm.toLocaleString()}}</td>
           <td class="recover-number-column">{{regionData.recover.toLocaleString()}}</td>
           <td class="death-number-column">{{regionData.death.toLocaleString()}}</td>
-          <td class="rate-column">{{Math.ceil(regionData.rate * 10000000) / 100000}}%</td>
+          <td class="rate-column">{{Math.ceil(regionData.rate * 100000) / 1000}}%</td>
         </tr>
       </tbody>
     </table>
@@ -28,119 +28,18 @@
 
 <script>
 import axios from 'axios';
-import countryJson from '../assets/language/country.json';
 
 export default {
   name: 'InfectRegionTableBlock',
   data() {
     return {
-      lang: this.$i18n.locale,
-      countryData: countryJson,
       regionDatas: [
         {
-          region: '東京都',
-          confirm: 1100,
-          recover: 1100,
-          dath: 1100,
-          rate: 0.000125,
-        },
-        {
-          region: '愛知県',
-          confirm: 1100,
-          recover: 1100,
-          dath: 1100,
-          rate: 0.00001689,
-        },
-        {
-          region: '北海道',
-          confirm: 1100,
-          recover: 1100,
-          dath: 1100,
-          rate: 0.00000689,
-        },
-        {
-          region: '大阪府',
-          confirm: 1100,
-          recover: 1100,
-          dath: 1100,
-          rate: 0.00000089,
-        },
-        {
-          region: '神奈川県',
-          confirm: 1100,
-          recover: 1100,
-          dath: 1100,
-          rate: 0.00000009,
-        },
-        {
-          region: 'その他１',
-          confirm: 1100,
-          recover: 1100,
-          dath: 1100,
-          rate: 0.00000009,
-        },
-        {
-          region: 'その他２',
-          confirm: 1100,
-          recover: 1100,
-          dath: 1100,
-          rate: 0.00000009,
-        },
-        {
-          region: 'その他３',
-          confirm: 1100,
-          recover: 1100,
-          dath: 1100,
-          rate: 0.00000009,
-        },
-        {
-          region: 'その他４',
-          confirm: 1100,
-          recover: 1100,
-          dath: 1100,
-          rate: 0.00000009,
-        },
-        {
-          region: 'その他５',
-          confirm: 1100,
-          recover: 1100,
-          dath: 1100,
-          rate: 0.00000009,
-        },
-        {
-          region: 'その他６',
-          confirm: 1100,
-          recover: 1100,
-          dath: 1100,
-          rate: 0.00000009,
-        },
-        {
-          region: 'その他７',
-          confirm: 1100,
-          recover: 1100,
-          dath: 1100,
-          rate: 0.00000009,
-        },
-        {
-          region: 'その他８',
-          confirm: 1100,
-          recover: 1100,
-          dath: 1100,
-          rate: 0.00000009,
-        },
-        {
-          region: 'その他９',
-          confirm: 1100,
-          recover: 1100,
-          dath: 1100,
-          rate: 0.00000009,
-        },
-        {
-          region: '中国居住者',
-          confirm: 1100,
-          recover: 1100,
-          dath: 1100,
-          rate: 0.00000002,
+          region: 'Japan',
+          confirm: 0,
+          recover: 0,
+          death: 0,
+          rate: 0.000,
         },
       ],
     };
@@ -163,37 +62,16 @@ export default {
         // 暫定的な対応
         const data = {
           region: '-',
-          confirm: 0,
-          recover: 0,
-          death: 0,
-          rate: 0.0,
+          confirm: '-',
+          recover: '-',
+          death: '-',
+          rate: '-',
         };
         dataList.push(data);
       });
     this.regionDatas = dataList;
   },
   methods: {
-    regionLangName(name) {
-      let countryName = name;
-      const nameObject = this.countryData[name];
-
-      if (!nameObject) {
-        return name;
-      }
-      switch (this.lang) {
-        case 'ja':
-          countryName = nameObject.ja;
-          break;
-        case 'cn':
-          countryName = nameObject.cn;
-          break;
-        default:
-          countryName = nameObject.ja;
-          break;
-      }
-
-      return countryName;
-    },
   },
   computed: {
     maxCount() {
@@ -233,6 +111,10 @@ $break-point: 480px;
       padding-top: 5px;
       padding-bottom: 5px;
       @include noto-font-001em(16px, bold);
+
+      @media (max-width: $break-point) {
+        @include noto-font-001em(10px, bold);
+      }
     }
 
     tbody td {
@@ -280,6 +162,11 @@ $break-point: 480px;
     padding-left: 8px;
     text-align: left;
     width: 999999px;
+    @media (max-width: $break-point) {
+      @include poppins-font-001em(10px, bold);
+      padding-left: 0;
+      min-width: 60px;
+    }
   }
 
   thead .region-column {
@@ -302,6 +189,7 @@ $break-point: 480px;
 
     @media (max-width: $break-point) {
       @include poppins-font-001em(10px, bold);
+      min-width: 60px;
       text-align: right;
     }
   }
@@ -315,6 +203,7 @@ $break-point: 480px;
     @media (max-width: $break-point) {
       @include poppins-font-001em(10px, normal);
       text-align: right;
+      min-width: 60px;
     }
   }
 
@@ -332,7 +221,7 @@ $break-point: 480px;
 
   tbody .confirm-number-column {
     @media (max-width: $break-point) {
-      min-width: 48px;
+      min-width: 60px;
     }
   }
 
@@ -340,7 +229,7 @@ $break-point: 480px;
   tbody .death-number-column {
     @include poppins-font-001em(16px, normal);
     @media (max-width: $break-point) {
-      min-width: 48px;
+      min-width: 60px;
       @include poppins-font-001em(10px, normal);
     }
   }

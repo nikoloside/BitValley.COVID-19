@@ -7,9 +7,10 @@
 
 
 <script>
+import axios from 'axios';
 import Leaf from 'leaflet';
 import worldJson from '../assets/map/custom.geo.json';
-import countryJson from '../assets/language/country.json';
+import i18n from '../commons/i18n';
 
 // 世界地図の境界線をかす
 const southWest = Leaf.latLng(-89.98155760646617, -180);
@@ -20,23 +21,53 @@ let map;
 let marker;
 let popup;
 let nowfeature;
+let globalDatas;
 
 export default {
   name: 'WorldRegionMap',
   data() {
     return {
-      lang: this.$i18n.locale,
       worldData: worldJson,
-      countryData: countryJson,
-      confirmData:
+      regionDatas: [
         {
-          China: 90000,
-          Japan: 900,
+          region: '日本',
+          confirm: 0,
+          recover: 0,
+          dath: 0,
         },
+      ],
     };
   },
   mounted() {
+    // 基础地图优先初始化
     this.mapCreate();
+    // 数据读取
+    const dataList = [];
+    axios.get('https://api.survival-jp.com/api/patient/global/country')
+      .then((response) => {
+        response.data.data.forEach((region) => {
+          const data = {
+            region: region.Location,
+            confirm: region.Confirmed,
+            recover: region.Recovered,
+            death: region.Deaths,
+          };
+          dataList.push(data);
+        });
+        // 数据读取完了之后绘图
+        this.mapDraw();
+      }).catch(() => {
+        // 暫定的な対応
+        const data = {
+          region: '-',
+          confirm: '-',
+          recover: '-',
+          death: '-',
+        };
+        dataList.push(data);
+      });
+    this.regionDatas = dataList;
+    globalDatas = dataList;
   },
   methods: {
     // 指标调色板
@@ -76,8 +107,16 @@ export default {
     },
     // FillColorの色を生成
     style(feature) {
+      const valObj = [];
+      let count = 0;
+      this.regionDatas.forEach((regionData) => {
+        if (regionData.region === feature.properties.name) valObj.push(regionData.confirm);
+      });
+      if (valObj.length > 0) {
+        count = valObj[0];
+      }
       return {
-        fillColor: this.getColor(this.confirmData[feature.properties.name]),
+        fillColor: this.getColor(count),
         weight: 0,
         opacity: 0,
         color: 'white',
@@ -124,27 +163,36 @@ export default {
             marker.setLatLng(event.latlng);
             if (!popup.isOpen()) {
               let country = '未知言語';
-              switch (this.lang) {
-                case 'ja':
-                  country = countryJson[feature.properties.name].ja;
-                  break;
-                case 'cn':
-                  country = countryJson[feature.properties.name].cn;
-                  break;
-                default:
-                  country = countryJson[feature.properties.name].ja;
-                  break;
+              // eslint-disable-next-line prefer-template
+              country = i18n.t('messages.' + feature.properties.name.replace('\'', ''));
+
+              let countryObj = {
+                region: '-',
+                confirm: '-',
+                recover: '-',
+                death: '-',
+              };
+              const valObj = [];
+              globalDatas.forEach((regionData) => {
+                if (regionData.region === feature.properties.name) valObj.push(regionData);
+              });
+              if (valObj.length > 0) {
+                countryObj = valObj[0];
               }
 
               let div = '<div class="world-content">';
               // eslint-disable-next-line prefer-template
               div = div + '<div class="world-country">' + country + '</div>';
               // eslint-disable-next-line prefer-template
-              div = div + '<div class="world-data">感染者数:' + country + '</div>';
+              div += '<div class="world-data-wrap">';
               // eslint-disable-next-line prefer-template
-              div = div + '<div class="world-data">死亡者数:' + country + '</div>';
+              div = div + '<div class="world-data">' + i18n.t('messages.datajapanconfirm') + ': ' + countryObj.confirm.toLocaleString() + '</div>';
               // eslint-disable-next-line prefer-template
-              div = div + '<div class="world-data">回復者数:' + country + '</div>';
+              div = div + '<div class="world-data">' + i18n.t('messages.datajapandeath') + ': ' + countryObj.death.toLocaleString() + '</div>';
+              // eslint-disable-next-line prefer-template
+              div = div + '<div class="world-data">' + i18n.t('messages.datajapanrecover') + ': ' + countryObj.recover.toLocaleString() + '</div>';
+              // eslint-disable-next-line prefer-template
+              div += '</div>';
               // eslint-disable-next-line prefer-template
               div += '</div>';
 
@@ -155,7 +203,58 @@ export default {
           }
         },
         mouseout: this.resetHighlight,
-        // click: this.highlightFeature,
+        click: function click(event) {
+          layer.setStyle({
+            weight: 0,
+            opacity: 0,
+            dashArray: '',
+            fillColor: '#0452E6',
+            fillOpacity: 0.7,
+          });
+          if (!Leaf.Browser.ie && !Leaf.Browser.opera && !Leaf.Browser.edge) {
+            layer.bringToFront();
+            marker.setLatLng(event.latlng);
+            if (!popup.isOpen()) {
+              let country = '未知言語';
+              // eslint-disable-next-line prefer-template
+              country = i18n.t('messages.' + feature.properties.name.replace('\'', ''));
+
+              let countryObj = {
+                region: '-',
+                confirm: '-',
+                recover: '-',
+                death: '-',
+              };
+              const valObj = [];
+              globalDatas.forEach((regionData) => {
+                if (regionData.region === feature.properties.name) valObj.push(regionData);
+              });
+              if (valObj.length > 0) {
+                countryObj = valObj[0];
+              }
+
+              let div = '<div class="world-content">';
+              // eslint-disable-next-line prefer-template
+              div = div + '<div class="world-country">' + country + '</div>';
+              // eslint-disable-next-line prefer-template
+              div += '<div class="world-data-wrap">';
+              // eslint-disable-next-line prefer-template
+              div = div + '<div class="world-data">' + i18n.t('messages.datajapanconfirm') + ': ' + countryObj.confirm.toLocaleString() + '</div>';
+              // eslint-disable-next-line prefer-template
+              div = div + '<div class="world-data">' + i18n.t('messages.datajapandeath') + ': ' + countryObj.death.toLocaleString() + '</div>';
+              // eslint-disable-next-line prefer-template
+              div = div + '<div class="world-data">' + i18n.t('messages.datajapanrecover') + ': ' + countryObj.recover.toLocaleString() + '</div>';
+              // eslint-disable-next-line prefer-template
+              div += '</div>';
+              // eslint-disable-next-line prefer-template
+              div += '</div>';
+
+              // eslint-disable-next-line prefer-template
+              popup.setContent(div);
+              map.openPopup(popup);
+            }
+          }
+        },
       });
     },
     // マップオブジェクト生成
@@ -170,6 +269,8 @@ export default {
       }).addLayer(
         Leaf.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png'),
       );
+    },
+    mapDraw() {
       // 実際JSONを描く
       geojson = Leaf.geoJson(this.worldData, {
         style: this.style,
@@ -182,14 +283,20 @@ export default {
       // create popup contents
       const customPopup = '';
       const customOptions = {
-        minWidth: '74',
         minHeight: '68',
         closeButton: false,
         className: 'custom',
       };
       popup = Leaf.popup(customOptions).setContent(customPopup);
       // markerとpopup
-      marker = Leaf.marker(Leaf.latLng(35.6825, 139.752778)).addTo(map)
+
+      const iconc = Leaf.divIcon({
+        className: 'invisible-map-marker',
+        html: "<div'></div>",
+        iconSize: [0, 0],
+        iconAnchor: [0, 0],
+      });
+      marker = Leaf.marker([35.6825, 139.752778], { icon: iconc }).addTo(map)
         .bindPopup(popup);
     },
   },

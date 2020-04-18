@@ -36,7 +36,7 @@ export default {
         Leaf.marker(
           p.latlng,
           {
-            icon: Leaf.divIcon({ className: 'red marker', iconSize: [60, 60] }),
+            icon: Leaf.divIcon({ className: 'check-map-marker', iconSize: [60, 60] }),
           },
         ),
       ),

@@ -1,6 +1,6 @@
 <template>
   <a
-    :id="tapId"
+    :id="id"
     :href="`##${apiId}`"
     role="tab"
     :aria-controls="apiId"
@@ -9,7 +9,7 @@
     :class="[bgClass, { active: isActive }]"
   >
     <div class="tab-title">
-      {{ label }}
+      {{ $t(label) }}
     </div>
 
     <div class="tab-number">
@@ -113,7 +113,7 @@ export default {
   text-align: center;
 }
 .tab-number {
-  @include noto-font-001em(24px, bold);
+  @include noto-font-001em(20px, bold);
   color: $color-black;
   text-align: center;
   margin:2px 0;
@@ -178,6 +178,7 @@ export default {
     border-radius: 0px 0px 12px 0px;
     background: transparent;
     cursor: default;
+    pointer-events: none;
 
     &:hover {
       background: transparent;

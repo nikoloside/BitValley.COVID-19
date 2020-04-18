@@ -2,7 +2,7 @@
     <div id="question_button">
         <a href="mailto:bitvalley.meliponinae@gmail.com">
             <div class="text_button">
-                {{ msg }}
+                {{ $t("messages.headerquestionbutton") }}
             </div>
         </a>
     </div>

@@ -28,7 +28,7 @@ export default {
       newsData: [
         {
           title: '-',
-          url: 'http://covid-info.site/',
+          url: '/',
         },
       ],
       index: 0,
@@ -46,8 +46,14 @@ export default {
           };
           list.push(data);
         });
+        this.newsData = list;
+      }).catch(() => {
+        // 暫定的な対応
+        list.push({
+          title: '-',
+          url: '/',
+        });
       });
-    this.newsData = list;
   },
   methods: {
     calcIndex(val) {

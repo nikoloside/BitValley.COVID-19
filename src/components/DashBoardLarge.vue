@@ -122,7 +122,7 @@ export default {
   data() {
     return {
       BoardTitle: '日本感染人数',
-      TotalPersons: 1010,
+      TotalPersons: 0,
       DiffPersons: 0,
 
       unitCount: 6,

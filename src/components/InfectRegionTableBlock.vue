@@ -3,10 +3,10 @@
     <table class="infect-region-table">
       <thead>
         <tr>
-          <th class="region-column">都道府県</th>
+          <th class="region-column">{{ $t("messages.datajapanregion") }}</th>
           <th class="count-graph-column"></th>
-          <th class="count-number-column">感染人数</th>
-          <th class="rate-column">感染率</th>
+          <th class="count-number-column">{{ $t("messages.datajapanconfirm") }}</th>
+          <th class="rate-column">{{ $t("messages.datajapanconfirmrate") }}</th>
         </tr>
       </thead>
       <tbody>
