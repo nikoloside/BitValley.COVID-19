@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 <template>
   <div id="AboutTeamTermsOfServiceBlock">
     <ul class="tab-link-list" role="tablist">

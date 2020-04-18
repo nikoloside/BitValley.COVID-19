@@ -51,9 +51,17 @@ export default {
 #CheckMap{
     width:100%;
     height:60vw;
-    max-height:70vh;
+    max-height:75vh;
     margin-top: 24px;
     border-radius: 12px;
+
+    @media (max-width: $breakpoint-pc) {
+      height: 90vh;
+    }
+
+    @media (max-width: $breakpoint-sp) {
+      height: 100vh;
+    }
 }
 #map {
   width: 100%;

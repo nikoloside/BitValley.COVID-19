@@ -17,7 +17,15 @@
           <div class="sp-language flex-container-spacebetween">
             <div class="sp-language-text">言語設定</div>
             <div class="sp-language-button">
-              <a>日本語</a><div class="sp-border"></div><a>中文</a>
+              <a
+                v-on:click="onChangeToJapanese"
+                v-bind:class="{ active: isLangJapanese }"
+              >日本語</a>
+              <div class="sp-border"></div>
+              <a
+                v-on:click="onChangeToChinese"
+                v-bind:class="{ active: isLangChinese }"
+              >中文</a>
             </div>
           </div>
           <div class="sp-footer">
@@ -28,7 +36,7 @@
             <SharePanel />
             <QuestionButton />
             <div class="sp-close-button">
-              × 閉じる
+              × {{$t("messages.headerclose")}}
             </div>
             </div>
           </div>
@@ -60,6 +68,22 @@ export default {
   destroyed() {
     window.removeEventListener('touchmove',
       event.preventDefault);
+  },
+  computed: {
+    isLangJapanese() {
+      return this.$i18n.locale === 'ja';
+    },
+    isLangChinese() {
+      return this.$i18n.locale === 'cn';
+    },
+  },
+  methods: {
+    onChangeToJapanese() {
+      this.$i18n.locale = 'ja';
+    },
+    onChangeToChinese() {
+      this.$i18n.locale = 'cn';
+    },
   },
 };
 </script>
@@ -233,7 +257,12 @@ export default {
       margin: 0 16px;
     }
     a{
-      color: $color-white;
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.5);
+      &:hover,
+      &.active {
+        color: $color-white;
+      }
     }
     padding: 24px;
   }
