@@ -164,7 +164,7 @@ export default {
             if (!popup.isOpen()) {
               let country = '未知言語';
               // eslint-disable-next-line prefer-template
-              country = i18n.t('messages.' + feature.properties.name.replace('\'', ''));
+              country = i18n.t('messages.' + feature.properties.name.replace('\'', '').replace('.', ''));
 
               let countryObj = {
                 region: '-',
@@ -217,7 +217,7 @@ export default {
             if (!popup.isOpen()) {
               let country = '未知言語';
               // eslint-disable-next-line prefer-template
-              country = i18n.t('messages.' + feature.properties.name.replace('\'', ''));
+              country = i18n.t('messages.' + feature.properties.name.replace('\'', '').replace('.', ''));
 
               let countryObj = {
                 region: '-',

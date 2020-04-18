@@ -8,8 +8,13 @@
         srcset="../assets/image/logo@2x.png"
       />
 
-      <div class="share-panel-desktop-wrapper">
-        <SharePanel />
+      <div class="footer-desktop-wrapper">
+        <div class="share-panel-desktop-wrapper">
+          <SharePanel />
+        </div>
+        <div class="question-button-desktop-wrapper">
+          <QuestionButton />
+        </div>
       </div>
     </h3>
 
@@ -31,10 +36,11 @@
 
 <script>
 import SharePanel from '@/components/SharePanel';
+import QuestionButton from '@/components/QuestionButton';
 
 export default {
   name: 'AboutServiceBlock',
-  components: { SharePanel },
+  components: { SharePanel, QuestionButton },
 };
 </script>
 
@@ -52,13 +58,29 @@ $break-point: 480px;
     display: none;
   }
 
-  @media (max-width: $break-point) {
+  .footer-desktop-wrapper {
+    display: flex;
+  }
+
+  .share-panel-desktop-wrapper {
+    margin-right: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: $breakpoint-sp) {
     padding: 30px 16px;
 
+    .footer-desktop-wrapper {
+      display: none;
+    }
+  }
+
+  @media (max-width: $breakpoint-pc) {
     .share-panel-desktop-wrapper {
       display: none;
     }
-
     .share-panel-mobile-wrapper {
       display: block;
     }

@@ -189,6 +189,12 @@ export default {
   }
 }
 
+.section-checkmap {
+  .section {
+    margin-left: 0;
+  }
+}
+
 .additional-topinfo {
   @include noto-font-001em(14px, bold);
   padding: 0;
