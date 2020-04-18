@@ -22,6 +22,7 @@ let marker;
 let popup;
 let nowfeature;
 let globalDatas;
+let lastfeature;
 
 export default {
   name: 'WorldRegionMap',
@@ -204,6 +205,10 @@ export default {
         },
         mouseout: this.resetHighlight,
         click: function click(event) {
+          if (lastfeature) {
+            geojson.resetStyle(lastfeature);
+          }
+          lastfeature = event.target;
           layer.setStyle({
             weight: 0,
             opacity: 0,
