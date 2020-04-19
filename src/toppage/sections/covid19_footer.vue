@@ -58,6 +58,8 @@ export default {
     padding-bottom: 40px;
     img {
       margin-bottom: 4px;
+      width: 68px;
+      height: auto;
     }
     .logo-koi-title {
       @include poppins-font-001em(12px, bold);

@@ -9,8 +9,8 @@
 import 'leaflet/dist/leaflet.css';
 import Leaf from 'leaflet';
 
-const southWest = Leaf.latLng(-89.98155760646617, -180);
-const northEast = Leaf.latLng(89.99346179538875, 180);
+const southWest = Leaf.latLng(20.6825, 119.752778);
+const northEast = Leaf.latLng(50.6825, 159.752778);
 const bounds = Leaf.latLngBounds(southWest, northEast);
 
 export default {
@@ -22,13 +22,13 @@ export default {
   mounted() {
     const map = Leaf.map('map', {
       center: Leaf.latLng(35.6825, 139.752778),
-      zoom: 15,
-      minZoom: 1,
-      maxZoom: 15,
+      zoom: 13,
+      minZoom: 5,
+      maxZoom: 13,
       maxBounds: bounds,
       maxBoundsViscosity: 1.0,
     }).addLayer(
-      Leaf.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png'),
+      Leaf.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png'),
     );
     map.on(
       'click',
@@ -36,7 +36,7 @@ export default {
         Leaf.marker(
           p.latlng,
           {
-            icon: Leaf.divIcon({ className: 'check-map-marker', iconSize: [60, 60] }),
+            icon: Leaf.divIcon({ className: 'check-map-marker', iconSize: [12, 12] }),
           },
         ),
       ),

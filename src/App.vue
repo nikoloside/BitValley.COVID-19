@@ -51,11 +51,28 @@ export default {
 
 //! check map
 .check-map-marker {
-  text-align: center;
-  color: white;
-  font-size: 16;
-  border-radius: 8px;
-  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.4);
+  border-radius: 24px;
+  border-radius: 50%;
+  background-color: $color-red;
+  border:1px solid $color-red;
+  box-shadow: 0px 0px 0px 12px rgba(237, 84, 76, 0.15);
+  animation-name: anim01;
+  animation-duration: 1s;
+  animation-iteration-count : infinite;
+}
+@keyframes anim01 {
+    from {
+      box-shadow: 0px 0px 0px 0px rgba(237, 84, 76, 0.15);
+    }
+    30% {
+      box-shadow: 0px 0px 0px 12px rgba(237, 84, 76, 0.15);
+    }
+    50% {
+      box-shadow: 0px 0px 0px 12px rgba(237, 84, 76, 0.15);
+    }
+    to {
+      box-shadow: 0px 0px 0px 0px rgba(237, 84, 76, 0.15);
+    }
 }
 
 //! world map
