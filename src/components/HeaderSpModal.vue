@@ -36,7 +36,8 @@
             <SharePanel />
             <QuestionButton />
             <div class="sp-close-button">
-              × {{$t("messages.headerclose")}}
+              <div class="remove icon" />
+              {{$t("messages.headerclose")}}
             </div>
             </div>
           </div>
@@ -186,6 +187,8 @@ export default {
     }
     .sp-close-button {
       @include poppins-font-001em(13px, 500);
+      position: relative;
+      cursor: pointer;
     }
     img{
       width: 100px;
@@ -267,4 +270,35 @@ export default {
     padding: 24px;
   }
 }
+
+.remove.icon {
+  display: inline-block;
+  color: #000;
+  position: absolute;
+  margin-left: 3px;
+  margin-top: 10px;
+  left: -20px;
+  top: -1px;
+}
+
+.remove.icon:before {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 1px;
+  background-color: currentColor;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.remove.icon:after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 1px;
+  background-color: currentColor;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
 </style>
