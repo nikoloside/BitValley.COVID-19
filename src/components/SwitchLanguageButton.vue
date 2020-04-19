@@ -8,7 +8,7 @@
                 <div class="language-downer"/>
             </label>
         </div>
-        <input type="checkbox" id="toggle">
+        <input type="checkbox" v-model="checkboxModel" id="toggle">
         <div class="language-button" v-on:click.prevent="clickNextLang()">
             <div class="language-button-text">
                  {{ getNextLang() }}
@@ -22,6 +22,7 @@ export default {
   name: 'SwitchLanguageButton',
   data() {
     return {
+      checkboxModel: false,
     };
   },
   methods: {
@@ -36,6 +37,7 @@ export default {
       }
     },
     clickNextLang() {
+      this.checkboxModel = false;
       switch (this.$i18n.locale) {
         case 'ja':
           this.$i18n.locale = 'cn';

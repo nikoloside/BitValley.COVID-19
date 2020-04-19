@@ -133,6 +133,13 @@ $break-point: 960px;
     }
   }
 
+  @media (max-width: $breakpoint-sp) {
+    .newsList {
+      max-height: 999999px;
+      height: auto;
+    }
+  }
+
   .newsItem {
     display: flex;
     margin: 24px 24px 24px 0;

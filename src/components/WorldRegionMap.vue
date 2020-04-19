@@ -22,6 +22,7 @@ let marker;
 let popup;
 let nowfeature;
 let globalDatas;
+let lastfeature;
 
 export default {
   name: 'WorldRegionMap',
@@ -121,7 +122,7 @@ export default {
         opacity: 0,
         color: 'white',
         dashArray: '',
-        fillOpacity: 0.7,
+        fillOpacity: 1.0,
       };
     },
     // MoverOver的event的样式
@@ -156,7 +157,7 @@ export default {
             opacity: 0,
             dashArray: '',
             fillColor: '#0452E6',
-            fillOpacity: 0.7,
+            fillOpacity: 1.0,
           });
           if (!Leaf.Browser.ie && !Leaf.Browser.opera && !Leaf.Browser.edge) {
             layer.bringToFront();
@@ -204,12 +205,16 @@ export default {
         },
         mouseout: this.resetHighlight,
         click: function click(event) {
+          if (lastfeature) {
+            geojson.resetStyle(lastfeature);
+          }
+          lastfeature = event.target;
           layer.setStyle({
             weight: 0,
             opacity: 0,
             dashArray: '',
             fillColor: '#0452E6',
-            fillOpacity: 0.7,
+            fillOpacity: 1.0,
           });
           if (!Leaf.Browser.ie && !Leaf.Browser.opera && !Leaf.Browser.edge) {
             layer.bringToFront();
@@ -265,10 +270,8 @@ export default {
         minZoom: 1,
         maxZoom: 4,
         maxBounds: bounds,
-        maxBoundsViscosity: 1.0,
-      }).addLayer(
-        Leaf.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png'),
-      );
+        maxBoundsViscosity: 5.0,
+      });
     },
     mapDraw() {
       // 実際JSONを描く

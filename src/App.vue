@@ -50,12 +50,159 @@ export default {
 // 这里开始是地图的css
 
 //! check map
-.check-map-marker {
-  text-align: center;
-  color: white;
-  font-size: 16;
-  border-radius: 8px;
-  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.4);
+.check-map-red {
+  border-radius: 50%;
+  background-color: $color-red;
+  border:1px solid $color-red;
+  box-shadow: 0px 0px 0px 12px rgba(237, 84, 76, 0.15);
+  animation-name: anim01;
+  animation-duration: 1s;
+  animation-iteration-count : infinite;
+
+  &-press {
+    border-radius: 50%;
+    background-color: $color-white;
+    border:1px solid $color-white;
+    box-shadow: 0px 0px 0px 12px rgba(237, 84, 76, 0.15);
+    animation-name: anim01;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    position: relative;
+
+    .virus {
+      position: absolute;
+      top: -35px;
+      left: -18px;
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+      background-image: url("./assets/image/map/virus@2x.png");
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+.check-map-green {
+  border-radius: 50%;
+  background-color: $color-green;
+  border:1px solid $color-green;
+  box-shadow: 0px 0px 0px 12px rgba(49, 217, 165, 0.5);
+  animation-name: anim02;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+
+  &-press {
+    border-radius: 50%;
+    background-color: $color-white;
+    border:1px solid $color-white;
+    box-shadow: 0px 0px 0px 12px rgba(49, 217, 165, 0.5);
+    animation-name: anim02;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    position: relative;
+
+    .virus {
+      position: absolute;
+      top: -35px;
+      left: -18px;
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+      background-image: url("./assets/image/map/recover@2x.png");
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+@keyframes anim01 {
+    from {
+      box-shadow: 0px 0px 0px 0px rgba(237, 84, 76, 0.15);
+    }
+    30% {
+      box-shadow: 0px 0px 0px 12px rgba(237, 84, 76, 0.15);
+    }
+    50% {
+      box-shadow: 0px 0px 0px 12px rgba(237, 84, 76, 0.15);
+    }
+    to {
+      box-shadow: 0px 0px 0px 0px rgba(237, 84, 76, 0.15);
+    }
+}
+@keyframes anim02 {
+    from {
+      box-shadow: 0px 0px 0px 0px rgba(49, 217, 165, 0.5);
+    }
+    30% {
+      box-shadow: 0px 0px 0px 12px rgba(49, 217, 165, 0.5);
+    }
+    50% {
+      box-shadow: 0px 0px 0px 12px rgba(49, 217, 165, 0.5);
+    }
+    to {
+      box-shadow: 0px 0px 0px 0px rgba(49, 217, 165, 0.5);
+    }
+}
+
+// click弹出窗口popup
+.checkmappopup .leaflet-popup-content-wrapper,
+.checkmappopup .leaflet-popup-tip-container {
+  position: relative;
+  top: -24px;
+}
+
+.checkmappopup .leaflet-popup-tip,
+.checkmappopup .leaflet-popup-content-wrapper {
+  background: $color-white;
+  /* card shadow */
+  box-shadow: 0px 6px 36px #E8ECF2;
+  border-radius: 4px;
+}
+
+.checkmap-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  color: $color-white;
+  padding: 4px;
+}
+.checkmap-id {
+  @include poppins-font-001em(12px, bold);
+  color: $color-black;
+  margin-bottom: 8px;
+}
+.checkmap-main {
+  @include noto-font-001em(12px, bold);
+  color: $color-black;
+  text-align: left;
+  margin-bottom: 8px;
+}
+.checkmap-sub {
+  @include noto-font-001em(12px, 500);
+  color: $color-gray;
+  text-align: left;
+  margin-bottom: 8px;
+}
+.checkmap-connecttitle {
+  @include poppins-font-001em(12px, bold);
+  color: $color-black;
+  text-align: left;
+}
+.checkmap-connecttext {
+  @include poppins-font-001em(12px, bold);
+  color: $color-pink;
+  text-align: left;
+  margin-bottom: 8px;
+}
+.checkmap-now {
+  @include noto-font-001em(12px, bold);
+  color: $color-black;
+  text-align: left;
+}
+.checkmap-status {
+  @include noto-font-001em(12px, bold);
+  text-align: left;
+  margin-bottom: 8px;
 }
 
 //! world map
@@ -86,7 +233,7 @@ export default {
     border-radius: 4px;
   }
 }
-// hover弹出窗口
+// hover弹出窗口popup
 .custom .leaflet-popup-tip {
   display: none;
 }
