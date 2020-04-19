@@ -51,8 +51,8 @@
           label="messages.datanoneconfirm"
           v-bind:is-active="isNoneConfirmTabActive"
           v-bind:on-click="onNoneConfirmTabClick"
-          v-bind:total-persons= "0"
-          v-bind:diff-persons= "0"
+          v-bind:total-persons= "symptomless"
+          v-bind:diff-persons= "newSymptomless"
         />
         </li>
         <li>
@@ -128,6 +128,8 @@ export default {
       newRecovered: 0,
       totalTested: 0,
       newTested: 0,
+      symptomless: 0,
+      newSymptomless: 0,
       confirmedList: [],
       recoveredList: [],
       criticalList: [],
@@ -142,10 +144,17 @@ export default {
       .then((response) => {
         const data = response.data.data;
         this.totalConfirmed = data.Confirmed;
+        this.newConfirmed = data.NewConfirmed;
         this.totalDeaths = data.Dead;
+        this.newDeaths = data.NewDead;
         this.totalRecovered = data.Recovered;
+        this.newRecovered = data.NewRecovered;
         this.totalCritical = data.Critical;
+        this.newCritical = data.NewCritical;
         this.totalTested = data.Tested;
+        this.newTested = data.NewTested;
+        this.symptomless = data.Symptomless;
+        this.newSymptomless = data.NewSymptomless;
       });
 
 
