@@ -54,8 +54,8 @@
 import SwitchLanguageButton from '@/components/SwitchLanguageButton';
 import clipboard from 'clipboard-polyfill';
 
-const SHARE_URL = 'http://covid-info.site/';
-const SHARE_TEXT = '「さよならコロナ」1分で新型コロナウイルスのリアルタイム情報をまとめて見るサイト #さよならコロナ #covid19 #新型肺炎 #新型コロナウイルス対策まとめ';
+const SHARE_URL = 'https://survival-jp.com';
+const SHARE_TEXT = '「さよならコロナ」1分で新型コロナウイルスのリアルタイム情報をまとめて感染事例チェックマップ #感染事例チェックマップ #さよならコロナ #covid19 #新型肺炎 #新型コロナウイルス対策まとめ';
 
 export default {
   name: 'HeaderPcBlock',

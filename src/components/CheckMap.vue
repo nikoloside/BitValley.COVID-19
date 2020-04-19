@@ -128,7 +128,7 @@ export default {
     watchChange() {
       const center = map.getCenter();
       const zoomLevel = map.getZoom();
-      if (!this.loading && (zoomLevel > 8) && map.distance(center, this.localLatLng) > 15000) {
+      if (!this.loading && (zoomLevel >= 8) && map.distance(center, this.localLatLng) > 15000) {
         this.loadData(zoomLevel <= 8);
         this.localLatLng = center;
         return;
