@@ -49,7 +49,7 @@ export default {
     background-image:url('../assets/image/logo.png');
     background-size: 100%;
     background-repeat: no-repeat;
-    width: 227px;
+    width: 217px;
     height: 36px;
     position: absolute;
     top: 18px;
