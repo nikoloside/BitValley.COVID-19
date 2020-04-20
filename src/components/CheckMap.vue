@@ -114,11 +114,11 @@ export default {
         center: this.localLatLng,
         zoom: this.zoomLevel,
         minZoom: 5,
-        maxZoom: 12,
+        maxZoom: 15,
         maxBounds: bounds,
         maxBoundsViscosity: 1.0,
       }).addLayer(
-        Leaf.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png'),
+        Leaf.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'),
       );
       map.on({
         zoomend: this.watchChange,
@@ -126,16 +126,19 @@ export default {
       });
     },
     watchChange() {
+      const borderZoom = 8.5;
       const center = map.getCenter();
       const zoomLevel = map.getZoom();
-      if (!this.loading && (zoomLevel >= 8) && map.distance(center, this.localLatLng) > 15000) {
-        this.loadData(zoomLevel <= 8);
-        this.localLatLng = center;
+      if (!this.loading && (zoomLevel - borderZoom) * (zoomOrigin - borderZoom) < 0) {
+        this.loadData(zoomLevel < borderZoom);
+        zoomOrigin = zoomLevel;
         return;
       }
-      if (!this.loading && (zoomLevel - 8) * (zoomOrigin - 8) < 0) {
-        this.loadData(zoomLevel <= 8);
-        zoomOrigin = zoomLevel;
+      if (!this.loading &&
+      (zoomLevel > borderZoom) &&
+      map.distance(center, this.localLatLng) > 15000) {
+        this.loadData(zoomLevel < borderZoom);
+        this.localLatLng = center;
       }
     },
     resetMarkers() {
