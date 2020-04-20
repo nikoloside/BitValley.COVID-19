@@ -48,7 +48,8 @@
             </svg>
             <div class="today-circle"
             v-bind:style="{
-              right:`${50 / infectDatas.length - 2}%`,
+              display:`${infectDatas[infectDatas.length-1]===0 ? 'none':'block'}`,
+              right:`${50 / infectDatas.length-1}%`,
               top: `${100 - infectDatas[infectDatas.length-1].count
               / units[0] * 100 - 3}%` }">
             </div>
@@ -61,7 +62,11 @@
               height: `${label / units[0] * 100}%`,
               left:`${100 / labelsCount.length * index}%`}"
             >
-                <div class="infect-count">{{ label }}</div>
+                <div class="infect-count">
+                  <div class="infect-count-title">
+                    {{labelsDate[index]}}{{$t("messages.datajapanconfirm")}}
+                  </div>
+                  {{ label }}</div>
             </div>
         </div>
 
@@ -95,39 +100,39 @@ export default {
       infectDatas: [
         {
           date: '-',
-          count: 0,
+          count: 1,
         },
         {
           date: '-',
-          count: 20,
+          count: 1,
         },
         {
           date: '-',
-          count: 50,
+          count: 1,
         },
         {
           date: '-',
-          count: 100,
+          count: 1,
         },
         {
           date: '-',
-          count: 150,
+          count: 1,
         },
         {
           date: '-',
-          count: 200,
+          count: 1,
         },
         {
           date: '-',
-          count: 250,
+          count: 1,
         },
         {
           date: '-',
-          count: 190,
+          count: 1,
         },
         {
           date: '-',
-          count: 200,
+          count: 1,
         },
       ],
     };
@@ -135,7 +140,6 @@ export default {
   watch: {
     lineData() {
       this.infectDatas = this.lineData;
-      this.unitCount = this.lineData.length - 1;
       this.labelCount = this.lineData.length;
     },
   },
@@ -218,7 +222,7 @@ export default {
   max-width: 960px;
   min-height: 230px;
   width: 100%;
-  height: 100%;
+  height: 278px;
   display: grid;
   grid-template-rows: 90% 24px;
   grid-template-columns:  18px  95%;
@@ -260,8 +264,8 @@ export default {
 
     .today-circle {
         position: absolute;
-        width: 6px;
-        height: 6px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
         border: solid 3px $color-navy;
         background-color:#fff;
@@ -273,29 +277,38 @@ export default {
       border-radius: 0px 0px 0px 0px;
       cursor: pointer;
 
+      &:active,
+      &:focus,
       &:hover {
         .infect-count {
-            opacity: 1;
+            opacity: 0.6;
         }
       }
     }
     .infect-count {
-      @include poppins-font(12px, 500);
+      @include poppins-font-001em(12px, 500);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       opacity: 0;
-      position: absolute;
-      width: 46px;
-      height: 24px;
-      top: 0;
+      max-width: 80px;
+      height: 36px;
       transform: translateY(calc(-100% - 8px));
-      background-color: #757F8B;
+      background-color: $color-black;
       color: $color-white;
       text-align: center;
       box-sizing: border-box;
-      padding: 4px 8px;
+      margin: 4px auto;
       border-radius: 15px;
       pointer-events: none;
       transition: opacity .3s ease;
       word-break: break-all;
+      border-radius: 4px;
+      &-title {
+        @include noto-font-001em(8px, 500);
+        width: 70px;
+      }
     }
   }
 
