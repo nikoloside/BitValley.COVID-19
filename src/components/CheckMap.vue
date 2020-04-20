@@ -11,7 +11,7 @@ import Leaf from 'leaflet';
 import axios from 'axios';
 
 const southWest = Leaf.latLng(20.6825, 119.752778);
-const northEast = Leaf.latLng(50.6825, 159.752778);
+const northEast = Leaf.latLng(55.6825, 159.752778);
 const bounds = Leaf.latLngBounds(southWest, northEast);
 const maxPoint = 350;
 let map;
@@ -159,8 +159,8 @@ export default {
         const marker = Leaf.marker(
           Leaf.latLng(patient.Latitude, patient.Longitude),
           {
-            title: classname,
-            id: index,
+            class: classname,
+            title: index,
             icon: Leaf.divIcon({
               className: classname,
               iconSize: [12, 12],
@@ -171,7 +171,7 @@ export default {
             if (lastMarker) {
               lastMarker.setIcon(
                 Leaf.divIcon({
-                  className: lastMarker.options.title,
+                  className: lastMarker.options.class,
                   iconSize: [12, 12],
                   html: '<span class="none" />',
                 }),
@@ -181,12 +181,12 @@ export default {
             event.target.setIcon(
               Leaf.divIcon({
                 // eslint-disable-next-line prefer-template
-                className: event.target.options.title + '-press',
+                className: event.target.options.class + '-press',
                 iconSize: [12, 12],
                 html: '<span class="virus" />',
               }),
             );
-            drawPopup(event.target.options.id);
+            drawPopup(event.target.options.title);
             lastMarker = event.target;
           },
         });
