@@ -101,7 +101,7 @@ export default {
     },
     // setPosition可以被Location替代，也可以被Center替代
     setPosition(position) {
-      this.localLatLng = Leaf.latLng(position.coords.latitude, position.coords.longitude);
+      map.flyTo(Leaf.latLng(position.coords.latitude, position.coords.longitude));
     },
     // getLocationをトリガーに, setPositionが走る, watchが作動する
     getLocation() {
