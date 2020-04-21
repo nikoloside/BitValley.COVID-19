@@ -37,12 +37,12 @@ export default {
   },
   mounted() {
     const list = [];
-    axios.get('https://api.github.com/repos/woshahua/issue_api/issues')
+    axios.get('https://api.survival-jp.com/api/topics')
       .then((response) => {
-        response.data.forEach((news) => {
+        response.data.data.forEach((news) => {
           const data = {
-            title: news.title,
-            url: news.body,
+            title: news.Title,
+            url: news.Body,
           };
           list.push(data);
         });
