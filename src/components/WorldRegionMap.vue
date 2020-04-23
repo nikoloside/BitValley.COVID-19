@@ -7,9 +7,10 @@
 
 
 <script>
-import axios from 'axios';
+import 'leaflet/dist/leaflet.css';
 import Leaf from 'leaflet';
-import worldJson from '../assets/map/custom.geo.json';
+import axios from 'axios';
+import worldJson from '../assets/map/world.geo.json';
 import i18n from '../commons/i18n';
 
 // 世界地図の境界線をかす
@@ -265,12 +266,12 @@ export default {
     // マップオブジェクト生成
     mapCreate() {
       map = Leaf.map('app', {
-        center: Leaf.latLng(35.6825, 139.752778),
+        center: Leaf.latLng(45.6825, 139.752778),
         zoom: 1,
         minZoom: 1,
         maxZoom: 4,
         maxBounds: bounds,
-        maxBoundsViscosity: 5.0,
+        maxBoundsViscosity: 2.0,
       });
     },
     mapDraw() {
