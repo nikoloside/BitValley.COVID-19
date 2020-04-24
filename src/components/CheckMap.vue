@@ -186,7 +186,7 @@ export default {
         maxBounds: bounds,
         maxBoundsViscosity: 1.0,
       }).addLayer(
-        Leaf.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'),
+        Leaf.tileLayer('https://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}'),
       );
       map.on({
         zoomend: this.watchChange,
@@ -433,14 +433,17 @@ export default {
       axios.get('https://api.survival-jp.com/api/patient/tokyo')
         .then((response) => {
           response.data.data.forEach((region) => {
-            const data = {
-              id: region.ID,
-              sum: region.Sum,
-              location: region.Location,
-              updatedAt: region.UpdateTime,
-            };
-            dataList.push(data);
-            tokyoRealSum += region.Sum;
+            if (region.Location !== '都外' &&
+                region.Location !== '調査中') {
+              const data = {
+                id: region.ID,
+                sum: region.Sum,
+                location: region.Location,
+                updatedAt: region.UpdateTime,
+              };
+              dataList.push(data);
+              tokyoRealSum += region.Sum;
+            }
           });
           regionDatas = dataList;
           this.drawTokyo();
