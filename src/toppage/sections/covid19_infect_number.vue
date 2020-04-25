@@ -130,6 +130,7 @@ export default {
       newTested: 0,
       symptomless: 0,
       newSymptomless: 0,
+      symptomlessList: [],
       confirmedList: [],
       recoveredList: [],
       criticalList: [],
@@ -165,6 +166,7 @@ export default {
         this.testedList = [];
         this.deathList = [];
         this.criticalList = [];
+        this.symptomlessList = [];
         response.data.data.forEach((patientByDate) => {
           const dead = {
             date: patientByDate.Date,
@@ -191,6 +193,12 @@ export default {
             count: Number(patientByDate.Confirmed),
           };
           this.confirmedList.push(confirmed);
+
+          const symptomless = {
+            date: patientByDate.Date,
+            count: Number(patientByDate.Symptomless),
+          };
+          this.symptomlessList.push(symptomless);
         });
         this.graphList = this.confirmedList;
       });
@@ -238,7 +246,7 @@ export default {
       this.activeTab = TAB.RECOVER;
     },
     onNoneConfirmTabClick() {
-      this.graphList = this.deathList;
+      this.graphList = this.symptomlessList;
       this.activeTab = TAB.NONECONFIRM;
     },
     onHeavyConfirmTabClick() {
