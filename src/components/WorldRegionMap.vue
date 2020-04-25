@@ -14,6 +14,7 @@ import worldJson from '../assets/map/world.geo.json';
 import i18n from '../commons/i18n';
 
 // 世界地図の境界線をかす
+
 const southWest = Leaf.latLng(-89.98155760646617, -180);
 const northEast = Leaf.latLng(89.99346179538875, 180);
 const bounds = Leaf.latLngBounds(southWest, northEast);
@@ -139,6 +140,21 @@ export default {
       if (!Leaf.Browser.ie && !Leaf.Browser.opera && !Leaf.Browser.edge) {
         layer.bringToFront();
         marker.setLatLng(e.latlng);
+        let popUpOffset = [0, 0];
+        if (event.latlng.lat > 50) {
+          popUpOffset = [0, 130];
+        }
+
+        const popupConf = {
+          offset: popUpOffset,
+          autoPan: false,
+          minHeight: '68',
+          closeButton: false,
+          className: 'custom',
+        };
+        popup = Leaf.popup(popupConf);
+        popup.setLatLng(event.latlng);
+
         if (!popup.isOpen()) {
           popup.setContent(nowfeature.properties.name);
           map.openPopup(popup);
@@ -163,6 +179,22 @@ export default {
           if (!Leaf.Browser.ie && !Leaf.Browser.opera && !Leaf.Browser.edge) {
             layer.bringToFront();
             marker.setLatLng(event.latlng);
+
+            let popUpOffset = [0, 0];
+            if (event.latlng.lat > 50) {
+              popUpOffset = [0, 130];
+            }
+
+            const popupConf = {
+              offset: popUpOffset,
+              autoPan: false,
+              minHeight: '68',
+              closeButton: false,
+              className: 'custom',
+            };
+            popup = Leaf.popup(popupConf);
+            popup.setLatLng(event.latlng);
+
             if (!popup.isOpen()) {
               let country = '未知言語';
               // eslint-disable-next-line prefer-template
@@ -220,6 +252,23 @@ export default {
           if (!Leaf.Browser.ie && !Leaf.Browser.opera && !Leaf.Browser.edge) {
             layer.bringToFront();
             marker.setLatLng(event.latlng);
+
+            let popUpOffset = [0, 0];
+            if (event.latlng.lat > 50) {
+              popUpOffset = [0, 130];
+            }
+
+            const popupConf = {
+              offset: popUpOffset,
+              autoPan: false,
+              minHeight: '68',
+              closeButton: false,
+              className: 'custom',
+            };
+            popup = Leaf.popup(popupConf);
+            popup.setLatLng(event.latlng);
+
+
             if (!popup.isOpen()) {
               let country = '未知言語';
               // eslint-disable-next-line prefer-template
@@ -287,6 +336,7 @@ export default {
       // create popup contents
       const customPopup = '';
       const customOptions = {
+        autoPan: false,
         minHeight: '68',
         closeButton: false,
         className: 'custom',
