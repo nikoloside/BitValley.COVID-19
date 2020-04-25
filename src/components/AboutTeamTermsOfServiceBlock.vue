@@ -55,7 +55,7 @@
       class="tab-panel"
       v-bind:class="{ active: isTermsOfServiceTabActive }"
     >
-      <strong>{{ $t("messages.rulesTitle") }}</strong>
+      <strong>{{ $t("messages.rulesDataSourceTitle") }}</strong>
       <br />
       {{$t("messages.rulesDataSource1")}}
       <br />
@@ -65,6 +65,8 @@
       <br />
       {{$t("messages.rulesDataSource4")}}
       <br />
+      {{$t("messages.rulesDataSource5")}}
+      <br />
       <strong>{{$t("messages.rulesUsageTitle")}}</strong>
       <br />
       {{$t("messages.rulesUsage1")}}
@@ -73,7 +75,29 @@
       <br />
       {{$t("messages.rulesUsage3")}}
       <br />
+      <strong>{{$t("messages.rulesTruthTitle")}}</strong>
       <br />
+      {{$t("messages.rulesTruth1")}}
+      <br />
+      {{$t("messages.rulesTruth2")}}
+      <br />
+      {{$t("messages.rulesTruth3")}}
+      <br />
+      {{$t("messages.rulesTruth4")}}
+      <br />
+      {{$t("messages.rulesTruth5")}}
+      <br />
+      <strong>{{$t("messages.rulesMapTitle")}}</strong>
+      <br />
+      {{$t("messages.rulesMap1")}}
+      <br />
+      {{$t("messages.rulesMap2")}}
+      <br />
+      {{$t("messages.rulesMap3")}}
+      <br />
+      <strong>{{$t("messages.rulesPrivacyTitle")}}</strong>
+      <br />
+      {{$t("messages.rulesPrivacy1")}}
     </p>
   </div>
 </template>

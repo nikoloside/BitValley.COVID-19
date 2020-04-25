@@ -8,7 +8,8 @@ Vue.use(VueI18n);
 const languageMessages = require('../assets/language/messages.json');
 
 export default new VueI18n({
-  locale: 'ja', // デフォルト言語はjaにしておくが、ブラウザの言語を拾ってきてここに入れる => 言語変更されたら書き換える
+  locale: navigator.language.split('-')[0] === 'cn' ? 'cn' : 'ja',
+  fallbackLocale: 'ja',
   messages: languageMessages,
 });
 

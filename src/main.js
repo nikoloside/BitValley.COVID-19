@@ -38,7 +38,7 @@ new Vue({
         { property: 'og:type', content: 'website' },
         { property: 'og:title', content: '「さよならコロナ」感染情報チェックマップ' },
         { property: 'og:url', content: 'https://survival-jp.com' },
-        { property: 'og:image', content: 'https://res.cloudinary.com/df6wesepg/image/upload/v1587212080/OGP_1.2_lrpsex.png' },
+        { property: 'og:image', content: 'https://res.cloudinary.com/df6wesepg/image/upload/v1587817947/OGP_2.1_o1noa1.png' },
         { property: 'og:description', content: '「さよならコロナ」1分で新型コロナウイルスのリアルタイム情報をまとめて感染事例チェックマップ #感染事例チェックマップ #さよならコロナ #covid19 #新型肺炎 #新型コロナウイルス対策まとめ' },
         { property: 'twitter:card', content: 'summary_large_image' },
       ];
