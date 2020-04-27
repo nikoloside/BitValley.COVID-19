@@ -96,7 +96,7 @@ module.exports = {
               data: "@import '@/src/commons/_variables.scss'; ",
               includePaths: [path.resolve(__dirname, '../src/commons/')]
             }
-          }
+          },
         ]
       },
       {
@@ -115,7 +115,20 @@ module.exports = {
             }
           }
         ]
-      }
+      },
+      {
+        test: /\.md$/,
+        exclude: /(node_modules|bower_components)/,
+        use: [
+          'vue-loader',
+          {
+            loader: 'markdown-to-vue-loader',
+            options: {
+                exportSource: true    // この設定でMarkdownのRawデータを読み込めるようにする
+            },
+          },
+        ],
+      },
     ]
   },
   node: {

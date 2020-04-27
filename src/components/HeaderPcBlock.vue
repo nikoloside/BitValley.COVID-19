@@ -1,18 +1,18 @@
 <template>
   <div id="HeaderPcBlock" class="flex-container-spacebetween">
-    <a class="covid19-logo" href='/'>
-    </a>
+    <router-link to="/" class="covid19-logo">
+    </router-link>
     <div class="nav flex-container-spacebetween">
       <div class="nav-link flex-container-spacebetween">
-        <li><a href="#" v-scroll-to="'#section-infect'">
+        <li><router-link to="/info" v-scroll-to="'#section-infect'">
             {{ $t("messages.headerinfectinfo") }}
-        </a></li>
-        <li><a href="#" v-scroll-to="'#section-checkmap'">
+        </router-link></li>
+        <li><router-link to="/map" v-scroll-to="'#section-checkmap'">
             {{ $t("messages.headermap") }}
-        </a></li>
-        <li><a href="#" v-scroll-to="'#section-news'">
+        </router-link></li>
+        <li><router-link to="/news" v-scroll-to="'#section-news'">
             {{ $t("messages.headernews") }}
-        </a></li>
+        </router-link></li>
       </div>
       <div class="social flex-container-spacebetween">
         <div class="social-text">

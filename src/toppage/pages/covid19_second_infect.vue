@@ -25,18 +25,6 @@
     </div>
     </div>
 
-    <div id="section-checkmap" class="section-wrapper wrap-shadow section-checkmap">
-      <div class="section">
-        <div class="section-left" />{{ $t("messages.titlecheckmap") }}
-      </div>
-      <CheckMap/>
-    </div>
-
-    <div id="section-news" class="section section-news">
-      <div class="section-left" />{{ $t("messages.titlenews") }}
-    </div>
-    <News></News>
-
   </div>
 </template>
 
@@ -44,21 +32,16 @@
 import InfectNumber from '@/toppage/sections/covid19_infect_number';
 import InfectRegion from '@/toppage/sections/covid19_infect_region';
 import InfectWorld from '@/toppage/sections/covid19_infect_world';
-import CheckMap from '@/toppage/sections/covid19_check_map';
-import News from '@/toppage/sections/covid19_news';
 
 export default {
-  name: 'TopPage',
+  name: 'SecondInfectPage',
   components: {
     InfectNumber,
     InfectRegion,
     InfectWorld,
-    CheckMap,
-    News,
   },
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
     };
   },
 };
@@ -116,12 +99,6 @@ export default {
   }
 }
 
-.section-checkmap {
-  .section {
-    margin-left: 0;
-  }
-}
-
 .additional-topinfo {
   @include noto-font-001em(14px, bold);
   padding: 0;
@@ -155,27 +132,5 @@ export default {
     @include noto-font-001em(10px, normal);
     margin: 4px 0;
   }
-}
-
-// link的共通样式
-ul {
-  list-style:none;
-}
-
-a {
-  text-decoration: none;
-  color:$color-black;
-  transition: color .3s ease;
-  -webkit-transition: color .3s ease;
-  &.router-link-exact-active {
-    color: $color-black;
-  }
-}
-a:hover{
-    color: $color-blue;
-}
-
-body {
-  margin: 0;
 }
 </style>

@@ -15,7 +15,7 @@
         </time>
 
         <div class="articleWrapper">
-          <a class="newsLink" v-bind:href="news.href" target="_blank">
+          <router-link to="/news/1" class="newsLink" target="_blank">
             <article class="article">
               <h3 class="articleTitle">
                 <span>{{ news.title }}</span>
@@ -31,7 +31,7 @@
               </h3>
               <p class="articleText">{{ news.text }}</p>
             </article>
-          </a>
+          </router-link>
         </div>
       </li>
     </ul>
@@ -109,7 +109,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 @import "@/commons/_variables.scss";
 $news-margin-bottom: 24px;
 $break-point: 960px;

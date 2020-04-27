@@ -4,14 +4,21 @@
       <div class="spmodal-window">
         <div class="spmodal-header">
           <div class="covid19-logo">
+            <router-link to="/"></router-link>
           </div>
         </div>
         <div class="spmodal-content" @click="$emit('close')">
           <div class="sp-header-menu">
             <div class="sp-nav">
-              <a href="#" v-scroll-to="'#section-infect'">{{ $t("messages.headerinfectinfo") }}</a>
-              <a href="#" v-scroll-to="'#section-checkmap'">{{ $t("messages.headermap") }}</a>
-              <a href="#" v-scroll-to="'#section-news'"> {{ $t("messages.headernews") }}</a>
+              <router-link to="/info" v-scroll-to="'#section-infect'">
+                {{ $t("messages.headerinfectinfo") }}
+              </router-link>
+              <router-link to="/map" v-scroll-to="'#section-checkmap'">
+                {{ $t("messages.headermap") }}
+              </router-link>
+              <router-link to="/news" v-scroll-to="'#section-news'">
+                {{ $t("messages.headernews") }}
+              </router-link>
             </div>
           </div>
           <div class="sp-language flex-container-spacebetween">
