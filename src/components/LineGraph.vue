@@ -140,7 +140,6 @@ export default {
   watch: {
     lineData() {
       this.infectDatas = this.lineData;
-      this.labelCount = this.lineData.length;
     },
   },
   computed: {
