@@ -1,5 +1,8 @@
 <template>
-  <div id="HeaderPcBlock" class="flex-container-spacebetween">
+  <div id="HeaderPcBlock"
+  class="flex-container-spacebetween"
+   v-bind:class="scrollY === true ? 'header-height-scroll' : 'header-height-top'"
+  >
     <router-link to="/" class="covid19-logo">
     </router-link>
     <div class="nav flex-container-spacebetween">
@@ -64,7 +67,7 @@ export default {
   },
   data() {
     return {
-      scrollY: true,
+      scrollY: 0,
     };
   },
   computed: {
@@ -87,7 +90,7 @@ export default {
     },
     handleScroll() {
       // Any code to be executed when the window is scrolled
-      this.scrollY = window.scrollY > window.innerHeight + 20;
+      this.scrollY = window.scrollY > 90;
     },
   },
   created() {
@@ -108,7 +111,6 @@ export default {
   z-index:$z-index-header;
   // width
   width: 100%;
-  height: 112px;
   // fixed
   position: fixed;
   top: 0px;
@@ -200,7 +202,6 @@ export default {
   }
 
   @media (max-width: $breakpoint-pc) {
-    height: 130px;
 
     .covid19-logo {
         position: absolute;
@@ -272,6 +273,22 @@ export default {
     a:hover::after {
       width: 100%;
     }
+  }
+}
+
+.header-height-top {
+  height: 112px;
+  transition: 0.3s all ease 0s;
+  @media (max-width: $breakpoint-pc) {
+    height: 130px;
+  }
+}
+
+.header-height-scroll {
+  height: 74px;
+  transition: 0.3s all ease 0s;
+  @media (max-width: $breakpoint-pc) {
+    height: 130px;
   }
 }
 </style>

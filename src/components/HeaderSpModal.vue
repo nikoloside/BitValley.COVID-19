@@ -155,7 +155,7 @@ export default {
           z-index: $z-index-over;
         }
         a:hover{
-            color: $color-blue;
+            color: rgba(255, 255, 255, 0.5);
         }
         a::after {
           border-bottom: solid 4px $color-white;
