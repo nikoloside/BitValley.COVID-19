@@ -24,8 +24,10 @@ export default {
   name: 'Articles',
   components: { ArticleItemBlock },
   created() {
-    if (articles.news.length > 1 && articles.news[0].uid === '1') {
-      articles.news.reverse();
+    if (articles.articles.length > 1 && articles.articles[0].uid === '1') {
+      articles.articles.reverse();
+    } else {
+      articles.articles = [];
     }
   },
   data() {

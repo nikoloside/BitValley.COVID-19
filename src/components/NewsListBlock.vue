@@ -15,8 +15,8 @@
         </time>
 
         <div class="articleWrapper">
-          <router-link
-          :to="{name: 'newsdetail', params: {id: news.id}}"
+          <a
+          v-bind:href="news.href"
           class="newsLink"
           >
             <article class="article">
@@ -34,7 +34,7 @@
               </h3>
               <p class="articleText">{{ isLangJapanese ? news.textja : news.textcn }}</p>
             </article>
-          </router-link>
+          </a>
         </div>
       </li>
     </ul>
@@ -90,7 +90,7 @@ export default {
         titlecn: news.titlecn,
         textja: news.descriptionja,
         textcn: news.descriptioncn,
-        href: news.Link,
+        href: news.link,
       };
       dataList.push(data);
     });
@@ -314,6 +314,7 @@ $break-point: 960px;
 
   .newsLink {
     display: block;
+    cursor: pointer;
 
     &:hover {
       .linkArrow path {

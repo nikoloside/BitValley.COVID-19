@@ -6,9 +6,9 @@
         <div class="icon-pickup-title">PICKUP</div>
       </div>
       <div class="icon-pickup-text">
-        <router-link :to="newsData[index].url">
+        <a v-bind:href="newsData[index].url">
           {{ $i18n.locale === 'ja' ? newsData[index].titleja : newsData[index].titlecn}}
-        </router-link>
+        </a>
       </div>
       <div class="scroll-bar">
         <div class="scroll-upper" v-on:click="calcIndex(-1)"/>
@@ -59,7 +59,7 @@ export default {
         titleja: news.titleja,
         titlecn: news.titlecn,
         // eslint-disable-next-line prefer-template
-        url: '/news/' + news.uid,
+        url: news.link,
       };
       list.push(data);
     });
