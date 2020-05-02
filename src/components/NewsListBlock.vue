@@ -15,10 +15,13 @@
         </time>
 
         <div class="articleWrapper">
-          <a class="newsLink" v-bind:href="news.href" target="_blank">
+          <router-link
+          :to="{name: 'newsdetail', params: {id: news.id}}"
+          class="newsLink"
+          >
             <article class="article">
               <h3 class="articleTitle">
-                <span>{{ news.title }}</span>
+                <span>{{ isLangJapanese ? news.titleja : news.titlecn }}</span>
                 <svg class="linkArrow" width="7" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M1 1.333L5.667 6 1 10.667"
@@ -29,9 +32,9 @@
                   />
                 </svg>
               </h3>
-              <p class="articleText">{{ news.text }}</p>
+              <p class="articleText">{{ isLangJapanese ? news.textja : news.textcn }}</p>
             </article>
-          </a>
+          </router-link>
         </div>
       </li>
     </ul>
@@ -41,18 +44,58 @@
 </template>
 
 <script>
-import axios from 'axios';
 import dayjs from 'dayjs';
+// 新news服务器做出来之前先变成从本地获取更新
+// import axios from 'axios';
+import newsList from '@/assets/news/news.json';
 
 export default {
   name: 'NewsList',
   data() {
     return {
       newsDatas: [],
+      newsCount: this.$route.name === 'news' ? 99999 : 5,
+      newsArray: newsList.news,
     };
+  },
+  created() {
+    if (newsList.news.length > 1 && newsList.news[0].uid === '1') {
+      newsList.news.reverse();
+    }
   },
   mounted() {
     const dataList = [];
+
+    // 新news服务器做出来之前先变成从本地获取更新
+    this.newsCount = Math.min(this.newsCount, newsList.news.length);
+    // 5個のパターンと無限個のパターンあり
+    let count = -1;
+    this.newsArray.forEach((news) => {
+      count += 1;
+      if (count >= this.newsCount) {
+        return;
+      }
+      let publishTime = dayjs().subtract(news.passedMinutes, 'minute').toISOString();
+      if (news.passedMinutes > 60) {
+        if (news.passedHour > 24) {
+          publishTime = dayjs().subtract(news.passedDay, 'day').toISOString();
+        }
+        publishTime = dayjs().subtract(news.passedHour, 'hour').toISOString();
+      }
+
+      const data = {
+        id: news.uid,
+        publishAt: publishTime,
+        titleja: news.titleja,
+        titlecn: news.titlecn,
+        textja: news.descriptionja,
+        textcn: news.descriptioncn,
+        href: news.Link,
+      };
+      dataList.push(data);
+    });
+
+    /* 新news服务器出来之前先从前端更新
     axios.get('https://api.survival-jp.com/api/news?number=20')
       .then((response) => {
         response.data.data.forEach((news) => {
@@ -74,7 +117,13 @@ export default {
           dataList.push(data);
         });
       });
+      */
     this.newsDatas = dataList;
+  },
+  computed: {
+    isLangJapanese() {
+      return this.$i18n.locale === 'ja';
+    },
   },
   methods: {
     getISOString(publishAt) {
@@ -109,7 +158,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 @import "@/commons/_variables.scss";
 $news-margin-bottom: 24px;
 $break-point: 960px;
@@ -119,8 +168,10 @@ $break-point: 960px;
   margin-top: 24px;
 
   .newsList {
-    max-height: 600px;
+    // max-height: 600px;
     overflow: scroll;
+    max-height: 999999px;
+
     list-style: none;
     text-align: left;
     padding: 0;
@@ -129,7 +180,8 @@ $break-point: 960px;
 
   @media (max-width: $break-point) {
     .newsList {
-      max-height: 850px;
+      // max-height: 850px;
+      max-height: 999999px;
     }
   }
 

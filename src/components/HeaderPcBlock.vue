@@ -1,18 +1,21 @@
 <template>
-  <div id="HeaderPcBlock" class="flex-container-spacebetween">
-    <a class="covid19-logo" href='/'>
-    </a>
+  <div id="HeaderPcBlock"
+  class="flex-container-spacebetween"
+   v-bind:class="scrollY === true ? 'header-height-scroll' : 'header-height-top'"
+  >
+    <router-link to="/" v-scroll-to="'#covid19-pickup'" class="covid19-logo">
+    </router-link>
     <div class="nav flex-container-spacebetween">
       <div class="nav-link flex-container-spacebetween">
-        <li><a href="#" v-scroll-to="'#section-infect'">
+        <li><router-link to="/info" v-scroll-to="'#section-infect'">
             {{ $t("messages.headerinfectinfo") }}
-        </a></li>
-        <li><a href="#" v-scroll-to="'#section-checkmap'">
+        </router-link></li>
+        <li><router-link to="/map" v-scroll-to="'#section-checkmap'">
             {{ $t("messages.headermap") }}
-        </a></li>
-        <li><a href="#" v-scroll-to="'#section-news'">
+        </router-link></li>
+        <li><router-link to="/news" v-scroll-to="'#covid19-article'">
             {{ $t("messages.headernews") }}
-        </a></li>
+        </router-link></li>
       </div>
       <div class="social flex-container-spacebetween">
         <div class="social-text">
@@ -35,11 +38,11 @@
             />
         </li>
         <li>
-            <button
-                aria-label="URLをコピーする"
-                type="button"
-                class="link-copy-button"
-                v-on:click="onLinkCopyButtonClick"
+            <a
+                aria-label="Weiboでシェアする"
+                class="weibo"
+                target="_blank"
+                v-bind:href="weiboShareUrl"
             />
         </li>
       </div>
@@ -52,10 +55,10 @@
 
 <script>
 import SwitchLanguageButton from '@/components/SwitchLanguageButton';
-import clipboard from 'clipboard-polyfill';
 
 const SHARE_URL = 'https://survival-jp.com';
 const SHARE_TEXT = '「さよならコロナ」1分で新型コロナウイルスのリアルタイム情報をまとめて感染事例チェックマップ #感染事例チェックマップ #さよならコロナ #covid19 #新型肺炎 #新型コロナウイルス対策まとめ';
+const SHARE_PIC = 'https://res.cloudinary.com/df6wesepg/image/upload/v1587817947/OGP_2.1_o1noa1.png';
 
 export default {
   name: 'HeaderPcBlock',
@@ -64,7 +67,7 @@ export default {
   },
   data() {
     return {
-      scrollY: true,
+      scrollY: 0,
     };
   },
   computed: {
@@ -78,16 +81,16 @@ export default {
         new URLSearchParams([['u', SHARE_URL]])
       }`;
     },
+    weiboShareUrl() {
+      return `http://service.weibo.com/share/share.php?${
+        new URLSearchParams([['url', SHARE_URL], ['title', SHARE_TEXT]], ['pic', SHARE_PIC])
+      }`;
+    },
   },
   methods: {
-    async onLinkCopyButtonClick() {
-      await clipboard.writeText(SHARE_URL);
-      // eslint-disable-next-line no-alert
-      alert('URLをコピーしました');
-    },
     handleScroll() {
       // Any code to be executed when the window is scrolled
-      this.scrollY = window.scrollY > window.innerHeight + 20;
+      this.scrollY = window.scrollY > 90;
     },
   },
   created() {
@@ -108,7 +111,6 @@ export default {
   z-index:$z-index-header;
   // width
   width: 100%;
-  height: 112px;
   // fixed
   position: fixed;
   top: 0px;
@@ -154,24 +156,12 @@ export default {
         -webkit-mask-image: url('../assets/image/facebook.svg');
         mask-image: url('../assets/image/facebook.svg');
       }
-      .link-copy-button {
-        display: block;
-        width: 30px;
-        height: 30px;
-        background-color: $color-black;
-        -webkit-mask-size: cover;
-        mask-size: cover;
-        transition: background-color .3s ease;
-
-        &:hover {
-        background-color: $color-blue;
-        }
-        -webkit-mask-image: url('../assets/image/sharelink.svg');
-        mask-image: url('../assets/image/sharelink.svg');
-        border: none;
-        padding: 0;
-        cursor: pointer;
-        appearance: none;
+      .weibo {
+        width: 24px;
+        height: 24px;
+        -webkit-mask-image: url('../assets/image/weibolink.svg');
+        mask-image: url('../assets/image/weibolink.svg');
+        mask-size: contain;
       }
       .nav-link {
         width: 100%;
@@ -200,7 +190,6 @@ export default {
   }
 
   @media (max-width: $breakpoint-pc) {
-    height: 130px;
 
     .covid19-logo {
         position: absolute;
@@ -272,6 +261,22 @@ export default {
     a:hover::after {
       width: 100%;
     }
+  }
+}
+
+.header-height-top {
+  height: 112px;
+  transition: 0.3s all ease 0s;
+  @media (max-width: $breakpoint-pc) {
+    height: 130px;
+  }
+}
+
+.header-height-scroll {
+  height: 74px;
+  transition: 0.3s all ease 0s;
+  @media (max-width: $breakpoint-pc) {
+    height: 130px;
   }
 }
 </style>

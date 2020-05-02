@@ -3,14 +3,14 @@
     <h3 class="about-service-header">
       <img
         class="service-logo"
-        alt="新型コロナウイルス対策"
+        alt="「さよならコロナ」新型コロナウイルス事例チェックマップ"
         src="../assets/image/logo.png"
         srcset="../assets/image/logo@2x.png"
       />
 
       <div class="footer-desktop-wrapper">
         <div class="share-panel-desktop-wrapper">
-          <SharePanel />
+          <ShareFivePanel />
         </div>
         <div class="question-button-desktop-wrapper">
           <QuestionButton />
@@ -29,18 +29,19 @@
 
     <div class="share-panel-mobile-wrapper">
       <h4 class="share-title">{{ $t("messages.headershare") }}</h4>
-      <SharePanel />
+      <ShareFivePanel />
     </div>
   </article>
 </template>
 
 <script>
 import SharePanel from '@/components/SharePanel';
+import ShareFivePanel from '@/components/ShareFivePanel';
 import QuestionButton from '@/components/QuestionButton';
 
 export default {
   name: 'AboutServiceBlock',
-  components: { SharePanel, QuestionButton },
+  components: { SharePanel, ShareFivePanel, QuestionButton },
 };
 </script>
 

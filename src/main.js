@@ -20,6 +20,7 @@ new Vue({
   el: '#app',
   i18n,
   router,
+  render: h => h(App),
   components: { App },
   template: '<App/>',
   head: {
@@ -49,4 +50,4 @@ new Vue({
       this.$i18n.locale = lang;
     },
   },
-});
+}).$mount('#app');

@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <PickUp></PickUp>
+  <div class="page-container">
     <div class="section-dashboard">
     <div class="section-japan">
       <div id="section-infect" class="section-wrapper wrap-shadow section-infect">
@@ -26,47 +25,23 @@
     </div>
     </div>
 
-    <div id="section-checkmap" class="section-wrapper wrap-shadow section-checkmap">
-      <div class="section">
-        <div class="section-left" />{{ $t("messages.titlecheckmap") }}
-      </div>
-      <CheckMap/>
-    </div>
-
-    <div id="section-news" class="section section-news">
-      <div class="section-left" />{{ $t("messages.titlenews") }}
-    </div>
-    <News></News>
-    <div class="section-readmore">
-      <router-link class="newsReadmore" to="/news" v-scroll-to="'#covid19-article'">
-        {{ $t("messages.newsreadmore") }}
-      </router-link>
-    </div>
-
   </div>
 </template>
 
 <script>
-import PickUp from '@/toppage/sections/covid19_pickup';
 import InfectNumber from '@/toppage/sections/covid19_infect_number';
 import InfectRegion from '@/toppage/sections/covid19_infect_region';
 import InfectWorld from '@/toppage/sections/covid19_infect_world';
-import CheckMap from '@/toppage/sections/covid19_check_map';
-import News from '@/toppage/sections/covid19_news';
 
 export default {
-  name: 'TopPage',
+  name: 'SecondInfectPage',
   components: {
-    PickUp,
     InfectNumber,
     InfectRegion,
     InfectWorld,
-    CheckMap,
-    News,
   },
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
     };
   },
 };
@@ -124,12 +99,6 @@ export default {
   }
 }
 
-.section-checkmap {
-  .section {
-    margin-left: 0;
-  }
-}
-
 .additional-topinfo {
   @include noto-font-001em(14px, bold);
   padding: 0;
@@ -162,37 +131,6 @@ export default {
   @media (max-width: $breakpoint-sp) {
     @include noto-font-001em(10px, normal);
     margin: 4px 0;
-  }
-}
-
-.section-readmore {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-
-  .newsReadmore {
-    width: 115px;
-    height: 42px;
-    margin-bottom: 48px;
-    padding: 18px 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    @include noto-font-001em(14px, bold);
-    line-height: 200%;
-    color: $color-gray;
-
-    border: 2px solid $color-gray;
-    box-sizing: border-box;
-    border-radius: 22px;
-    transition: color 0.3 ease;
-    transition: all 0.3 ease;
-    &:hover {
-        color: $color-lightgray;
-        border: 2px solid $color-lightgray;
-    }
   }
 }
 </style>

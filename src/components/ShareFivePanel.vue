@@ -24,10 +24,28 @@
         v-bind:href="weiboShareUrl"
       />
     </li>
+    <li>
+      <a
+        aria-label="Wechatでシェアする"
+        class="wechat-share"
+        target="_blank"
+        v-bind:href="wechatShareUrl"
+      />
+    </li>
+    <li>
+      <button
+        aria-label="URLをコピーする"
+        type="button"
+        class="link-copy-button"
+        v-on:click="onLinkCopyButtonClick"
+      />
+    </li>
   </ul>
 </template>
 
 <script>
+import clipboard from 'clipboard-polyfill';
+
 const SHARE_URL = 'https://survival-jp.com';
 const SHARE_TEXT = '「さよならコロナ」1分で新型コロナウイルスのリアルタイム情報をまとめて感染事例チェックマップ #感染事例チェックマップ #さよならコロナ #covid19 #新型肺炎 #新型コロナウイルス対策まとめ';
 const SHARE_PIC = 'https://res.cloudinary.com/df6wesepg/image/upload/v1587817947/OGP_2.1_o1noa1.png';
@@ -50,6 +68,18 @@ export default {
         new URLSearchParams([['u', SHARE_URL], ['title', SHARE_TEXT], ['pic', SHARE_PIC]])
       }`;
     },
+    wechatShareUrl() {
+      return `https://www.addtoany.com/ext/wechat/share/#${
+        new URLSearchParams([['url', SHARE_URL]])
+      }`;
+    },
+  },
+  methods: {
+    async onLinkCopyButtonClick() {
+      await clipboard.writeText(SHARE_URL);
+      // eslint-disable-next-line no-alert
+      alert('URLをコピーしました');
+    },
   },
 };
 </script>
@@ -71,7 +101,9 @@ export default {
 
   .twitter-share,
   .facebook-share,
-  .weibo-share {
+  .weibo-share,
+  .wechat-share,
+  .link-copy-button {
     display: block;
     width: 30px;
     height: 30px;
@@ -98,6 +130,20 @@ export default {
   .weibo-share {
     -webkit-mask-image: url('../assets/image/weibolink.svg');
     mask-image: url('../assets/image/weibolink.svg');
+  }
+
+  .wechat-share {
+    -webkit-mask-image: url('../assets/image/wechatlink.svg');
+    mask-image: url('../assets/image/wechatlink.svg');
+  }
+
+  .link-copy-button {
+    -webkit-mask-image: url('../assets/image/sharelink.svg');
+    mask-image: url('../assets/image/sharelink.svg');
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
   }
 }
 </style>

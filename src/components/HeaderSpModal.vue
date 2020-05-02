@@ -2,20 +2,26 @@
   <transition name="spmodal" appear>
     <div class="spmodal spmodal-overlay">
       <div class="spmodal-window">
-        <div class="spmodal-header">
-          <div class="covid19-logo">
-          </div>
+        <div class="spmodal-header" @click="$emit('close')">
+          <router-link to="/" v-scroll-to="'#covid19-pickup'" class="covid19-logo">
+          </router-link>
         </div>
         <div class="spmodal-content" @click="$emit('close')">
           <div class="sp-header-menu">
             <div class="sp-nav">
-              <a href="#" v-scroll-to="'#section-infect'">{{ $t("messages.headerinfectinfo") }}</a>
-              <a href="#" v-scroll-to="'#section-checkmap'">{{ $t("messages.headermap") }}</a>
-              <a href="#" v-scroll-to="'#section-news'"> {{ $t("messages.headernews") }}</a>
+              <router-link to="/info" v-scroll-to="'#section-infect'">
+                {{ $t("messages.headerinfectinfo") }}
+              </router-link>
+              <router-link to="/map" v-scroll-to="'#section-checkmap'">
+                {{ $t("messages.headermap") }}
+              </router-link>
+              <router-link to="/news" v-scroll-to="'#covid19-article'">
+                {{ $t("messages.headernews") }}
+              </router-link>
             </div>
           </div>
           <div class="sp-language flex-container-spacebetween">
-            <div class="sp-language-text">言語設定</div>
+            <div class="sp-language-text">{{ $t("messages.headerswitchlang") }}</div>
             <div class="sp-language-button">
               <a
                 v-on:click="onChangeToJapanese"
@@ -148,7 +154,7 @@ export default {
           z-index: $z-index-over;
         }
         a:hover{
-            color: $color-blue;
+            color: rgba(255, 255, 255, 0.5);
         }
         a::after {
           border-bottom: solid 4px $color-white;
