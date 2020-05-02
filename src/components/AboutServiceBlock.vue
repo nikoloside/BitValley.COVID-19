@@ -3,7 +3,7 @@
     <h3 class="about-service-header">
       <img
         class="service-logo"
-        alt="新型コロナウイルス対策"
+        alt="「さよならコロナ」新型コロナウイルス事例チェックマップ"
         src="../assets/image/logo.png"
         srcset="../assets/image/logo@2x.png"
       />

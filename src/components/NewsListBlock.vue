@@ -15,10 +15,13 @@
         </time>
 
         <div class="articleWrapper">
-          <router-link to="/news/1" class="newsLink" target="_blank">
+          <router-link
+          :to="{name: 'newsdetail', params: {id: news.id}}"
+          class="newsLink"
+          >
             <article class="article">
               <h3 class="articleTitle">
-                <span>{{ news.title }}</span>
+                <span>{{ isLangJapanese ? news.titleja : news.titlecn }}</span>
                 <svg class="linkArrow" width="7" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M1 1.333L5.667 6 1 10.667"
@@ -29,7 +32,7 @@
                   />
                 </svg>
               </h3>
-              <p class="articleText">{{ news.text }}</p>
+              <p class="articleText">{{ isLangJapanese ? news.textja : news.textcn }}</p>
             </article>
           </router-link>
         </div>
@@ -41,8 +44,10 @@
 </template>
 
 <script>
-import axios from 'axios';
 import dayjs from 'dayjs';
+// 新news服务器做出来之前先变成从本地获取更新
+// import axios from 'axios';
+import newsList from '@/assets/news/news.json';
 
 export default {
   name: 'NewsList',
@@ -53,6 +58,30 @@ export default {
   },
   mounted() {
     const dataList = [];
+
+    // 新news服务器做出来之前先变成从本地获取更新
+    newsList.news.forEach((news) => {
+      let publishTime = dayjs().subtract(news.passedMinutes, 'minute').toISOString();
+      if (news.passedMinutes > 60) {
+        if (news.passedHour > 24) {
+          publishTime = dayjs().subtract(news.passedDay, 'day').toISOString();
+        }
+        publishTime = dayjs().subtract(news.passedHour, 'hour').toISOString();
+      }
+
+      const data = {
+        id: news.uid,
+        publishAt: publishTime,
+        titleja: news.titleja,
+        titlecn: news.titlecn,
+        textja: news.descriptionja,
+        textcn: news.descriptioncn,
+        href: news.Link,
+      };
+      dataList.push(data);
+    });
+
+    /* 新news服务器出来之前先从前端更新
     axios.get('https://api.survival-jp.com/api/news?number=20')
       .then((response) => {
         response.data.data.forEach((news) => {
@@ -74,7 +103,13 @@ export default {
           dataList.push(data);
         });
       });
+      */
     this.newsDatas = dataList;
+  },
+  computed: {
+    isLangJapanese() {
+      return this.$i18n.locale === 'ja';
+    },
   },
   methods: {
     getISOString(publishAt) {

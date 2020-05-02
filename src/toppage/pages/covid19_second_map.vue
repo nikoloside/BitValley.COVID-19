@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-container">
     <div id="section-checkmap" class="section-wrapper wrap-shadow section-checkmap">
       <div class="section">
         <div class="section-left" />{{ $t("messages.titlecheckmap") }}

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-container">
     <div class="section-dashboard">
     <div class="section-japan">
       <div id="section-infect" class="section-wrapper wrap-shadow section-infect">

@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 <template>
   <div id="WorldRegionMap">
-      <div id='app'></div>
+      <div id='appmap'></div>
   </div>
 </template>
 
@@ -314,7 +314,7 @@ export default {
     },
     // マップオブジェクト生成
     mapCreate() {
-      map = Leaf.map('app', {
+      map = Leaf.map('appmap', {
         center: Leaf.latLng(45.6825, 139.752778),
         zoom: 1,
         minZoom: 1,
@@ -366,7 +366,7 @@ export default {
     margin-top: 24px;
     border-radius: 12px;
 }
-#app {
+#appmap {
   width: 100%;
   height: 100%;
   border-radius: 12px;

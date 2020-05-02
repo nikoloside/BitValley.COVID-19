@@ -1,5 +1,6 @@
 <template>
   <div>
+    <PickUp></PickUp>
     <div class="section-dashboard">
     <div class="section-japan">
       <div id="section-infect" class="section-wrapper wrap-shadow section-infect">
@@ -41,6 +42,7 @@
 </template>
 
 <script>
+import PickUp from '@/toppage/sections/covid19_pickup';
 import InfectNumber from '@/toppage/sections/covid19_infect_number';
 import InfectRegion from '@/toppage/sections/covid19_infect_region';
 import InfectWorld from '@/toppage/sections/covid19_infect_world';
@@ -50,6 +52,7 @@ import News from '@/toppage/sections/covid19_news';
 export default {
   name: 'TopPage',
   components: {
+    PickUp,
     InfectNumber,
     InfectRegion,
     InfectWorld,
@@ -155,27 +158,5 @@ export default {
     @include noto-font-001em(10px, normal);
     margin: 4px 0;
   }
-}
-
-// link的共通样式
-ul {
-  list-style:none;
-}
-
-a {
-  text-decoration: none;
-  color:$color-black;
-  transition: color .3s ease;
-  -webkit-transition: color .3s ease;
-  &.router-link-exact-active {
-    color: $color-black;
-  }
-}
-a:hover{
-    color: $color-blue;
-}
-
-body {
-  margin: 0;
 }
 </style>

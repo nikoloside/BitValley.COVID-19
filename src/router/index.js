@@ -13,27 +13,32 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'TopPage',
+      name: 'top',
       component: TopPage,
     },
     {
       path: '/info',
-      name: '感染情報ダッシュボード',
+      name: 'info',
       component: SecondInfectPage,
     },
     {
       path: '/map',
-      name: '感染事例チェックマップ',
+      name: 'map',
       component: SecondMapPage,
     },
     {
       path: '/news',
-      name: '最新情報',
+      name: 'news',
       component: SecondNewsPage,
     },
     {
       path: '/news/:id',
-      name: '記事',
+      name: 'newsdetail',
+      component: ThirdNewsDetailPage,
+    },
+    {
+      path: '/article/:id',
+      name: 'article',
       component: ThirdNewsDetailPage,
     },
   ],

@@ -38,11 +38,11 @@
             />
         </li>
         <li>
-            <button
-                aria-label="URLをコピーする"
-                type="button"
-                class="link-copy-button"
-                v-on:click="onLinkCopyButtonClick"
+            <a
+                aria-label="Weiboでシェアする"
+                class="weibo"
+                target="_blank"
+                v-bind:href="weiboShareUrl"
             />
         </li>
       </div>
@@ -55,10 +55,10 @@
 
 <script>
 import SwitchLanguageButton from '@/components/SwitchLanguageButton';
-import clipboard from 'clipboard-polyfill';
 
 const SHARE_URL = 'https://survival-jp.com';
 const SHARE_TEXT = '「さよならコロナ」1分で新型コロナウイルスのリアルタイム情報をまとめて感染事例チェックマップ #感染事例チェックマップ #さよならコロナ #covid19 #新型肺炎 #新型コロナウイルス対策まとめ';
+const SHARE_PIC = 'https://res.cloudinary.com/df6wesepg/image/upload/v1587817947/OGP_2.1_o1noa1.png';
 
 export default {
   name: 'HeaderPcBlock',
@@ -81,13 +81,13 @@ export default {
         new URLSearchParams([['u', SHARE_URL]])
       }`;
     },
+    weiboShareUrl() {
+      return `http://service.weibo.com/share/share.php?${
+        new URLSearchParams([['url', SHARE_URL], ['title', SHARE_TEXT]], ['pic', SHARE_PIC])
+      }`;
+    },
   },
   methods: {
-    async onLinkCopyButtonClick() {
-      await clipboard.writeText(SHARE_URL);
-      // eslint-disable-next-line no-alert
-      alert('URLをコピーしました');
-    },
     handleScroll() {
       // Any code to be executed when the window is scrolled
       this.scrollY = window.scrollY > 90;
@@ -156,24 +156,12 @@ export default {
         -webkit-mask-image: url('../assets/image/facebook.svg');
         mask-image: url('../assets/image/facebook.svg');
       }
-      .link-copy-button {
-        display: block;
-        width: 30px;
-        height: 30px;
-        background-color: $color-black;
-        -webkit-mask-size: cover;
-        mask-size: cover;
-        transition: background-color .3s ease;
-
-        &:hover {
-        background-color: $color-blue;
-        }
-        -webkit-mask-image: url('../assets/image/sharelink.svg');
-        mask-image: url('../assets/image/sharelink.svg');
-        border: none;
-        padding: 0;
-        cursor: pointer;
-        appearance: none;
+      .weibo {
+        width: 24px;
+        height: 24px;
+        -webkit-mask-image: url('../assets/image/weibolink.svg');
+        mask-image: url('../assets/image/weibolink.svg');
+        mask-size: contain;
       }
       .nav-link {
         width: 100%;

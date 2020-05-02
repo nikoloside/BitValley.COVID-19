@@ -2,7 +2,6 @@
   <div id="app flex-container-spacebetween">
     <div id="wrap">
       <Header></Header>
-      <PickUp></PickUp>
       <div id="wrap-contents">
         <router-view/>
       </div>
@@ -13,14 +12,12 @@
 
 <script>
 import Header from '@/toppage/sections/covid19_header';
-import PickUp from '@/toppage/sections/covid19_pickup';
 import Footer from '@/toppage/sections/covid19_footer';
 
 export default {
   name: 'App',
   components: {
     Header,
-    PickUp,
     Footer,
   },
 };
@@ -99,6 +96,10 @@ body {
 }
 
 //! 以下是covid19_top内部所有的共通css class
+// Header大概
+.page-container {
+  margin-top: 132px;
+}
 // Covid19_top的标准h1
 .section {
   display: flex;
