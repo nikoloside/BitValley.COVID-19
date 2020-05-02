@@ -54,13 +54,27 @@ export default {
   data() {
     return {
       newsDatas: [],
+      newsCount: this.$route.name === 'news' ? 99999 : 5,
+      newsArray: newsList.news,
     };
+  },
+  created() {
+    if (newsList.news.length > 1 && newsList.news[0].uid === '1') {
+      newsList.news.reverse();
+    }
   },
   mounted() {
     const dataList = [];
 
     // 新news服务器做出来之前先变成从本地获取更新
-    newsList.news.forEach((news) => {
+    this.newsCount = Math.min(this.newsCount, newsList.news.length);
+    // 5個のパターンと無限個のパターンあり
+    let count = -1;
+    this.newsArray.forEach((news) => {
+      count += 1;
+      if (count >= this.newsCount) {
+        return;
+      }
       let publishTime = dayjs().subtract(news.passedMinutes, 'minute').toISOString();
       if (news.passedMinutes > 60) {
         if (news.passedHour > 24) {
@@ -154,8 +168,10 @@ $break-point: 960px;
   margin-top: 24px;
 
   .newsList {
-    max-height: 600px;
+    // max-height: 600px;
     overflow: scroll;
+    max-height: 999999px;
+
     list-style: none;
     text-align: left;
     padding: 0;
@@ -164,7 +180,8 @@ $break-point: 960px;
 
   @media (max-width: $break-point) {
     .newsList {
-      max-height: 850px;
+      // max-height: 850px;
+      max-height: 999999px;
     }
   }
 

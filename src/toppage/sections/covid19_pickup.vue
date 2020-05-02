@@ -6,8 +6,9 @@
         <div class="icon-pickup-title">PICKUP</div>
       </div>
       <div class="icon-pickup-text">
-        <a :href="newsData[index].url"> {{newsData[index].title}}
-        </a>
+        <router-link :to="newsData[index].url">
+          {{ $i18n.locale === 'ja' ? newsData[index].titleja : newsData[index].titlecn}}
+        </router-link>
       </div>
       <div class="scroll-bar">
         <div class="scroll-upper" v-on:click="calcIndex(-1)"/>
@@ -19,10 +20,17 @@
 </template>
 
 <script>
-import axios from 'axios';
+// 暂时news放local
+// import axios from 'axios';
+import newsJson from '@/assets/news/news.json';
 
 export default {
   name: 'PickUp',
+  created() {
+    if (newsJson.news.length > 1 && newsJson.news[0].uid === '1') {
+      newsJson.news.reverse();
+    }
+  },
   data() {
     return {
       newsData: [
@@ -37,6 +45,26 @@ export default {
   },
   mounted() {
     const list = [];
+
+    // 暂时news放在local
+    if (newsJson.news.length < 1) {
+      // 暫定的な対応
+      list.push({
+        title: '-',
+        url: '/',
+      });
+    }
+    newsJson.news.forEach((news) => {
+      const data = {
+        titleja: news.titleja,
+        titlecn: news.titlecn,
+        // eslint-disable-next-line prefer-template
+        url: '/news/' + news.uid,
+      };
+      list.push(data);
+    });
+    this.newsData = list;
+    /*
     axios.get('https://api.survival-jp.com/api/topics')
       .then((response) => {
         response.data.data.forEach((news) => {
@@ -54,6 +82,7 @@ export default {
           url: '/',
         });
       });
+      */
   },
   methods: {
     calcIndex(val) {

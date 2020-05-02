@@ -2,10 +2,9 @@
   <transition name="spmodal" appear>
     <div class="spmodal spmodal-overlay">
       <div class="spmodal-window">
-        <div class="spmodal-header">
-          <div class="covid19-logo">
-            <router-link to="/"></router-link>
-          </div>
+        <div class="spmodal-header" @click="$emit('close')">
+          <router-link to="/" v-scroll-to="'#covid19-pickup'" class="covid19-logo">
+          </router-link>
         </div>
         <div class="spmodal-content" @click="$emit('close')">
           <div class="sp-header-menu">
@@ -16,13 +15,13 @@
               <router-link to="/map" v-scroll-to="'#section-checkmap'">
                 {{ $t("messages.headermap") }}
               </router-link>
-              <router-link to="/news" v-scroll-to="'#section-news'">
+              <router-link to="/news" v-scroll-to="'#covid19-article'">
                 {{ $t("messages.headernews") }}
               </router-link>
             </div>
           </div>
           <div class="sp-language flex-container-spacebetween">
-            <div class="sp-language-text">言語設定</div>
+            <div class="sp-language-text">{{ $t("messages.headerswitchlang") }}</div>
             <div class="sp-language-button">
               <a
                 v-on:click="onChangeToJapanese"

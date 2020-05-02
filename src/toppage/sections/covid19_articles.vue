@@ -23,6 +23,11 @@ import articles from '@/assets/news/articles.json';
 export default {
   name: 'Articles',
   components: { ArticleItemBlock },
+  created() {
+    if (articles.news.length > 1 && articles.news[0].uid === '1') {
+      articles.news.reverse();
+    }
+  },
   data() {
     return {
       articleDatas: articles.articles,

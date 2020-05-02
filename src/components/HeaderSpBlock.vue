@@ -1,7 +1,7 @@
 <template>
   <div id="HeaderSpBlock" class="flex-container-spacebetween">
-    <div class="covid19-logo">
-    </div>
+    <router-link to="/" v-scroll-to="'#covid19-pickup'" class="covid19-logo">
+    </router-link>
     <div class="covid19-sp-button">
         <HeaderSpButton />
     </div>

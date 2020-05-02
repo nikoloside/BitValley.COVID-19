@@ -37,6 +37,11 @@
       <div class="section-left" />{{ $t("messages.titlenews") }}
     </div>
     <News></News>
+    <div class="section-readmore">
+      <router-link class="newsReadmore" to="/news" v-scroll-to="'#covid19-article'">
+        {{ $t("messages.newsreadmore") }}
+      </router-link>
+    </div>
 
   </div>
 </template>
@@ -157,6 +162,37 @@ export default {
   @media (max-width: $breakpoint-sp) {
     @include noto-font-001em(10px, normal);
     margin: 4px 0;
+  }
+}
+
+.section-readmore {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  .newsReadmore {
+    width: 115px;
+    height: 42px;
+    margin-bottom: 48px;
+    padding: 18px 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include noto-font-001em(14px, bold);
+    line-height: 200%;
+    color: $color-gray;
+
+    border: 2px solid $color-gray;
+    box-sizing: border-box;
+    border-radius: 22px;
+    transition: color 0.3 ease;
+    transition: all 0.3 ease;
+    &:hover {
+        color: $color-lightgray;
+        border: 2px solid $color-lightgray;
+    }
   }
 }
 </style>

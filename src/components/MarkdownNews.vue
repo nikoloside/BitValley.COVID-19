@@ -5,9 +5,9 @@
         <div class="markdown-share">
             <ShareFivePanel/>
         </div>
-        <div class="markdown-back">
-            {{ $t("messages.datareturn") }}
-        </div>
+        <router-link to="/news" v-scroll-to="'#covid19-article'" class="markdown-back">
+            {{ $t("messages.newsreturn") }}
+        </router-link>
     </div>
   </div>
 </template>
@@ -23,13 +23,28 @@ export default {
   components: { ShareFivePanel },
   data() {
     return {
-      markdownTextja: this.$route.path === '/article' ? articles.articles[this.$route.params.id].mdja : news.news[this.$route.params.id].mdja,
-      markdownTextcn: this.$route.path === '/article' ? articles.articles[this.$route.params.id].mdcn : news.news[this.$route.params.id].mdcn,
+      articlesArrayja: articles.articles,
+      newsArrayja: news.news,
     };
+  },
+  created() {
+    if (news.news[0].uid !== '1') {
+      news.news.reverse();
+    }
+    if (articles.articles[0].uid !== '1') {
+      articles.articles.reverse();
+    }
   },
   computed: {
     compiledMarkdownText() {
-      return marked(this.$i18n.locale === 'ja' ? this.markdownTextja.replace('\n', '') : this.markdownTextcn.replace('\n', ''));
+      if (this.$route.name === 'article') {
+        const markdownTextja = this.articlesArrayja[this.$route.params.id - 1].mdja;
+        const markdownTextcn = this.articlesArrayja[this.$route.params.id - 1].mdcn;
+        return marked(this.$i18n.locale === 'ja' ? markdownTextja.replace('\n', '') : markdownTextcn.replace('\n', ''));
+      }
+      const markdownTextja = this.newsArrayja[this.$route.params.id - 1].mdja;
+      const markdownTextcn = this.newsArrayja[this.$route.params.id - 1].mdcn;
+      return marked(this.$i18n.locale === 'ja' ? markdownTextja.replace('\n', '') : markdownTextcn.replace('\n', ''));
     },
   },
 };
@@ -47,26 +62,32 @@ export default {
     max-width: 100vw;
     max-width: 612px;
     .markdown-share {
-        position: relative;
-        right: 0;
-        text-align: right;
+        display: flex;
+        justify-content: flex-end;
         width: 100%;
+        margin: 32px 16px;
     }
     .markdown-back {
         width: 79px;
         height: 42px;
-        margin: 48px 0;
+        margin: 32px 0;
 
         display: flex;
         justify-content: center;
         align-items: center;
-        @include noto-font-001em(24px, bold);
+        @include noto-font-001em(14px, bold);
         line-height: 200%;
         color: $color-gray;
 
         border: 2px solid $color-gray;
         box-sizing: border-box;
         border-radius: 22px;
+        transition: color 0.3 ease;
+        transition: all 0.3 ease;
+        &:hover {
+            color: $color-lightgray;
+            border: 2px solid $color-lightgray;
+        }
     }
 }
 
@@ -86,7 +107,6 @@ export default {
         width: 100%;
         height: auto;
         max-width: 1280px;
-        max-height: 670px;
     }
 
     & >>> h1 {
@@ -95,10 +115,15 @@ export default {
         text-align: left;
     }
 
-
     & >>> h2 {
         color: #000000;
         @include noto-font(24px, bold);
+        text-align: left;
+    }
+
+    & >>> h5 {
+        @include poppins-font(14px, normal);
+        color: $color-gray;
         text-align: left;
     }
 
@@ -120,18 +145,24 @@ export default {
         padding: 0;
     }
 
-    & >>> h1, h2, h3, p, blockquote, ul, ol, dl, li, table, pre {
+    & >>> h1, h2, h5, p, blockquote, ul, ol, dl, li, table, pre {
         margin-top: 32px;
         margin-bottom: 24px;
         margin-left: 0px;
         margin-right: 0px;
     }
 
-    & >>> a, a:hover, a:visited {
+    & >>> a, a:visited {
         color: #0452E6;
         background-color: inherit;
         text-decoration: none;
         font-weight: bold;
+        transition: opacity .3s ease;
+        opacity: 1.0;
+    }
+
+    & >>> a:hover {
+        opacity: 0.5;
     }
 
     & >>> blockquote {

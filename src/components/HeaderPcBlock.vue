@@ -3,7 +3,7 @@
   class="flex-container-spacebetween"
    v-bind:class="scrollY === true ? 'header-height-scroll' : 'header-height-top'"
   >
-    <router-link to="/" class="covid19-logo">
+    <router-link to="/" v-scroll-to="'#covid19-pickup'" class="covid19-logo">
     </router-link>
     <div class="nav flex-container-spacebetween">
       <div class="nav-link flex-container-spacebetween">
@@ -13,7 +13,7 @@
         <li><router-link to="/map" v-scroll-to="'#section-checkmap'">
             {{ $t("messages.headermap") }}
         </router-link></li>
-        <li><router-link to="/news" v-scroll-to="'#section-news'">
+        <li><router-link to="/news" v-scroll-to="'#covid19-article'">
             {{ $t("messages.headernews") }}
         </router-link></li>
       </div>

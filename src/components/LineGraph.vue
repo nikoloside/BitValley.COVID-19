@@ -332,6 +332,13 @@ export default {
     text-align: center;
     padding: 0 4px;
     line-height: 1.1;
+
+    @media (max-width: $breakpoint-sp) {
+      word-wrap : break-word;
+      overflow-wrap : break-word;
+      font-size: 6px;
+      padding: 0 0px;
+    }
   }
 }
 </style>
