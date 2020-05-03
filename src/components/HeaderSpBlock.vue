@@ -1,6 +1,13 @@
 <template>
   <div id="HeaderSpBlock" class="flex-container-spacebetween">
     <router-link to="/" v-scroll-to="'#covid19-pickup'" class="covid19-logo">
+    <img
+      alt="「さよならコロナ」新型コロナウイルス事例チェックマップ"
+      :src="$i18n.locale === 'ja' ?
+      require('../assets/image/logo@2x.png') : require('../assets/image/logocn@2x.png')"
+      :srcset="$i18n.locale === 'ja' ?
+      require('../assets/image/logo@2x.png') : require('../assets/image/logocn@4x.png')"
+    />
     </router-link>
     <div class="covid19-sp-button">
         <HeaderSpButton />
@@ -46,14 +53,22 @@ export default {
   }
 
   .covid19-logo {
-    background-image:url('../assets/image/logo.png');
-    background-size: 100%;
-    background-repeat: no-repeat;
     width: 217px;
     height: 36px;
     position: absolute;
     top: 18px;
     left: 16px;
+    img {
+      width: auto;
+      height: 41px;
+    }
+
+    @media (max-width: $breakpoint-sp) {
+      img {
+        width: auto;
+        height: 36px;
+      }
+    }
   }
 
   .covid19-sp-button {
@@ -62,10 +77,6 @@ export default {
     position:absolute;
     right: 16px;
     top: 24px;
-  }
-
-  @media (max-width: $breakpoint-pc) {
-
   }
 
   // 下划线动画特效

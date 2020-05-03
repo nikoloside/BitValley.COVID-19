@@ -3,8 +3,17 @@
     <div class="spmodal spmodal-overlay">
       <div class="spmodal-window">
         <div class="spmodal-header" @click="$emit('close')">
-          <router-link to="/" v-scroll-to="'#covid19-pickup'" class="covid19-logo">
-          </router-link>
+        <router-link to="/" v-scroll-to="'#covid19-pickup'" class="covid19-logo">
+        <img
+          alt="「さよならコロナ」新型コロナウイルス事例チェックマップ"
+          :src="$i18n.locale === 'ja' ?
+          require('../assets/image/logo_white.png') :
+          require('../assets/image/logocn_white@2x.png')"
+          :srcset="$i18n.locale === 'ja' ?
+          require('../assets/image/logo_white@2x.png') :
+          require('../assets/image/logocn_white@4x.png')"
+        />
+        </router-link>
         </div>
         <div class="spmodal-content" @click="$emit('close')">
           <div class="sp-header-menu">
@@ -215,14 +224,22 @@ export default {
 }
 
 .covid19-logo {
-  background-image:url('../assets/image/logo_white.png');
-  background-size: 100%;
-  background-repeat: no-repeat;
-  width: 227px;
+  width: 217px;
   height: 36px;
   position: absolute;
   top: 18px;
   left: 16px;
+  img {
+    width: auto;
+    height: 41px;
+  }
+
+  @media (max-width: $breakpoint-sp) {
+    img {
+      width: auto;
+      height: 36px;
+    }
+  }
 }
 
 // オーバーレイのトランジション

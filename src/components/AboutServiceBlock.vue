@@ -4,8 +4,10 @@
       <img
         class="service-logo"
         alt="「さよならコロナ」新型コロナウイルス事例チェックマップ"
-        src="../assets/image/logo.png"
-        srcset="../assets/image/logo@2x.png"
+        :src="$i18n.locale === 'ja' ?
+        require('../assets/image/logo.png') : require('../assets/image/logocn@2x.png')"
+        :srcset="$i18n.locale === 'ja' ?
+        require('../assets/image/logo.png') : require('../assets/image/logocn@4x.png')"
       />
 
       <div class="footer-desktop-wrapper">
@@ -95,9 +97,11 @@ $break-point: 480px;
   }
 
   .service-logo {
+    width: auto;
     height: 50px;
 
     @media (max-width: $break-point) {
+      width: auto;
       height: 38px;
     }
   }

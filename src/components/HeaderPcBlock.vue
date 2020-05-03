@@ -3,7 +3,15 @@
   class="flex-container-spacebetween"
    v-bind:class="scrollY === true ? 'header-height-scroll' : 'header-height-top'"
   >
-    <router-link to="/" v-scroll-to="'#covid19-pickup'" class="covid19-logo">
+    <router-link to="/" v-scroll-to="'#covid19-pickup'" class="covid19-logo"
+    >
+    <img
+      alt="「さよならコロナ」新型コロナウイルス事例チェックマップ"
+      :src="$i18n.locale === 'ja' ?
+      require('../assets/image/logo@2x.png') : require('../assets/image/logocn@2x.png')"
+      :srcset="$i18n.locale === 'ja' ?
+      require('../assets/image/logo@2x.png') : require('../assets/image/logocn@4x.png')"
+    />
     </router-link>
     <div class="nav flex-container-spacebetween">
       <div class="nav-link flex-container-spacebetween">
@@ -121,13 +129,14 @@ export default {
       display: none;
   }
   .covid19-logo {
-    background-image:url('../assets/image/logo@2x.png');
-    background-size: 100%;
-    background-repeat: no-repeat;
     max-width: 247px;
     width: 32%;
     height: 50px;
     margin-left: 16px;
+    img {
+      width: auto;
+      height: 50px;
+    }
   }
 
   .nav {
@@ -197,6 +206,11 @@ export default {
         top: 24px;
         left: 16px;
         margin-left: 0;
+
+        img {
+          width: auto;
+          height: 50px;
+        }
     }
     .question {
         position: absolute;

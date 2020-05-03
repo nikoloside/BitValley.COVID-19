@@ -75,17 +75,10 @@ export default {
       if (count >= this.newsCount) {
         return;
       }
-      let publishTime = dayjs().subtract(news.passedMinutes, 'minute').toISOString();
-      if (news.passedMinutes > 60) {
-        if (news.passedHour > 24) {
-          publishTime = dayjs().subtract(news.passedDay, 'day').toISOString();
-        }
-        publishTime = dayjs().subtract(news.passedHour, 'hour').toISOString();
-      }
 
       const data = {
         id: news.uid,
-        publishAt: publishTime,
+        publishAt: news.updatedTime,
         titleja: news.titleja,
         titlecn: news.titlecn,
         textja: news.descriptionja,
@@ -350,7 +343,7 @@ $break-point: 960px;
     @include noto-font-001em(12px, normal);
     color: $color-gray;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     margin: 8px 0 0;
@@ -359,7 +352,7 @@ $break-point: 960px;
 
   @media (max-width: $break-point) {
     .articleText {
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 10;
     }
   }
 
