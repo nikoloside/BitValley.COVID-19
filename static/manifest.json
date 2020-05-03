@@ -1,0 +1,25 @@
+{
+    "name": "さよならコロナ",
+    "short_name": "日本疫情指南",
+    "theme_color": "#0452E6",
+    "background_color": "#E8ECF2",
+    "display": "standalone",
+    "start_url": "https://survival-jp.com/",
+    "icons": [
+        {
+            "src": "/static/favicon.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/favicon.png",
+            "sizes": "107x107",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/favicon-264x264.png",
+            "sizes": "264x264",
+            "type": "image/png"
+        }
+    ]
+}
