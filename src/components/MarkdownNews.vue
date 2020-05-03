@@ -28,15 +28,15 @@ export default {
     };
   },
   created() {
-    if (news.news[0].uid !== '1') {
-      news.news.reverse();
-    }
-    if (articles.articles[0].uid !== '1') {
-      articles.articles.reverse();
-    }
   },
   computed: {
     compiledMarkdownText() {
+      if (news.news[0].uid !== '1') {
+        news.news.reverse();
+      }
+      if (articles.articles[0].uid !== '1') {
+        articles.articles.reverse();
+      }
       if (this.$route.name === 'article') {
         const markdownTextja = this.articlesArrayja[this.$route.params.id - 1].mdja;
         const markdownTextcn = this.articlesArrayja[this.$route.params.id - 1].mdcn;
