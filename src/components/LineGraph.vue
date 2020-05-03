@@ -64,7 +64,7 @@
             >
                 <div class="infect-count">
                   <div class="infect-count-title">
-                    {{labelsDate[index]}}{{$t("messages.datajapanconfirm")}}
+                    {{labelsDate[index]}}{{$t(messages)}}
                   </div>
                   {{ label }}</div>
             </div>
@@ -92,7 +92,7 @@
 
 export default {
   name: 'LineGraph',
-  props: ['lineData'],
+  props: ['lineData', 'messagesName'],
   data() {
     return {
       unitCount: 8,
@@ -135,11 +135,15 @@ export default {
           count: 1,
         },
       ],
+      messages: 'messages.datajapanconfirm',
     };
   },
   watch: {
     lineData() {
       this.infectDatas = this.lineData;
+    },
+    messagesName() {
+      this.messages = this.messagesName;
     },
   },
   computed: {
@@ -291,7 +295,9 @@ export default {
       align-items: center;
       flex-direction: column;
       opacity: 0;
-      max-width: 80px;
+      position: relative;
+      left: -30px;
+      width: 110px;
       height: 36px;
       transform: translateY(calc(-100% - 8px));
       background-color: $color-black;
@@ -306,7 +312,7 @@ export default {
       border-radius: 4px;
       &-title {
         @include noto-font-001em(8px, 500);
-        width: 70px;
+        width: auto;
       }
     }
   }

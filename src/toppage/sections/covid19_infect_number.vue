@@ -82,7 +82,10 @@
       </ul>
     </div>
     <div class="infect-info-graph">
-      <LineGraph v-bind:line-data="graphList" />
+      <LineGraph
+        v-bind:line-data="graphList"
+        v-bind:messages-name="messagesName"
+      />
     </div>
     <p class="additional-info">
       <UpdateAtLabel v-bind:update-at="updateAt" />
@@ -137,6 +140,7 @@ export default {
       testedList: [],
       deathList: [],
       graphList: [],
+      messagesName: 'messages.datajapanconfirm',
       updateAt: new Date(),
     };
   },
@@ -236,26 +240,32 @@ export default {
     onConfirmTabClick() {
       this.graphList = this.confirmedList;
       this.activeTab = TAB.CONFIRM;
+      this.messagesName = 'messages.datajapanconfirm';
     },
     onDeathTabClick() {
       this.graphList = this.deathList;
       this.activeTab = TAB.DEATH;
+      this.messagesName = 'messages.datajapandeath';
     },
     onRecoverTabClick() {
       this.graphList = this.recoveredList;
       this.activeTab = TAB.RECOVER;
+      this.messagesName = 'messages.datajapanrecover';
     },
     onNoneConfirmTabClick() {
       this.graphList = this.symptomlessList;
       this.activeTab = TAB.NONECONFIRM;
+      this.messagesName = 'messages.datanoneconfirm';
     },
     onHeavyConfirmTabClick() {
       this.graphList = this.criticalList;
       this.activeTab = TAB.HEAVYCONFIRM;
+      this.messagesName = 'messages.dataheavyconfirm';
     },
     onPCRTestTabClick() {
       this.graphList = this.testedList;
       this.activeTab = TAB.PCRTEST;
+      this.messagesName = 'messages.datapcrtest';
     },
   },
 };

@@ -6,7 +6,15 @@
         <div class="icon-pickup-title">PICKUP</div>
       </div>
       <div class="icon-pickup-text">
-        <a v-bind:href="newsData[index].url">
+        <a
+          v-bind:href="newsData[index].url"
+          v-bind:class="{
+            slideIn: isSlideIn,
+            slideOut: isSlideOut,
+            slideInReverse: isSlideInReverse,
+            slideOutReverse: isSlideOutReverse
+          }"
+        >
           {{ $i18n.locale === 'ja' ? newsData[index].titleja : newsData[index].titlecn}}
         </a>
       </div>
@@ -41,6 +49,12 @@ export default {
       ],
       index: 0,
       showNum: 5,
+      isSlideIn: false,
+      isSlideOut: false,
+      isSlideInReverse: false,
+      isSlideOutReverse: false,
+      isResetCount: false,
+      isReverse: false,
     };
   },
   mounted() {
@@ -83,10 +97,67 @@ export default {
         });
       });
       */
+    setTimeout(() => {
+      this.countDownTimer();
+    }, 5000);
   },
   methods: {
     calcIndex(val) {
-      this.index = Math.min(Math.max(this.index + val, 0), this.showNum);
+      this.isResetCount = true;
+      const nextIndex = Math.min(Math.max(this.index + val, 0), this.showNum);
+      if (nextIndex !== this.index &&
+      nextIndex < this.newsData.length &&
+      nextIndex < this.showNum) {
+        this.animateNextBegin(nextIndex, val < 0);
+      }
+    },
+    animateNextBegin(nextIndex, isReserve) {
+      this.isReverse = isReserve;
+      if (this.isSlideIn ||
+      this.isSlideOut ||
+      this.isSlideInReverse ||
+      this.isSlideOutReverse) {
+        return;
+      }
+      if (this.isReverse) {
+        this.isSlideOutReverse = true;
+      } else {
+        this.isSlideOut = true;
+      }
+
+      setTimeout(() => {
+        this.animateNextEnd(nextIndex);
+      }, 300);
+    },
+    animateNextEnd(nextIndex) {
+      this.index = nextIndex;
+      if (this.isReverse) {
+        this.isSlideOutReverse = false;
+        this.isSlideInReverse = true;
+      } else {
+        this.isSlideOut = false;
+        this.isSlideIn = true;
+      }
+
+      setTimeout(() => {
+        this.isSlideInReverse = false;
+        this.isSlideIn = false;
+      }, 300);
+    },
+    countDownTimer() {
+      if (!this.isResetCount) {
+        if (this.index >= this.newsData.length - 1 ||
+        this.index >= this.showNum - 1) {
+          this.animateNextBegin(0, false);
+        } else {
+          this.calcIndex(1);
+        }
+      }
+      this.isResetCount = false;
+
+      setTimeout(() => {
+        this.countDownTimer();
+      }, 5000);
     },
   },
 };
@@ -130,8 +201,8 @@ export default {
     }
 
     .icon-pickup-text {
-      padding-top: 8px;
-      padding-left:16px;
+      margin-top: 8px;
+      margin-left:16px;
       width: 263px;
     }
   }
@@ -155,11 +226,71 @@ export default {
     color: $color-pink
   }
 }
+
 .icon-pickup-text {
     @include noto-font-001em(16px, bold);
     padding-right: 64px;
+    overflow: hidden;
+
+    a {
+      position: relative;
+      top: 0px;
+    }
 }
 
+// animation tag
+@keyframes slideIn {
+  from {
+    top:-72px;
+  }
+  to {
+    top:0px;
+  }
+}
+@keyframes slideOut {
+  from {
+    top:0px;
+  }
+  to {
+    top:72px;
+  }
+}
+
+@keyframes slideInReverse {
+  from {
+    top:72px;
+  }
+  to {
+    top:0px;
+  }
+}
+@keyframes slideOutReverse {
+  from {
+    top:0px;
+  }
+  to {
+    top:-72px;
+  }
+}
+
+.slideIn {
+  -webkit-animation: 0.3s linear 0s infinite alternate slideIn;
+          animation: 0.3s linear 0s infinite alternate slideIn;
+}
+.slideOut {
+  -webkit-animation: 0.3s linear 0s infinite alternate slideOut;
+          animation: 0.3s linear 0s infinite alternate slideOut;
+}
+.slideInReverse {
+  -webkit-animation: 0.3s linear 0s infinite alternate slideInReverse;
+          animation: 0.3s linear 0s infinite alternate slideInReverse;
+}
+.slideOutReverse {
+  -webkit-animation: 0.3s linear 0s infinite alternate slideOutReverse;
+          animation: 0.3s linear 0s infinite alternate slideOutReverse;
+}
+
+// ui controller
 .scroll-bar {
   display: flex;
   flex-direction: column;
