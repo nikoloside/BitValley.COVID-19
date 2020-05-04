@@ -8,7 +8,7 @@ Vue.use(VueI18n);
 const languageMessages = require('../assets/language/messages.json');
 
 export default new VueI18n({
-  locale: navigator.language.split('-')[0] === 'ja' ? 'ja' : 'cn',
+  locale: 'cn',
   fallbackLocale: 'cn',
   messages: languageMessages,
 });
