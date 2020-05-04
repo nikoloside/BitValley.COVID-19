@@ -233,6 +233,9 @@ export default {
     width: auto;
     height: 41px;
   }
+  &:hover {
+    opacity: 0.5;
+  }
 
   @media (max-width: $breakpoint-sp) {
     img {

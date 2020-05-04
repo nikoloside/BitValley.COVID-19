@@ -137,6 +137,9 @@ export default {
       width: auto;
       height: 50px;
     }
+    &:hover {
+      opacity: 0.5;
+    }
   }
 
   .nav {
@@ -210,6 +213,10 @@ export default {
         img {
           width: auto;
           height: 50px;
+        }
+
+        &:hover {
+          opacity: 0.5;
         }
     }
     .question {
