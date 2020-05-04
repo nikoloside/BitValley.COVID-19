@@ -27,8 +27,6 @@ export default {
       newsArrayja: news.news,
     };
   },
-  created() {
-  },
   computed: {
     compiledMarkdownText() {
       if (news.news[0].uid !== '1') {

@@ -161,9 +161,9 @@ $break-point: 960px;
   margin-top: 24px;
 
   .newsList {
-    // max-height: 600px;
+    max-height: 850px;
     overflow: scroll;
-    max-height: 999999px;
+    // max-height: 999999px;
 
     list-style: none;
     text-align: left;
@@ -173,14 +173,15 @@ $break-point: 960px;
 
   @media (max-width: $break-point) {
     .newsList {
-      // max-height: 850px;
-      max-height: 999999px;
+      max-height: 1000px;
+      // max-height: 999999px;
     }
   }
 
   @media (max-width: $breakpoint-sp) {
     .newsList {
-      max-height: 999999px;
+      max-height: 3500px;
+      // max-height: 999999px;
       height: auto;
     }
   }
