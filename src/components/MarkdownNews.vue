@@ -3,7 +3,12 @@
     <div class="markdown" v-html="compiledMarkdownText" />
     <div class="markdown-foot">
         <div class="markdown-share">
-            <ShareFivePanel/>
+            <ShareFivePanel
+            v-bind:share-url="this.articlesArrayja[this.$route.params.id - 1].link"
+            v-bind:share-text="this.articlesArrayja[this.$route.params.id - 1].titlecn"
+            v-bind:share-text-cn="this.articlesArrayja[this.$route.params.id - 1].descriptioncn"
+            v-bind:share-pic-cn="this.articlesArrayja[this.$route.params.id - 1].thumbnail"
+            />
         </div>
         <router-link to="/news" v-scroll-to="'#covid19-article'" class="markdown-back">
             {{ $t("messages.newsreturn") }}

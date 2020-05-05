@@ -46,37 +46,102 @@
 <script>
 import clipboard from 'clipboard-polyfill';
 
-const SHARE_URL = 'https://survival-jp.com';
-const SHARE_TEXT = '「さよならコロナ」1分で新型コロナウイルスのリアルタイム情報をまとめて感染事例チェックマップ #感染事例チェックマップ #さよならコロナ #covid19 #新型肺炎 #新型コロナウイルス対策まとめ';
-const SHARE_PIC = 'https://res.cloudinary.com/df6wesepg/image/upload/v1587817947/OGP_2.1_o1noa1.png';
-
 export default {
   name: 'SharePanel',
+  props: {
+    shareUrl: String,
+    shareText: String,
+    shareTextCn: String,
+    sharePicCn: String,
+  },
+  data() {
+    return {
+      SHARE_URL: 'https://survival-jp.com',
+      SHARE_TEXT: '「さよならコロナ」1分で新型コロナウイルスのリアルタイム情報をまとめて感染事例チェックマップ #感染事例チェックマップ #さよならコロナ #covid19 #新型肺炎 #新型コロナウイルス対策まとめ',
+      SHARE_TEXT_CN: 'https://survival-jp.com 「日本疫情指南」面向在日华人的日本新冠疫情信息网站——“日本疫情指南”, 查看日本新冠肺炎感染数据，还能通过地图来查找身边有没有感染病例，同时提供新冠肺炎相关新闻的更新，世界疫情发展数据。 #再见吧新冠菌 #日本疫情指南 #日本疫情',
+      SHARE_PIC_CN: 'https://res.cloudinary.com/df6wesepg/image/upload/v1588696192/promotion/OGP_cn_j2ddbv.png',
+    };
+  },
+  watch: {
+    shareUrl() {
+      if (this.shareUrl) {
+        this.SHARE_URL = this.shareUrl;
+      }
+    },
+    shareText() {
+      if (this.shareText) {
+        this.SHARE_TEXT = this.shareText;
+      }
+    },
+    shareTextCn() {
+      if (this.shareTextCn) {
+        this.SHARE_TEXT_CN = this.shareTextCn;
+      }
+    },
+    sharePicCn() {
+      if (this.sharePicCn) {
+        this.SHARE_PIC_CN = this.sharePicCn;
+      }
+    },
+  },
   computed: {
     twitterShareUrl() {
+      let url = this.SHARE_URL;
+      if (this.shareUrl) {
+        url = this.shareUrl;
+      }
+      let text = this.SHARE_TEXT;
+      if (this.shareText) {
+        text = this.shareText;
+      }
       return `https://twitter.com/intent/tweet?${
-        new URLSearchParams([['url', SHARE_URL], ['text', SHARE_TEXT]])
+        new URLSearchParams([['url', url], ['text', text]])
       }`;
     },
     facebookShareUrl() {
+      let url = this.SHARE_URL;
+      if (this.shareUrl) {
+        url = this.shareUrl;
+      }
       return `https://www.facebook.com/sharer/sharer.php?${
-        new URLSearchParams([['u', SHARE_URL]])
+        new URLSearchParams([['u', url]])
       }`;
     },
     weiboShareUrl() {
+      let url = this.SHARE_URL;
+      if (this.shareUrl) {
+        url = this.shareUrl;
+      }
+      let text = this.SHARE_TEXT_CN;
+      if (this.shareText) {
+        text = this.shareTextCn;
+      }
+      let pic = this.SHARE_PIC_CN;
+      if (this.sharePicCn) {
+        pic = this.sharePicCn;
+      }
       return `http://service.weibo.com/share/share.php?${
-        new URLSearchParams([['u', SHARE_URL], ['title', SHARE_TEXT], ['pic', SHARE_PIC]])
+        // eslint-disable-next-line prefer-template
+        new URLSearchParams([['u', url], ['title', url + ' ' + text], ['pic', pic]])
       }`;
     },
     wechatShareUrl() {
+      let url = this.SHARE_URL;
+      if (this.shareUrl) {
+        url = this.shareUrl;
+      }
       return `https://www.addtoany.com/ext/wechat/share/#${
-        new URLSearchParams([['url', SHARE_URL]])
+        new URLSearchParams([['url', url]])
       }`;
     },
   },
   methods: {
     async onLinkCopyButtonClick() {
-      await clipboard.writeText(SHARE_URL);
+      let url = this.SHARE_URL;
+      if (this.shareUrl) {
+        url = this.shareUrl;
+      }
+      await clipboard.writeText(url);
       // eslint-disable-next-line no-alert
       alert('URLをコピーしました');
     },

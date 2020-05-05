@@ -28,26 +28,31 @@
 </template>
 
 <script>
-const SHARE_URL = 'https://survival-jp.com';
-const SHARE_TEXT = '「さよならコロナ」1分で新型コロナウイルスのリアルタイム情報をまとめて感染事例チェックマップ #感染事例チェックマップ #さよならコロナ #covid19 #新型肺炎 #新型コロナウイルス対策まとめ';
-const SHARE_PIC = 'https://res.cloudinary.com/df6wesepg/image/upload/v1587817947/OGP_2.1_o1noa1.png';
 
 export default {
   name: 'SharePanel',
+  data() {
+    return {
+      SHARE_URL: 'https://survival-jp.com',
+      SHARE_TEXT: '「さよならコロナ」1分で新型コロナウイルスのリアルタイム情報をまとめて感染事例チェックマップ #感染事例チェックマップ #さよならコロナ #covid19 #新型肺炎 #新型コロナウイルス対策まとめ',
+      SHARE_TEXT_CN: 'https://survival-jp.com 「日本疫情指南」面向在日华人的日本新冠疫情信息网站——“日本疫情指南”, 查看日本新冠肺炎感染数据，还能通过地图来查找身边有没有感染病例，同时提供新冠肺炎相关新闻的更新，世界疫情发展数据。 #再见吧新冠菌 #日本疫情指南 #日本疫情',
+      SHARE_PIC_CN: 'https://res.cloudinary.com/df6wesepg/image/upload/v1588696192/promotion/OGP_cn_j2ddbv.png',
+    };
+  },
   computed: {
     twitterShareUrl() {
       return `https://twitter.com/intent/tweet?${
-        new URLSearchParams([['url', SHARE_URL], ['text', SHARE_TEXT]])
+        new URLSearchParams([['url', this.SHARE_URL], ['text', this.SHARE_TEXT]])
       }`;
     },
     facebookShareUrl() {
       return `https://www.facebook.com/sharer/sharer.php?${
-        new URLSearchParams([['u', SHARE_URL]])
+        new URLSearchParams([['u', this.SHARE_URL]])
       }`;
     },
     weiboShareUrl() {
       return `http://service.weibo.com/share/share.php?${
-        new URLSearchParams([['u', SHARE_URL], ['title', SHARE_TEXT], ['pic', SHARE_PIC]])
+        new URLSearchParams([['u', this.SHARE_URL], ['title', this.SHARE_TEXT_CN], ['pic', this.SHARE_PIC_CN]])
       }`;
     },
   },
