@@ -163,7 +163,7 @@ export default {
       });
 
 
-    axios.get('https://api.survival-jp.com/api/patient/period')
+    axios.get('https://api.survival-jp.com/api/patient/period?number=19')
       .then((response) => {
         this.confirmedList = [];
         this.recoveredList = [];
