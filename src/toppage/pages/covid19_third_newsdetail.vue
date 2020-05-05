@@ -14,10 +14,6 @@ export default {
   components: {
     MarkdownNews,
   },
-  data() {
-    return {
-    };
-  },
 };
 </script>
 

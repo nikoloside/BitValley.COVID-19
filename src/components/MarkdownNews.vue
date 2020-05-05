@@ -45,6 +45,29 @@ export default {
       return marked(this.$i18n.locale === 'ja' ? markdownTextja.replace('\n', '') : markdownTextcn.replace('\n', ''));
     },
   },
+  head: {
+    title() {
+      return {
+        inner: this.$i18n.t('messages.metatitle'),
+        separator: '|',
+        complement: this.articlesArrayja[this.$route.params.id - 1].titlecn,
+      };
+    },
+    meta() {
+      return [
+        { name: 'description', content: this.articlesArrayja[this.$route.params.id - 1].titlecn },
+        { name: 'viewport', content: 'width=device-width,initial-scale=1.0,user-scalable=no' },
+        { charset: 'utf-8' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: this.articlesArrayja[this.$route.params.id - 1].titlecn },
+        // eslint-disable-next-line prefer-template
+        { property: 'og:url', content: 'https://survival-jp.com/article/' + this.$route.params.id },
+        { property: 'og:image', content: this.articlesArrayja[this.$route.params.id - 1].thumbnail },
+        { property: 'og:description', content: this.articlesArrayja[this.$route.params.id - 1].descriptioncn },
+        { property: 'twitter:card', content: 'summary_large_image' },
+      ];
+    },
+  },
 };
 </script>
 
