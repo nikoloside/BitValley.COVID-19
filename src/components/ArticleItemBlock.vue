@@ -51,16 +51,14 @@ export default {
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
 
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
 
     .article-graph {
-        position: relative;
-        top: -12px;
         width: 100%;
         height: 153px;
         overflow: hidden;
@@ -91,6 +89,7 @@ export default {
         overflow: hidden;
         margin: 8px 16px;
         transition: color .3s ease;
+        height: 48px;
     }
     &:hover .article-title {
         color: $color-blue;
