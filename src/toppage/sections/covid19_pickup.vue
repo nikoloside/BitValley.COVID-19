@@ -28,17 +28,10 @@
 </template>
 
 <script>
-// 暂时news放local
-// import axios from 'axios';
-import newsJson from '@/assets/news/news.json';
+import axios from 'axios';
 
 export default {
   name: 'PickUp',
-  created() {
-    if (newsJson.news.length > 1 && newsJson.news[0].uid === '1') {
-      newsJson.news.reverse();
-    }
-  },
   data() {
     return {
       newsData: [
@@ -60,43 +53,32 @@ export default {
   mounted() {
     const list = [];
 
-    // 暂时news放在local
-    if (newsJson.news.length < 1) {
-      // 暫定的な対応
-      list.push({
-        title: '-',
-        url: '/',
-      });
-    }
-    newsJson.news.forEach((news) => {
-      const data = {
-        titleja: news.titleja,
-        titlecn: news.titlecn,
-        // eslint-disable-next-line prefer-template
-        url: news.link,
-      };
-      list.push(data);
-    });
-    this.newsData = list;
-    /*
-    axios.get('https://api.survival-jp.com/api/topics')
+    axios.get('https://x5f9uvu468.execute-api.ap-northeast-1.amazonaws.com/default/getNews')
       .then((response) => {
-        response.data.data.forEach((news) => {
+        // 暂时news放在local
+        if (response.data.length < 1) {
+          // 很么都没有的时候
+          list.push({
+            title: '-',
+            url: '/',
+          });
+          return;
+        }
+        if (response.data[0].uid < response.data[response.data.length - 1].uid) {
+          response.data.reverse();
+        }
+        response.data.forEach((news) => {
           const data = {
-            title: news.Title,
-            url: news.Body,
+            titleja: news.titleja,
+            titlecn: news.titlecn,
+            // eslint-disable-next-line prefer-template
+            url: news.link,
           };
           list.push(data);
         });
         this.newsData = list;
-      }).catch(() => {
-        // 暫定的な対応
-        list.push({
-          title: '-',
-          url: '/',
-        });
       });
-      */
+
     setTimeout(() => {
       this.countDownTimer();
     }, 5000);

@@ -45,9 +45,7 @@
 
 <script>
 import dayjs from 'dayjs';
-// 新news服务器做出来之前先变成从本地获取更新
-// import axios from 'axios';
-import newsList from '@/assets/news/news.json';
+import axios from 'axios';
 
 export default {
   name: 'NewsList',
@@ -55,62 +53,38 @@ export default {
     return {
       newsDatas: [],
       newsCount: this.$route.name === 'news' ? 99999 : 5,
-      newsArray: newsList.news,
     };
-  },
-  created() {
-    if (newsList.news.length > 1 && newsList.news[0].uid === '1') {
-      newsList.news.reverse();
-    }
   },
   mounted() {
     const dataList = [];
 
-    // 新news服务器做出来之前先变成从本地获取更新
-    this.newsCount = Math.min(this.newsCount, newsList.news.length);
-    // 5個のパターンと無限個のパターンあり
-    let count = -1;
-    this.newsArray.forEach((news) => {
-      count += 1;
-      if (count >= this.newsCount) {
-        return;
-      }
-
-      const data = {
-        id: news.uid,
-        publishAt: news.updatedTime,
-        titleja: news.titleja,
-        titlecn: news.titlecn,
-        textja: news.descriptionja,
-        textcn: news.descriptioncn,
-        href: news.link,
-      };
-      dataList.push(data);
-    });
-
-    /* 新news服务器出来之前先从前端更新
-    axios.get('https://api.survival-jp.com/api/news?number=20')
+    axios.get('https://x5f9uvu468.execute-api.ap-northeast-1.amazonaws.com/default/getNews')
       .then((response) => {
-        response.data.data.forEach((news) => {
-          let publishTime = dayjs().subtract(news.PassedMinutes, 'minute').toISOString();
-          if (news.PassedMinutes > 60) {
-            if (news.PassedHour > 24) {
-              publishTime = dayjs().subtract(news.PassedDay, 'day').toISOString();
-            }
-            publishTime = dayjs().subtract(news.PassedHour, 'hour').toISOString();
+        if (response.data.length > 1 &&
+        response.data[0].uid < response.data[response.data.length - 1].uid) {
+          response.data.reverse();
+        }
+        this.newsCount = Math.min(this.newsCount, response.data.length);
+        // 5個のパターンと無限個のパターンあり
+        let count = -1;
+        response.data.forEach((news) => {
+          count += 1;
+          if (count >= this.newsCount) {
+            return;
           }
 
           const data = {
-            id: news.ID,
-            publishAt: publishTime,
-            title: news.Title,
-            text: news.Description,
-            href: news.Link,
+            id: news.uid,
+            publishAt: news.updatedTime,
+            titleja: news.titleja,
+            titlecn: news.titlecn,
+            textja: news.descriptionja,
+            textcn: news.descriptioncn,
+            href: news.link,
           };
           dataList.push(data);
         });
       });
-      */
     this.newsDatas = dataList;
   },
   computed: {
