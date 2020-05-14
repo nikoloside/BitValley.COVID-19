@@ -60,7 +60,8 @@ export default {
 
     axios.get('https://x5f9uvu468.execute-api.ap-northeast-1.amazonaws.com/default/getNews')
       .then((response) => {
-        if (response.data.length > 1 && response.data[0].uid === '1') {
+        if (response.data.length > 1 &&
+        response.data[0].uid < response.data[response.data.length - 1].uid) {
           response.data.reverse();
         }
         this.newsCount = Math.min(this.newsCount, response.data.length);
