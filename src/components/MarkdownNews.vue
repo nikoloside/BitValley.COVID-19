@@ -167,15 +167,12 @@ export default {
         @include noto-font-001em(16px, normal);
         color: #21262D;
         line-height: 200%;
-        margin: 0;
+        margin: 24px 0;
         padding: 0;
     }
 
     & >>> h1, h2, h5, p, blockquote, ul, ol, dl, li, table, pre {
-        margin-top: 32px;
-        margin-bottom: 24px;
-        margin-left: 0px;
-        margin-right: 0px;
+      margin: 24px 0;
     }
 
     & >>> a, a:visited {
