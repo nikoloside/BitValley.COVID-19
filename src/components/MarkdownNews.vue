@@ -176,6 +176,7 @@ export default {
     }
 
     & >>> a, a:visited {
+        word-wrap:break-word;
         color: #0452E6;
         background-color: inherit;
         text-decoration: none;
