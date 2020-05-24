@@ -197,6 +197,10 @@ export default {
         margin: 0;
         background: $color-palegray;
         border-radius: 4px;
+
+        p {
+          margin: 0;
+        }
     }
 
     & >>> ol {
